@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/IPDDischarge" method="POST" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <h2>PATIENT DISCHARGE FORM</h2>
+                        <div class="form-row">
+                        <div class="form-group">
+                                <label for="Patients Full Name">Hospital UserName</label>
+                                <input type="text" name="Hospital_UserName" id="Patients Full Name" required/>
+                         </div>
+                         <div class="form-group">
+                            <label for="Patients Full Name">Date Of Discharge</label>
+                            <input type="date" name="Date_Discharge" id="Patients Full Name" required/>
+                       </div>
+                   </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Patients Full Name</label>
+                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder(ID)">Patient (ID)</label>
+                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Treating Doctor</label>
+                                <input type="text" name="Doctor_Name" id="Temperature Level(TL)" required/>
+                            </div>
+                    
+                        <div class="form-group">
+                            <label for="Blood Level(BP)">Department</label>
+                            <input type="text" name="Deparment" id="Blood Level(BP)" required/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                         <div class="form-group">
+                            <label for="Body Weight(BM)"> Ward</label>
+                            <input type="text" name="Ward" id="Body Weight(BM)" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Sugar Level(SL)"> Bed</label>
+                            <input type="text" name="Bed" id="Sugar Level(SL)" required/>
+                        </div>
+                    </div>
+
+                <div class="form-row">
+                 <div class="form-group">
+                    <label for="Body Weight(BM)"> Number of Day Spent</label>
+                    <input type="text" name="Duration" id="Body Weight(BM)" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Sugar Level(SL)"> Billings</label>
+                    <input type="number" name="Billings" id="Sugar Level(SL)" required/>
+                </div>
+            </div>
+                        
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Discharge Patient" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

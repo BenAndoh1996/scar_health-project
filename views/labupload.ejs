@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 m-auto">
+                    <h4 class="text-center display-4 my-4"> Uploads Lab Result</h4>
+                    <form action="/dashboard/LabInput"  method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="Height(H)">Upload Lab Result</label>
+                            <input type="file" name="file" id="file" class="custo-file-input">
+                        </div>
+                        <input type="submit" value="submit" class="btn btn-primary btn-block">
+                        <div id="file-upload-filename"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="signup-content">    
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/LabBrief" method="POST" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <p> <strong>The Uploaded File Id Is : <%= LabID%> </strong> </p>
+                        
+                        <h2>UPLOAD NEW LAB FORM</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Patients Full Name</label>
+                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder(ID)">Patient (ID)</label>
+                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Hospital UserName</label>
+                                <input type="text" name="Hospital_username" id="Temperature Level(TL)" required/>
+                            </div>
+                    
+                        <div class="form-group">
+                            <label for="Blood Level(BP)">The Laboratory Name</label>
+                            <input type="text" name="Lab_name" id="Blood Level(BP)" required/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                         <div class="form-group">
+                            <label for="Body Weight(BM)">The Doctor Username</label>
+                            <input type="text" name="Doctor_UserName" id="Body Weight(BM)" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Sugar Level(SL)">Lab ID</label>
+                            <input type="text" name="Lab_ID" id="Sugar Level(SL)" required/>
+                        </div>
+                    </div>
+                        
+                          <div class="form-group">
+                           <label for="Height(H)">Lab Type</label>
+                          <input type="text" name="Lab_Type" id="Height(H)" required/>
+                       </div>
+
+                       <div class="form-group">
+                        <label for="comment">Lab Description(If Needed)</label>
+                        <textarea class="form-control" rows="2" cols="60" name="Description" id="comment" > </textarea>
+                      </div>
+
+                     
+                        
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Add File To Database" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/js/showfile.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "scar-health",
+  "version": "1.0.0",
+  "description": "A small Health App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.s"
+  },
+  "keywords": [
+    "Data"
+  ],
+  "author": "Ben",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-messages": "*",
+    "express-session": "^1.17.0",
+    "express-validator": "*",
+    "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.7.4",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.0.1",
+    "passport": "^0.4.0",
+    "passport-http": "*",
+    "passport-local": "^1.0.0",
+    "xls-to-json-lc": "^0.3.4",
+    "xlsx-to-json-lc": "^0.5.0"
+  }
+}

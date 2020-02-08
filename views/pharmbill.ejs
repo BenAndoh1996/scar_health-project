@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/PharmBill" method="POST" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <h2>Pharmacy Billing Form</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Month Of The Year</label>
+                                <input type="month" name="Month" id="Temperature Level(TL)" required/>
+                            </div>
+                    
+                          <div class="form-group">
+                            <label for="Blood Level(BP)">Current Date</label>
+                            <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
+                          </div>
+                         </div> 
+                         
+                        <div class="form-group">
+                            <label for="Current Date">Drug Name</label>
+                            <input type="text" name="Drug_One" id="Current" required/>
+                          </div>
+
+                          <div class="form-row">
+                            <div class="form-group">
+                                 <label for="Patients Full Name">Quantity</label>
+                                   <input type="number" name="Quantity_One" id="Patients Full Name" required/>
+                            </div>
+                                  
+                                  <div class="form-group">
+                                   <label for="Folder(ID)">Amount</label>
+                                   <input type="number" name="Amount_One" id="Folder(ID)" required/>
+                              </div>
+                          </div>
+                        
+                          <div class="form-group">
+                            <label for="Current Date">Drug Name</label>
+                            <input type="text" name="Drug_Two" id="Current" />
+                          </div>
+
+                           <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Quantity</label>
+                                    <input type="number" name="Quantity_Two" id="Temperature Level(TL)"/>
+                             </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Amount</label>
+                                <input type="number" name="Amount_Two" id="Blood Level(BP)" />
+                              </div>
+                          </div>
+          
+                               <div class="form-group">
+                                 <label for="Current Date">Drug Name</label>
+                                 <input type="text" name="Drug_Three" id="Current"/>
+                               </div>
+          
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Quantity</label>
+                                    <input type="number" name="Quantity_Three" id="Temperature Level(TL)" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Amount</label>
+                                <input type="number" name="Amount_Three" id="Blood Level(BP)" />
+                              </div>
+                             </div>  
+                             <div class="form-group">
+                                <label for="Current Date">Drug Name</label>
+                                <input type="text" name="Drug_Four" id="Current" />
+                              </div>
+
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Quantity</label>
+                                    <input type="number" name="Quantity_Four" id="Temperature Level(TL)" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Amount</label>
+                                <input type="number" name="Amount_Four" id="Blood Level(BP)" />
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="Current Date">Drug Name</label>
+                                <input type="text" name="Drug_Five" id="Current" />
+                              </div>
+
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Quantity</label>
+                                    <input type="number" name="Quantity_Five" id="Temperature Level(TL)" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Amount</label>
+                                <input type="number" name="Amount_Five" id="Blood Level(BP)" />
+                              </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

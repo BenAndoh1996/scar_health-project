@@ -1,0 +1,23 @@
+<%if(Patients.length > 0){ %>
+  <% Patients.forEach(function(row){%>
+    <tr>
+        <td><%= row.Full_Name %></td>
+        <td><%= row. Date_of_Registration %></td>
+        <td><%= row.Patient_ID_Number %></td>
+        <td><%= row.Health_Insurance_ID  %></td>
+        <td><%= row.Telephone %></td>
+        <td><%= row.Age %></td>
+        <td><%= row.gender %></td>
+        <td><%= row.state %></td>
+        <td><%= row.Religion %></td>
+        <td><%= row.birth_date %></td>
+        <td><%= row.Occupation %></td>
+        <td><%= row.Next_of_King %></td>
+        <td><%= row.Next_of_King_Number %></td>
+    </tr>
+  <%});%>
+<%}else{%>
+      <tr>
+          <td colspan="6"> No Record Found </td>
+      </tr>
+  <% } %>

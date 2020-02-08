@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form">
+                    <form action="/dashboard/patientregister" method="POST" class="register-form" id="register-form">
+                        <h2>Patient registration form</h2>
+                        <% include ./partials/messages %>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Health Insurance Provider</label>
+                                <input type="text" name ="Insurance_Provider" id="Health Facility Name" required="required" />
+                            </div>
+                        
+                            <div class="form-group">
+                            <label for="father_name">Health Insurance ID:</label>
+                                <input type="text" name="Health_Insurance_ID" id="Health facility No" required="required" />
+                            </div>
+                         </div>
+
+                         <div class="form-group">
+                            <label for="address">Month Of The Year </label>
+                            <input type="month" name="Month" id="address" required="required" />
+                         </div>
+
+                         <div class="form-group">
+                                <label for="Blood Level(BP)">Current Date(Day)</label>
+                                <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
+                              </div>
+
+                        <div class="form-group">
+                            <label for="address"> Full Name</label>
+                            <input type="text" name="Full_Name" id="Full Name" required="required" />
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="name">Age</label>
+                                <input type="text" name="Age" id="Age" required="required" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">Gender:</label>
+                                <div class="form-select">
+                                    <select name="gender" id="state" required="required" >
+                                        <option value=""></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">Marital Status :</label>
+                                <div class="form-select">
+                                    <select name="state" id="state"required="required" >
+                                        <option value=""></option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                         <option value="Others">Others</option>
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Religion:</label>
+                                <div class="form-select">
+                                    <select name="Religion" id="Religion" required="required" >
+                                        <option value="Christain">Christain</option>
+                                        <option value="Islam">Islam</option>
+                                         <option value="Others">Others</option>
+                                    </select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth_date">Date of birth :</label>
+                            <input type="text" name="birth_date" id="birth_date" required="required" />
+                        </div>
+                         <div class="form-group">
+                            <label for="ID Number"> Patient ID Number :</label>
+                            <input type="text" name="Patient_ID_Number" id="ID Number" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Occupation:</label>
+                            <input type="text" name="Occupation" id="Occupation" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Telephone:</label>
+                            <input type="text" name="Telephone" id="Telephone" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Next of King/Name:</label>
+                            <input type="text" name="Next_of_King" id="Next of King/Name" required="required" />
+                        </div>
+                         <div class="form-group">
+                            <label for="pincode">Next of King/Number:</label>
+                            <input type="text" name="Next_of_King_Number" id="Next of King/Number" required="required" />
+                        </div>
+                        <div class="form-submit">
+                           
+                            <input type="submit" value="Register Patient" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

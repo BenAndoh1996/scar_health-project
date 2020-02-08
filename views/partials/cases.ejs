@@ -1,0 +1,30 @@
+<%if(CaseStudy.length > 0){ %>
+    <% CaseStudy.forEach(function(row){%>
+
+        <div class="">
+            <p> Name :<%= row.Patients_Name %></p>
+            <p> ID :<%= row.Patient_ID %></p>
+            <p> Temperature :<%= row.Temperature %></p>
+            <p> Blood Level :<%= row.Blood_Level%></p>
+            <p> Sugar Level :<%= row.Sugar_Level %></p>
+            <p> Pulse Rate :<%= row.Pulse_Rate %></p>
+            <p>Date :<%= row.date %></p>
+        </div>
+    
+      <div class="">
+          <p><%= row.Current_condition %></p>
+      </div>
+      <div class="">
+        <p><%= row.Observations%></p>
+     </div>
+      <div class="">
+        <p><%= row.Adittional_Info %></p>
+     </div>
+      <%});%>
+      <%}else{%>
+        <tr>
+            <td colspan="4"> Case Study for the Patient Has not started yet, You can start by filling the form below  </td>
+        </tr>
+    <% } %>
+</tbody>
+

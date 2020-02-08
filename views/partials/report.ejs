@@ -1,0 +1,37 @@
+<%if(MedReport.length > 0){ %>
+    <% MedReport.forEach(function(row){%>
+      <div>
+          <p> PATIENT's NAME : <%= row.Patients_Name %></p>
+          <p> PATIENT's ID : <%= row.Patient_ID%></p>
+          <p> HOSPITAL :  <%= row.Hospital %></p>
+          <p> DOCTOR APPROVED : <%= row.Doctor_Name %></p>
+          <p><%= row.date %></p>
+          <div class="" >
+              <h5>Symptom And Complaints</h5>
+              <p><%= row.Patient_Complaints %></p>
+          </div>
+
+          <div class="">
+              <h5>Patient History</h5>
+              <p> <%= row.Patient_History%></p>
+        </div>
+          <div class="">
+            <h5>Doctor's Dianosis</h5>
+            <p> <%= row.Diagnosis%></div></p>
+          <div class="">
+            <h5>Prescribed Treatment</h5>
+            <p>  <%= row.Treament %></p>
+            </div>
+
+          <div class="">
+            <h5>Additonal Information </h5>
+            <p> <%= row.Adittional_Info %></p>
+            </div>
+          
+      </div>
+    <%});%>
+  <%}else{%>
+        <ul>
+            <h5> No Record Found </h5>
+        </ul>
+    <% } %>
