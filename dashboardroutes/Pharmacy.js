@@ -63,7 +63,8 @@ router.post('/InventoryForm', function(req, res){
 
 //Handle for Updating Stock
 
-var url = 'mongodb://localhost:27017/scarhealth';
+// url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
 
 router.post('/UpdateStocks', function(req, res, next){

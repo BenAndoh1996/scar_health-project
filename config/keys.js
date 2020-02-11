@@ -1,3 +1,3 @@
-/*module.exports ={
-    MongoURI: 'mongodb + localhost://127.0.0.1:27017 '
-}*/
+module.exports ={
+    MongoURI: 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+}

@@ -48,7 +48,8 @@ router.post('/Appointment', function(req, res){
 });
 
 
-var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
 router.get('/AppointList', function(req, res, next){
    

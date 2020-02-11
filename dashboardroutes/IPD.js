@@ -152,7 +152,8 @@ router.post('/IPDDischarge', function(req, res){
 });
 
 // handle for admitted patient list
-var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
 router.get('/AdmitList', function(req, res, next){
    

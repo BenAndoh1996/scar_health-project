@@ -5,7 +5,8 @@ const Mongoclient = require('mongodb');
 const assert = require('assert');
 
 
-var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
 router.get('/GetBills', function(req, res, next){
    

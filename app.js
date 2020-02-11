@@ -27,7 +27,7 @@ const app = express();
 //require('./config/passport')(passport);
 //require('./config/AdminPassport')(passport);
 
-/*const db = require('./config/keys').MongoUri
+const db = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
  //connect to mongo
 mongoose.connect(db, {useNewUrlParser: true})
@@ -37,16 +37,16 @@ mongoose.connect(db, {useNewUrlParser: true})
  .catch(function(err){
      console.log (err)
  })
- */
+ 
 
 
-mongoose.connect("mongodb://localhost/scarhealth", {useNewUrlParser: true} );
+ /*mongoose.connect("mongodb://localhost/scarhealth", {useNewUrlParser: true} );
 
 mongoose.connection.once('open', function(){
     console.log('connection has ben made')
 }).on('error', function(error){
     console.log(error)
-})
+})*/
 
 // later added to form upload
 app.use(bodyparser.json())

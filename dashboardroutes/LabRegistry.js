@@ -15,7 +15,8 @@ const Grid= require('gridfs-stream')
 const methodOverride = require('method-override')
 
 
-const mongoUri = 'mongodb://localhost:27017/scarhealth';
+//const mongoUri = 'mongodb://localhost:27017/scarhealth';
+const mongoUri = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 const conn = mongoose.createConnection(mongoUri)
 
 // init gfs
@@ -109,7 +110,8 @@ router.post('/LabInput', upload.single('file'), function(req, res){
 //LabList Handle
 
 router.get('/LabList', function(req, res, next){
-    var url = 'mongodb://localhost:27017/scarhealth';
+    //var url = 'mongodb://localhost:27017/scarhealth';
+    var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const labArray = []
   
     Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
@@ -135,7 +137,8 @@ router.get('/LabList', function(req, res, next){
 // handle for view lab request handle
 
 router.get('/RequestList', function(req, res, next){
-    var url = 'mongodb://localhost:27017/scarhealth';
+    //var url = 'mongodb://localhost:27017/scarhealth';
+    var url = 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const ViewArray = []
   
     Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
