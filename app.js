@@ -30,7 +30,8 @@ const app = express();
 const db = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
  //connect to mongo
-mongoose.connect(db, {useNewUrlParser: true})
+mongoose.connect(process.env.MONGODB_URI || db, 
+    {useNewUrlParser: true})
  .then(function(){
      console.log('mongoose db connected')
  })
@@ -40,7 +41,7 @@ mongoose.connect(db, {useNewUrlParser: true})
  
 
 
- /*mongoose.connect("mongodb://localhost/scarhealth", {useNewUrlParser: true} );
+ /*mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scarhealth", {useNewUrlParser: true} );
 
 mongoose.connection.once('open', function(){
     console.log('connection has ben made')

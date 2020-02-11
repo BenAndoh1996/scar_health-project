@@ -69,7 +69,7 @@ var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=tru
 
 router.post('/UpdateStocks', function(req, res, next){
 
-    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+    Mongoclient.connect( process.env.MONGODB_URI ||url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         let Quantity = Number(req.body.Quantity)
@@ -149,7 +149,7 @@ router.post('/PharmBill', function(req, res, next){
 
 
       // handle for updating 
-      Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+      Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         let Quantity = Number(req.body.Quantity_One)
@@ -169,7 +169,7 @@ router.post('/PharmBill', function(req, res, next){
       
    });
 
-   Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+   Mongoclient.connect(process.env.MONGODB_URI || url, {useNewUriParser: true}, function(err, client){
     assert.equal(null, err);
     console.log('sucessesfully connected');
     let Quantity = Number(req.body.Quantity_Two)
@@ -189,7 +189,7 @@ router.post('/PharmBill', function(req, res, next){
   
 });
 
-    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     assert.equal(null, err);
     console.log('sucessesfully connected');
    let Quantity = Number(req.body.Quantity_Three)
@@ -210,7 +210,7 @@ router.post('/PharmBill', function(req, res, next){
 
   });
 
-   Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+   Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
   assert.equal(null, err);
   console.log('sucessesfully connected');
   let Quantity = Number(req.body.Quantity_Four)
@@ -231,7 +231,7 @@ router.post('/PharmBill', function(req, res, next){
 
  });
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
    assert.equal(null, err);
    console.log('sucessesfully connected');
    let Quantity = Number(req.body.Quantity_Five)
@@ -312,7 +312,7 @@ router.get('/UserSales', function(req, res,next){
             
   });
   });
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     let DateToday = new Date().toLocaleDateString().split(",")[0]
     assert.equal(null, err);
@@ -342,7 +342,7 @@ router.get('/PharmSales', function(req, res,next){
   const SaleArray = []
   let DateToday = new Date().toLocaleDateString().split(",")[0]
   
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       assert.equal(null, err);
       console.log('sucessesfully connected');
       let db = client.db('scarhealth');
@@ -362,7 +362,7 @@ router.get('/PharmSales', function(req, res,next){
             
   });
   });
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     let DateToday = new Date().toLocaleDateString().split(",")[0]
     assert.equal(null, err);
@@ -389,7 +389,7 @@ router.get('/PharmSales', function(req, res,next){
 // Handle for Staff Sales 
 router.get('/StaffSales', function(req, res,next){
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Staff = []
     let DateToday = new Date().toLocaleDateString().split(",")[0]
     assert.equal(null, err);
@@ -440,7 +440,7 @@ router.post('/DaySearch', function(req, res,next){
             
   });
   });
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     const Money = []
     let DateToday = new Date(req.body.search)
@@ -476,7 +476,7 @@ router.post('/MonthSearch', function(req, res,next){
   
   let DateToday = req.body.search
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       assert.equal(null, err);
       console.log('sucessesfully connected');
       let db = client.db('scarhealth');
@@ -496,7 +496,7 @@ router.post('/MonthSearch', function(req, res,next){
             
   });
   });
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     const Money = []
     let DateToday = (req.body.search)
@@ -549,7 +549,7 @@ router.post('/pharmSale', function(req, res,next){
   const UserArray = []
   let DateToday = new Date(req.body.search)
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI ||  url, {useUnifiedTopology: true}, function(err, client){
       assert.equal(null, err);
       console.log('sucessesfully connected');
       let db = client.db('scarhealth');
@@ -569,7 +569,7 @@ router.post('/pharmSale', function(req, res,next){
             
   });
   });
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     const Money = []
     let DateToday = new Date(req.body.search)
@@ -607,7 +607,7 @@ router.post('/PharmMonthSearch', function(req, res,next){
   
   let DateToday = req.body.search
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       assert.equal(null, err);
       console.log('sucessesfully connected');
       let db = client.db('scarhealth');
@@ -677,7 +677,7 @@ router.post('/PharmMonthSearch', function(req, res,next){
 //Handle for Staff sale per day
 router.post('/StaffDaySearch', function(req, res,next){
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const  Staff = []
     
     let DateToday = new Date(req.body.search)
@@ -709,7 +709,7 @@ router.post('/StaffDaySearch', function(req, res,next){
 //Handle for Staff sale per month
 router.post('/StaffMonthSearch', function(req, res,next){
 
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const  Staff = []
     
     let DateToday = req.body.search

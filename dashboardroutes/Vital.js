@@ -65,7 +65,7 @@ router.get('/DocPage', function(req, res, next){
    
     const vitalArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useNewUriParser: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');

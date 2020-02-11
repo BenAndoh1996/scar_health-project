@@ -159,7 +159,7 @@ router.get('/AdmitList', function(req, res, next){
    
     const AdmitArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -183,7 +183,7 @@ router.get('/DischargeList', function(req, res, next){
    
   const DischargeArray = []
 
-  Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       assert.equal(null, err);
       console.log('sucessesfully connected');
       var db = client.db('scarhealth');
@@ -211,7 +211,7 @@ router.get('/DischargeList', function(req, res, next){
           var Search = req.body.Search
           const IpdArray = []
       
-          Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+          Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
               assert.equal(null, err);
               console.log('sucessesfully connected');
               var db = client.db('scarhealth');

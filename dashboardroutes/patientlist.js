@@ -12,7 +12,7 @@ router.get('/PatientList', function(req, res, next){
     var UserName = req.user.UserName
     const PatientArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -41,7 +41,7 @@ router.post('/MedicalReport', function(req, res, next){
     var Search = req.body.Search
     const MedReport = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -70,7 +70,7 @@ router.post('/LabRecord', function(req, res, next){
     var Patient_ID = req.body.Patient_ID
     const LabRecord = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -98,7 +98,7 @@ router.get('/DocLabList', function(req, res, next){
    
     const DocLabArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');

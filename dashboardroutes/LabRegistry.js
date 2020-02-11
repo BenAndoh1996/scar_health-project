@@ -114,7 +114,7 @@ router.get('/LabList', function(req, res, next){
     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const labArray = []
   
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -141,7 +141,7 @@ router.get('/RequestList', function(req, res, next){
     var url = 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const ViewArray = []
   
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');

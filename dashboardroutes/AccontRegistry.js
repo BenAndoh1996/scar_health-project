@@ -13,7 +13,7 @@ router.get('/GetBills', function(req, res, next){
     var Today = new Date().toLocaleDateString().split(",")[0]
     const PatientArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -41,7 +41,7 @@ router.post('/AccountCheck', function(req, res,next){
     const UserArray = []
     let DateToday = new Date(req.body.search)
   
-    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI ||url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         let db = client.db('scarhealth');
@@ -61,7 +61,7 @@ router.post('/AccountCheck', function(req, res,next){
               
     });
     });
-    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       const Total = []
       const Money = []
       let DateToday = new Date(req.body.search)
@@ -93,7 +93,7 @@ router.post('/AccountCheck', function(req, res,next){
 //handle monthly Account Search
 router.post('/AccountMonthSearch', function(req, res, next){
    
-  Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
     const Total = []
     const Money = []
     let DateToday = req.body.search
@@ -143,7 +143,7 @@ router.get('/DocLabList', function(req, res, next){
    
     const DocLabArray = []
 
-    Mongoclient.connect(url, {useNewUriParser: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
