@@ -88,7 +88,7 @@ router.post('/GetDrugs', function(req, res){
 
 //handle for viewing prescribed drugs at the pharmacy
 //var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/Pharmpage', function(req, res, next){
     var dateToday = new Date().toLocaleDateString().split(",")[0]

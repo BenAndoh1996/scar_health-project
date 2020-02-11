@@ -138,7 +138,7 @@ router.get('/LabList', function(req, res, next){
 
 router.get('/RequestList', function(req, res, next){
     //var url = 'mongodb://localhost:27017/scarhealth';
-    var url = 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+    var url = 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
     const ViewArray = []
   
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
