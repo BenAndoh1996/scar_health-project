@@ -21,12 +21,14 @@ router.get('/DocRegister', function(req, res){
 //register handle
 router.post('/DocRegister', function(req, res){
     
-    let Hospital = req.body.Hospital
-    let UserName = req.body.UserName
+    let Hospital = req.user.Hospital
+    let UserName = req.user.UserName
     let Name = req.body.Name
     let inputEmail = req.body.inputEmail
     let password = req.body.password;
     let confirmPassword = req.body.confirmPassword
+    let String_Date = new Date().toLocaleDateString().split(",")[0]
+    let Department= req.body.Department
    
     let errors = []
    
@@ -60,7 +62,9 @@ router.post('/DocRegister', function(req, res){
                        UserName:UserName,
                        Name,
                        inputEmail,
-                       password
+                       password,
+                       String_Date,
+                       Department
                    });
 
                    // Hash Password

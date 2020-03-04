@@ -19,7 +19,7 @@ router.get('/Labpage', function(req, res){
 
 //route for getting search lab page
 router.get('/DocSearchLab', function(req, res){
-    res.render('searchlab' )
+    res.render('searchlab', {Hospital:req.user.Hospital} )
     
 } );
 

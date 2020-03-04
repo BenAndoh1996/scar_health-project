@@ -83,41 +83,7 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Patients</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-tools"></i>
-          <span>Laboratory</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-heartbeat"></i>
-          <span>Pharmary</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Administrator</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-bell"></i>
-          <span>LogOut</span></a>
-      </li>
+      
     </ul>
 
     <div id="content-wrapper">
@@ -139,41 +105,30 @@
           <div class="card-header">
             <i class="fas fa-user"></i>
             Patients Database List  
-           <button type="button" class="btn-sm active btn-primary">Add new Patient</button>
-            <button type="button" class="btn-sm active btn-danger">Delete Patient</button>
-            <button type="button" class="btn-sm active btn-dark">Request Doctors Appointment</button>
-            
+           <a href="/dashboard/LabForm" type="button" class="btn-sm active btn-primary">Add new Lab</a>   
            </div>      
            </div>
 
 
 
 
-
+        
           <div class="card-body">
+            <h4>List of All the Lab Done By The Laboratory In The Year</h4>
             <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Full Name</th>
                     <th>Patient (ID</th>
                     <th>Laboratory Name</th>
+                    <th>Date </th>
                     <th> Lab File ID</th>
                     <th>Lab Type</th>
                     <th>Lab Description</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Full Name</th>
-                    <th>Patient (ID</th>
-                    <th>Laboratory Name</th>
-                    <th> Lab File ID</th>
-                    <th>Lab Type</th>
-                    <th>Lab Description</th>
-                   
-                  </tr>
-                </tfoot>
+              
                 <tbody>
                     <%if(LabArray.length > 0){ %>
                         <% LabArray.forEach(function(row){%>
@@ -181,6 +136,7 @@
                             <td><%= row.Patients_Name %></td>
                             <td><%= row.Patient_ID %></td>
                             <td><%= row.Lab_name %></td>
+                            <td><%= row.String_Date %></td>
                             <td><%= row.Lab_ID %></td>
                             <td><%= row.Lab_Type %></td>
                             <td><%= row.Description %></td> 

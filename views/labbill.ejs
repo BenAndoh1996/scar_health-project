@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin/Scar-Health</title>
+
+  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template-->
+  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="index.html">SCAR-HEALTH</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+      
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/LabMonthAccount">
+        <div class="input-group">
+          <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+  
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/DailyLabAccounts">
+        <div class="input-group">
+          <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+  
+
+    <!-- Navbar -->
+   
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="login.html">
+          <i class="fas fa-fw fa-bell"></i>
+          <span>LogOut</span></a>
+      </li>
+    </ul>
+
+  
+  <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Laboratory Accounts Section</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h2>Laboratory Account Section</h2>
+
+  <div class="card mb-3">
+
+      <div class="card-header">
+    
+        <i class="fas fa-user"></i>
+        LABORATORY ACCOUNTS       
+        <a href="/dashboard/LabBilling" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Add New Lab Bills</a>
+       <br>
+       <div class="alert alert-success" role="alert">
+        <h5 class="alert-heading">Welcome To the Laboratory Account Section</h5>
+      </div>
+       </div>   
+    </div>
+     <h4 >Below is the records of the Laboratory Accounts for Today</h4>
+   <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover " id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th> Patient Name</th>
+            <th>Patient ID</th>
+            <th>Date</th>
+            <th> Bill (One)</th>
+            <th> Purpose</th>
+            <th>Bill (Two)</th>
+            <th> Purpose</th>
+            <th>Total Bill</th>  
+           </thead>        
+         <tbody>
+          <%if(Labbill.length > 0){ %>
+            <% Labbill.forEach(function(row){%>
+              <tr>
+                <td><%= row.Patients_Name %></td>
+                <td><%= row.Patient_ID %></td>
+                <td><%= row.String_Date %></td>
+                <td><%= row.Billing_One %></td>
+                <td><%= row.Purpose_One%></td> 
+                <td><%= row.Billing_Two %></td>
+                <td><%= row.Purpose_Two %></td>  
+                <td><%= row.Total %></td> 
+              </tr>
+            <%});%>
+          <%}else{%>
+                <tr>
+                    <td colspan="6"> No Record Found </td>
+                </tr>
+            <% } %>
+        </tbody>
+       </table>
+    </div>
+   </div>
+        
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+    
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var index, table = document.getElementById('dataTable');
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].cells[12].onclick = function(){
+            var c = confirm('Do You Want Delete This Row?');
+            if(c === true){
+                index = this.parentElement.rowIndex;
+            table.deleteRow(index);
+             console.log(index);
+
+             
+            
+        var url = 'mongodb://localhost:27017/scarhealth'
+   
+         const vitalArray = []
+
+                
+                Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+              assert.equal(null, err);
+              console.log('sucessesfully connected');
+              let Quantity = Number(req.body.Quantity_Five)
+              let db = client.db('scarhealth')
+              let query = {Hospital_UserName: req.user.UserName};
+              let UpdateObj = {
+                $set: {
+                  Status: "Viewed" }
+              }
+              db.collection('bills').updateOne(query,UpdateObj,(function(err,docs){
+                if(err){
+                  console.log(err)
+                  console.log(Quantity)
+                }else{
+                  console.log('Updated successfully')
+                }
+            }));
+
+            });
+        
+      }
+   };
+}
+</script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../Assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../Assets/js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="../Assets/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

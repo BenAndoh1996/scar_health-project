@@ -71,43 +71,7 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="blank.html">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Patients</span></a>
-        </li>
       
-      
-      <li class="nav-item active">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tools"></i>
-            <span>Laboratory</span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="">
-              <i class="fas fa-fw fa-heartbeat"></i>
-              <span>Pharmary</span></a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Adminstartor</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-envelope"></i>
-                <span>Departments</span></a>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="">
-                <i class="fas fa-fw fa-balance-scale"></i>
-                <span>Accounts</span></a>
             </li>
       <li class="nav-item">
         <a class="nav-link" href="login.html">
@@ -137,40 +101,22 @@
       <div class="card-header">
         <i class="fas fa-user"></i>
         ACCOUNT SECTION        
-        <a href="/dashboard/PharmBill" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Pharmacy Billings</a>
-        <a href="/dashboard/InventoryForm" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Stock Inventory</a>
-
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Check Stocks
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/dashboard/ViewStock">Available Stocks</a>
-            <a class="dropdown-item" href="/dashboard/ViewStock">Sold Stocks</a>
-          </div>
-        </div>
-
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sales Summary
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/dashboard/UserSales">User</a>
-            <a class="dropdown-item" href="/dashboard/PharmSales">Pharmacy</a>
-            <a class="dropdown-item" href="/dashboard/StaffSales">Staff Sales</a>
-          </div>
-        </div>
-       </div>     
+        <a href="" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Yearly Accounts Summary</a>
+        <a href="/dashboard/newadischargeview" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Discharge Patient Bills</a>
+       
        </div>
 
        <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Welcome To the Account Section</h4>
-        <p>Here the Acconts can view the Doctor's prescription of any particular patient, Administer the medicine, bill and generate receipt.</p>
+        <p>Here The Accounts Department Can View All Patient Bills, Accept Payments And Generate Receipts.</p>
         <hr>
        </div>
    </div>   
    
-   
+   <div id="hid_form">
+    <form action="/dashboard/DeleteVitals" method="POST" class="" id="myForms">
+    </form>
+ </div>
      
    <div class="card-body">
     <div class="table-responsive">
@@ -179,6 +125,7 @@
           <tr>
             <th> Patient Name</th>
             <th>Patient ID</th>
+            <th>Transaction ID</th>
             <th>Billed By</th>
             <th>Date</th>
             <th> Department</th>  
@@ -198,6 +145,7 @@
               <tr>
                 <td><%= row.Patients_Name %></td>
                 <td><%= row.Patient_ID %></td>
+                <td><%= row._id %></td>
                 <td><%= row.Doctor_Name %></td>
                 <td><%= row.String_Date %></td>
                 <td><%= row.Department %></td>
@@ -265,47 +213,35 @@
   </div>
 
   <script>
+      
     var index, table = document.getElementById('dataTable');
+    var hidform = document.getElementById('hid_form')
      for(var i = 1; i < table.rows.length; i++){
 
-        table.rows[i].cells[12].onclick = function(){
+        table.rows[i].onclick= function(){
             var c = confirm('Do You Want Delete This Row?');
             if(c === true){
                 index = this.parentElement.rowIndex;
-            table.deleteRow(index);
-             console.log(index);
-
              
-            
-        var url = 'mongodb://localhost:27017/scarhealth'
-   
-         const vitalArray = []
+             var PatientId = this.cells[1].innerHTML;
+              var ID = this.cells[2].innerHTML;
+              console.log(ID);
+              console.log (PatientId);
+             
 
-                
-                Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
-              assert.equal(null, err);
-              console.log('sucessesfully connected');
-              let Quantity = Number(req.body.Quantity_Five)
-              let db = client.db('scarhealth')
-              let query = {Hospital_UserName: req.user.UserName};
-              let UpdateObj = {
-                $set: {
-                  Status: "Viewed" }
-              }
-              db.collection('bills').updateOne(query,UpdateObj,(function(err,docs){
-                if(err){
-                  console.log(err)
-                  console.log(Quantity)
-                }else{
-                  console.log('Updated successfully')
+              $.ajax({
+                type: 'DELETE',
+                url: '/dashboard/Accountdelete/'+ ID,
+                success:  function(data){
+                  location.reload();
+                  
                 }
-            }));
-
-            });
-        
-      }
+              })
+            }
+            
    };
 }
+
 </script>
 
   <!-- Bootstrap core JavaScript-->

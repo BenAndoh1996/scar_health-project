@@ -1,242 +1,403 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Patient/folder</title>
-
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
-
-    <!-- Main css -->
-    <link href="../Assets/css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" href="../Assets/css/form.css">
-</head>
-<body>
-
-    <div class="main">
-        <div class="container">
-            <div class="signup-content">
-               
-                <div class="signup-form"> 
-                    <form action="/dashboard/MedicalForm" method="POST" class="register-form" id="register-form">     
-                        <h2>PATIENT's MEDICAL REPORT FORM</h2>
-                        <% include ./partials/messages %>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
-                                </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                            <label for="Temperature Level(TL)">Hospital Name(TL)</label>
-                                <input type="text" name="Hospital" id="Temperature Level(TL)" required/>
-                            </div>
-                    
-                          <div class="form-group">
-                            <label for="Blood Level(BP)">Doctor's Name</label>
-                            <input type="text" name="Doctor_Name" id="Blood Level(BP)" required/>
-                          </div>
-                      </div>
-                        
-                      <div class="form-group">
-                        <label for="comment">Patient's Symptoms & Compliants</label>
-                        <textarea class="form-control" rows="6" cols="60" name="Patient_Complaints" id="comment" > </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Patient's Medical History</label>
-                        <textarea class="form-control" rows="6" cols="60" name="Patient_History" id="comment"> </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Diagnosis</label>
-                        <textarea class="form-control" rows="6" cols="60" name="Diagnosis" id="comment" > </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Treatment</label>
-                        <textarea class="form-control" rows="6" cols="60" name="Treament" id="comment" > </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Any Additional Information</label>
-                        <textarea class="form-control" rows="6" cols="60" name="Adittional_Info" id="comment" > </textarea>
-                      </div>
-
-                      <button type="submit" class="btn btn-primary btn-block" >Add Medical Report</button>
-                    </form>
-
-
-                    <form action="/dashboard/GetDrugs" method="POST" class="register-form" id="register-form">     
-                        <h3>Drug Prescription </h3>
-                        <% include ./partials/messages %>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
-                                </div>
-
-                        </div>
-                        
-                      <div class="form-group">
-                        <label for="Blood Level(BP)">Current Date(DD /MM/ YYYY)</label>
-                        <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group">
-                        <label for="Temperature Level(TL)">Drug One(Type & Name)</label>
-                            <input type="text" name="Drug_One" id="Temperature Level(TL)" required/>
-                        </div>
-                
-                      <div class="form-group">
-                        <label for="Blood Level(BP)">Drug One Dosage</label>
-                        <input type="text" name="Dosage_One" id="Blood Level(BP)" required/>
-                      </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group">
-                    <label for="Temperature Level(TL)">Drug Two(Type & Name)</label>
-                        <input type="text" name="Drug_Two" id="Temperature Level(TL)" />
-                    </div>
-            
-                  <div class="form-group">
-                    <label for="Blood Level(BP)">Drug Two Dosage</label>
-                    <input type="text" name="Dosage_Two" id="Blood Level(BP)" />
-                  </div>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+    <link href="../Assets/css/medreport.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="s007">
+      <form action="/dashboard/MedicalForm"  method="POST">
+        <div class="inner-form">
+          <div class="basic-search">
+            <div class="input-field">
+              <div class="icon-wrap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+                </svg>
               </div>
+              <input id="search" type="text" placeholder="MEDICAL HISTORY- REPORT FORM" />
+              <div class="result-count">
+                <span>01</span>Adult</div>
+            </div>
+          </div>
+          <div class="advance-search">
+            <span class="desc"><h3><b>PERSONAL INFORMATION</b></h3></span>
+            <% include ./partials/messages %>
+            <div class="row">
+              
               <div class="form-row">
                 <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Three(Type & Name)</label>
-                    <input type="text" name="Drug_Three" id="Temperature Level(TL)"/>
+                    <label for="name">Full Name</label>
+                    <input type="text" name="Full_Name" id="Patient Full Name" required/>
                 </div>
-        
+            </div>
+            <div class="form-row">
               <div class="form-group">
-                <label for="Blood Level(BP)">Drug Three Dosage</label>
-                <input type="text" name="Dosage_Three" id="Blood Level(BP)" />
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Four(Type & Name)</label>
-                    <input type="text" name="Drug_Four" id="Temperature Level(TL)" />
-                </div>
-        
-              <div class="form-group">
-                <label for="Blood Level(BP)">Drug Four Dosage</label>
-                <input type="text" name="Dosage_Four" id="Blood Level(BP)" />
-              </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Five(Type & Name)</label>
-                    <input type="text" name="Drug_Five" id="Temperature Level(TL)" />
-                </div>
-        
-              <div class="form-group">
-                <label for="Blood Level(BP)">Drug Five Dosage</label>
-                <input type="text" name="Dosage_Five" id="Blood Level(BP)" />
+                  <label for="name">Patient ID</label>
+                  <input type="text" name="Patient_ID" id="Patient Full Name" required/>
               </div>
           </div>
-                      
-          <button type="submit" class="btn btn-primary btn-block" >Add Treatment</button>
-         </form>
-    </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Date of Birth(DOB)</label>
+                  <input type="date" name="Birth_Date" id="Patient  ID Number" required/>
+              </div>
+              </div>
 
-            <div class="signup-form">
-              <form action="/dashboard/Billing" method="POST" class="register-form" id="register-form">     
-                <h3>BILLINGS</h3>
-                <% include ./partials/messages %>
-                 <div class="form-row">
-                    <div class="form-group">
-                         <label for="Patients Full Name">Patients Full Name</label>
-                           <input type="text" name="Patients_Name" id="Patients Full Name" required/>
-                    </div>
-                          
-                          <div class="form-group">
-                           <label for="Folder(ID)">Patient (ID)</label>
-                           <input type="text" name="Patient_ID" id="Folder(ID)" required/>
-                      </div>
-                  </div>
-
-                      <div class="form-row">
-                          <div class="form-group">
-                          <label for="Temperature Level(TL)">Hospital's UserName</label>
-                              <input type="text" name="Hospital_UserName" id="Temperature Level(TL)" required/>
-                       </div>
-                  
-                        <div class="form-group">
-                          <label for="Blood Level(BP)">Doctors Name</label>
-                          <input type="text" name="Doctor_Name" id="Blood Level(BP)" required/>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                      <div class="form-group">
-                      <label for="Temperature Level(TL)">Current Month</label>
-                          <input type="month" name="Month" id="Temperature Level(TL)" required/>
-                   </div>
-              
-                    <div class="form-group">
-                      <label for="Blood Level(BP)">Current Date(Day)</label>
-                      <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
-                    </div>
-                </div>
-
-                     <div class="form-group">
-                       <label for="Current Date">Department</label>
-                       <input type="text" name="Department" id="Current" required/>
-                     </div>
-
-                    <div class="form-row">
-                      <div class="form-group">
-                      <label for="Temperature Level(TL)">Billing One</label>
-                          <input type="number" name="Billing_One" id="Temperature Level(TL)" />
-                      </div>
-              
-                    <div class="form-group">
-                      <label for="Blood Level(BP)">Billing One Purpose</label>
-                      <input type="text" name="Purpose_One" id="Blood Level(BP)" />
-                    </div>
-                   </div>  
-                    <div class="form-row">
-                      <div class="form-group">
-                      <label for="Temperature Level(TL)">Billing Two</label>
-                          <input type="number" name="Billing_Two" id="Temperature Level(TL)" />
-                      </div>
-              
-                    <div class="form-group">
-                      <label for="Blood Level(BP)">Billing Two Purpose</label>
-                      <input type="text" name="Purpose_Two" id="Blood Level(BP)" />
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
-                  </form>
-            </div>  
-            
             </div>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <input type="text" name="Address" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Telephone</label>
+                  <input type="text" name="Telephone" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Refering Physcian</label>
+                  <input type="text" name="Reffered" id="Patient  ID Number" required/>
+              </div>
+              </div>
+            </div>
+            <br>
+          
+            <span class="desc"><h3><b>PRESENTING COMPLAINT(PC)</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="site">Site</label>
+                    <input type="text" size="15" name="Site" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="onset">Onset</label>
+                  <input type="text" size="15" name="Onset" id="Patient Full Name" />
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Time Course</label>
+                  <input type="text" size="15" name="Time_Course" id="Patient  ID Number" />
+              </div>
+              </div>
+               <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Severity</label>
+                  <input type="text" size="15" name="Severity" id="Patienit  ID Number" />
+              </div>
+              </div>
 
-     </div>
+            </div>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Charater</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="4" cols="20" name="Charater" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Radiations</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="4" cols="20" name="Radiations" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Associations</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="4" cols="20" name="Associations" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <h4>Relieving Factors</h4>
+              <label for="comment"></label>
+              <textarea type="text" rows="4" cols="20" name="Relieving" id="Patient Full Name" ></textarea>
+          </div>
       </div>
-      </div>
+            
+          </div>
 
+            <br>
+            <span class="desc"><h3><b>PREVIOUS MEDICAL HISTORY</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Family Illnesses</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="6" cols="30" name="Family" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Prior Illnesses</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="6" cols="30" name="Prior" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Present Illnesses</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="6" cols="30" name="Present" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+            
+          </div>
+          <br>
+          <span class="desc"><h3><b>HISTORY OF MEDICATION</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Medication History</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="3" cols="115" name="Medication" id="Patient Full Name"></textarea>
+                </div>
+            </div>
+          </div>
+          <br>
+          <span class="desc"><h3><b>SOCIAL HISTORY</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Sedentary Lifestyle</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="5" cols="30" name="Sedentary" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Work or Occupation</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="5" cols="30" name="Work" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Habits</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="5" cols="30" name="Habits" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+            
+          </div>
+          <br>
+          <span class="desc"><h3><b>EXAMINATIONS</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>O/E</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="5" cols="30" name="OE" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>CVS</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="5" cols="30" name="CVS" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Chest Findings</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="5" cols="30" name="Chest" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+            
+          </div>
+          <div class="row">
+              
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Abdominal Findings</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="5" cols="30" name="Abdominal" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <h4>CNS</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="5" cols="30" name="CNS" id="Patient Full Name"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <h4>GI</h4>
+              <label for="comment"></label>
+              <textarea type="text" rows="5" cols="30" name="GI" id="Patient Full Name" ></textarea>
+          </div>
+      </div>
+          
+        </div>
+        <br>
+          <span class="desc"><h3><b>REVIEW SYSTEMS / SUMMARY</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Review System(ROS)</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="6" cols="55" name="Review" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Summary of History</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="6" cols="55" name="Summary" id="Patient Full Name"></textarea>
+              </div>
+          </div>
+          </div>
+          <br>
+          <br>
+          <span class="desc"><h2><b>DOCTORS REVIEW REPORT</b></h2></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Diagnosis</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="6" cols="55" name="Diagnosis" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Propose Treatment</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="6" cols="55" name="Treatment" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          </div>
+          <br>
+          <span class="desc"><h3><b>LABORATORY REPORT </b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Any Lab Report</label>
+                    <input type="text" size="5" name="any" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Lab Type</label>
+                  <input type="text" size="15" name="Lab_type" id="Patient Full Name"/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Lab File ID</label>
+                  <input type="text" size="40" name="Lab_ID" id="Patient  ID Number" />
+              </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Brief Description Lab Report</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="3" cols="115" name="Description" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Any Surgical Treatment (if any, provide brief description)</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="4" cols="115" name="surgical" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Drugs Prescriptions</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="3" cols="115" name="Drugs" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-row">
+          <div class="form-group">
+            <h4> Any Other Statement/ Remarks</h4>
+              <label for="comment"></label>
+              <textarea type="text" rows="4" cols="115" name="Remarks" id="Patient Full Name" ></textarea>
+          </div>
+      </div>
+    </div> 
+            <div class="row third">
+              <div class="input-field">
+                <button type="submit" class="btn-search">Save And Update</button>
+                <button type="submit" class="btn-delete" id="delete">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
 
-    <!-- JS -->
-    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../Assets/js/formmain.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+    <script src="../Assets/js/choices.js"></script>
+    <script>
+      const customSelects = document.querySelectorAll("select");
+      const deleteBtn = document.getElementById('delete')
+      const choices = new Choices('select',
+      {
+        searchEnabled: false,
+        removeItemButton: true,
+        itemSelectText: '',
+      });
+      for (let i = 0; i < customSelects.length; i++)
+      {
+        customSelects[i].addEventListener('addItem', function(event)
+        {
+          if (event.detail.value)
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('valid')
+            parent.classList.remove('invalid')
+          }
+          else
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('invalid')
+            parent.classList.remove('valid')
+          }
+        }, false);
+      }
+      deleteBtn.addEventListener("click", function(e)
+      {
+        e.preventDefault()
+        const deleteAll = document.querySelectorAll('.choices__button')
+        for (let i = 0; i < deleteAll.length; i++)
+        {
+          deleteAll[i].click();
+        }
+      });
+
+    </script>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

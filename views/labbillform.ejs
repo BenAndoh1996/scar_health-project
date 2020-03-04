@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/LabBillPost" method="POST" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <h2>Hospital Billing Form</h2>
+
+                          <div class="form-row">
+                            <div class="form-group">
+                                 <label for="Patients Full Name">Patients Full Name</label>
+                                   <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                            </div>
+                                  
+                                  <div class="form-group">
+                                   <label for="Folder(ID)">Patient (ID)</label>
+                                   <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                              </div>
+                          </div>
+        
+                           <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Current Month</label>
+                                    <input type="month" name="Month" id="Temperature Level(TL)" required/>
+                             </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Current Date(Day)</label>
+                                <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
+                              </div>
+                          </div>
+          
+          
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Billing One</label>
+                                    <input type="number" name="Billing_One" id="Temperature Level(TL)" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Billing One Purpose</label>
+                                <input type="text" name="Purpose_One" id="Blood Level(BP)" />
+                              </div>
+                             </div>  
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Temperature Level(TL)">Billing Two</label>
+                                    <input type="number" name="Billing_Two" id="Temperature Level(TL)" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Billing Two Purpose</label>
+                                <input type="text" name="Purpose_Two" id="Blood Level(BP)" />
+                              </div>
+                              </div>
+
+                             
+                              <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

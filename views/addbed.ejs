@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/BedPost" method="POST" class="register-form" id="register-form">
+                      
+                        <h2> Adding Hospital Bed Form</h2>
+                        <% include ./partials/messages %>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Bed Number</label>
+                                <input type="text" name="Bed_Number" placeholder="Doctor's Name" id="Patients Full Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder(ID)">Bed Type </label>
+                                    <input type="text" name="Bed_Type" id="Folder(ID)" required/>
+                             </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Ward/Department </label>
+                                <input type="text" name="Ward" id="patient_name" required/>
+                            </div>
+                    
+                        <div class="form-group">
+                            <label for="Blood Level(BP)"> Cost Of Bed(Per Day)</label>
+                            <input type="number" name="Cost" id="Blood Level(BP)" required/>
+                        </div>
+                    </div>
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Add Bed " class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

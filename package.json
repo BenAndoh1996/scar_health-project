@@ -10,6 +10,9 @@
   "keywords": [
     "Data"
   ],
+  "engines": {
+    "node": "10.15.1"
+  },
   "author": "Ben",
   "license": "ISC",
   "dependencies": {
@@ -22,6 +25,7 @@
     "express-session": "^1.17.0",
     "express-validator": "*",
     "gridfs-stream": "^1.1.1",
+    "http": "0.0.0",
     "method-override": "^3.0.0",
     "mongodb": "^3.4.0",
     "mongoose": "^5.7.4",
@@ -30,6 +34,7 @@
     "passport": "^0.4.0",
     "passport-http": "*",
     "passport-local": "^1.0.0",
+    "socket.io": "^2.3.0",
     "xls-to-json-lc": "^0.3.4",
     "xlsx-to-json-lc": "^0.5.0"
   }

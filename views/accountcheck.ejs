@@ -48,44 +48,7 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="blank.html">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Patients</span></a>
-        </li>
-      
-      
-      <li class="nav-item active">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tools"></i>
-            <span>Laboratory</span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="">
-              <i class="fas fa-fw fa-heartbeat"></i>
-              <span>Pharmary</span></a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Adminstartor</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-envelope"></i>
-                <span>Departments</span></a>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="">
-                <i class="fas fa-fw fa-balance-scale"></i>
-                <span>Accounts</span></a>
-            </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="login.html">
           <i class="fas fa-fw fa-bell"></i>
@@ -114,35 +77,14 @@
       <div class="card-header">
         <i class="fas fa-user"></i>
         ACCOUNT SECTION        
-        <a href="/dashboard/PharmBill" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Pharmacy Billings</a>
-        <a href="/dashboard/InventoryForm" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Stock Inventory</a>
-
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Check Stocks
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/dashboard/ViewStock">Available Stocks</a>
-            <a class="dropdown-item" href="/dashboard/ViewStock">Sold Stocks</a>
-          </div>
-        </div>
-
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sales Summary
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/dashboard/UserSales">User</a>
-            <a class="dropdown-item" href="/dashboard/PharmSales">Pharmacy</a>
-            <a class="dropdown-item" href="/dashboard/StaffSales">Staff Sales</a>
-          </div>
-        </div>
+        <a href="" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Yearly Sales</a>
+        
        </div>     
        </div>
 
        <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Welcome To the Account Section</h4>
-        <p>Here the Acconts can view the Doctor's prescription of any particular patient, Administer the medicine, bill and generate receipt.</p>
+        <p>The Page Give Information about The Account History For Any Particular Date.</p>
         <hr>
        </div>
    </div>   
@@ -150,7 +92,7 @@
    <%if( Total.length > 0){ %>
     <% Total.forEach(function(row){%>
    <div class=""> 
-      <h4> Amount Of Money Received By The Accounts Department on <%= date %> is: <%= row.total %>.00 (local currency)</h4>
+      <h5> Amount Of Money Received By The Accounts Department on <%= date %> is: <%= row.total %>.00 (local currency)</h5>
    </div>
   <%});%>
  <% } %>

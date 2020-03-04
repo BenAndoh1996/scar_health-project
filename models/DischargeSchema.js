@@ -7,7 +7,7 @@ const DischargeSchema =mongoose.Schema({
 },
 
 Date_Discharge: {
-    type: String,
+    type: Date,
     require: true
 },
 
@@ -58,6 +58,18 @@ Duration: {
 
 Billings: {
     type: Number,
+    require: true
+},
+
+
+Month: {
+    type: String,
+    require: true
+},
+
+
+String_Date: {
+    type: String,
     require: true
 },
 

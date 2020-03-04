@@ -19,6 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+  
 
 </head>
 
@@ -152,40 +153,38 @@
 
 
 
-
+           <div id="hid_form">
+            <form action="/dashboard/" method="POST" class="" id="myForms">
+            </form>
+         </div>
 
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-hover " id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                  <tr>
+                 <tr>
                     <th>Full Name</th>
                     <th>Patient (ID</th>
                     <th>Laboratory Name</th>
                     <th> Lab File ID</th>
                     <th>Lab Type</th>
                     <th>Ation</th>
-                  </tr>
+                  </tr> 
                 </thead>
-               <form action="" method="">
-                   <label for="fname">Your name</label>
-                   <input type="text" id="fname" size="30">
-                   <label for="lname">Your name</label>
-                   <input type="text" id="lname" size="30">
-               </form>
+                
                 <tbody>
                   
                           <tr>
-                            <td>Benjamin ANdoh</td>
-                            <td>000000000001</td>
-                            <td>Kobby Lab</td>
-                            <td>666666666</td>
-                            <td>Blood Test</td>
+                               <td> Benjamin ANdoh </td> 
+                                <td> 1000000000</td>
+                               <td>Benjamin ANdoh</td>
+                               <td>Benjamin ANdoh</a> </td>
+                            <td><a class="dropdown-item" href="/dashboard/DocSearchLab">  Benjamin ANdoh</a> </td>
                             <td class="float-right"> 
-                               <button class="btn btn-danger badge-pill">Remove</button>
+                               <a href="index.ejs" button class="btn btn-danger badge-pill">Remove</a>
                             </td> 
                           </tr>
-                        
+                         
                           <tr>
                             <td>Benjamin ANdoh</td>
                             <td>000000000001</td>
@@ -198,7 +197,7 @@
                           </tr>
 
                           <tr>
-                            <td>Benjamin ANdoh</td>
+                           <a> <td>Benjamin ANdoh</td> </a>
                             <td>000000000001</td>
                             <td>Kobby Lab</td>
                             <td>666666666</td>
@@ -213,8 +212,9 @@
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 
-        <p class="small text-center text-muted my-5">
-          <em>More table examples coming soon...</em>
+        <p class="small> text-center text-muted my-5">
+          <a class="dropdown-item" href="/dashboard/DocSearchLab"><em>More table examples coming soon...</em></a>  
+          ,<a href=""></a>
         </p>
 
       </div>
@@ -258,26 +258,47 @@
       </div>
     </div>
   </div>
-
+   
     <script>
-        var index, table = document.getElementById('dataTable');
-        var fname = document.getElementById('fname');
-        var lname = document.getElementById('lname')
-         for(var i = 0; i < table.rows.length; i++){
 
-            table.rows[i].ondblclick = function(){
+const express = require('express');
+const router = express.Router();
+var app = express()
+      var pt =[]
+      $(document).ready(function(){
+        var table = $('table');
+         for(var i = 1; i < table.rows.length; i++){
+
+            table.rows[i].onclick= function(){
                 var c = confirm('Do You Want Delete This Row?');
                 if(c === true){
                     index = this.parentElement.rowIndex;
-                table.deleteRow(index);
-                fname.value = this.cells[0].innerHTML;
-                 lname.value = this.cells[1].innerHTML;
-                 console.log(fname.value);
+                 
+                 var Name = $(this).cells[0].text().replace(/ /g, "")
+                  var ID = this.cells[1].innerHTML;
+                  pt.push(Name)
+                  console.log(ID);
+                  console.log (pt);
+
+                  $.ajax({
+                    type: 'DELETE',
+                    url: '/delete/' + Name,
+                    
+                    success:  function(){
+                      location.reload();
+                    }
+            
+                    
+                  })
                 }
                 
        };
  }
+      })
+    
+ 
     </script>
+  
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

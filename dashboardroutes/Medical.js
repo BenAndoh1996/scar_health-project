@@ -23,28 +23,91 @@ router.get('/MedicalReport', function(req, res){
 //register handle
 router.post('/MedicalForm', function(req, res){
     
-    let Patients_Name= req.body.Patients_Name
+    let Full_Name= req.body.Full_Name
     let Patient_ID= req.body.Patient_ID
-    let Hospital= req.body.Hospital
-    let Doctor_Name = req.body.Doctor_Name
-    let Patient_Complaints = req.body.Patient_Complaints;
-    let Patient_History= req.body.Patient_History
-    let Diagnosis= req.body.Diagnosis
-    let Treament = req.body.Treament
-    let Adittional_Info = req.body.Adittional_Info
-    let date = req.body.date
+    let Hospital= req.user.Hospital
+    let Doctor_Name = req.user.Name
+    let Birth_Date = req.body.Birth_Date;
+    let Address= req.body.Address
+    let Telephone= req.body.Telephone
+    let Reffered = req.body.Reffered
+    let Site = req.body.Site
+    let Onset = req.body.Onset
+    let Time_Course = req.body.Time_Course;
+    let Severity = req.body.Severity
+    let Charater = req.body.Charater
+    let Radiations = req.body.Radiations
+    let Associations = req.body.Associations
+    let Relieving = req.body.Relieving
+    let Family = req.body.Family
+    let Prior = req.body.Prior;
+    let Present = req.body.Present
+    let Medication = req.body.Medication
+    let Sedentary = req.body.Sedentary
+    let Work = req.body.Work
+    let Habits = req.body.Habits
+    let OE = req.body.OE
+    let CVS = req.body.CVS
+    let Chest = req.body.Chest;
+    let Abdominal = req.body.Abdominal
+    let CNS = req.body.CNS
+    let GI = req.body.GI
+    let Review = req.body.Review
+    let Summary = req.body.Summary
+    let Diagnosis = req.body.Diagnosis
+    let Treatment = req.body.Treatment
+    let any = req.body.any
+    let Lab_type = req.body.Lab_type
+    let Lab_ID = req.body.Lab_ID
+    let Description = req.body.Description;
+    let surgical = req.body.surgical
+    let Drugs= req.body.Drugs
+    let Remarks = req.body.Remarks
+ 
+    let String_Date = new Date().toLocaleDateString().split(",")[0]
    
-    const newUser = new medical({
-        Patients_Name,
+      const newUser = new medical({
+        Full_Name,
         Patient_ID,
         Hospital,
         Doctor_Name,
-        Patient_Complaints,
-        Patient_History,
+        Birth_Date,
+        Address,
+        Telephone,
+        Reffered,
+        Site,       
+        Onset,
+        Time_Course,
+        Severity,
+        Charater ,
+        Radiations,
+        Associations,
+        Relieving,
+        Family,
+        Prior ,
+        Present,
+        Medication,
+        Sedentary,
+        Work,
+        Habits,
+        OE,
+        CVS,
+        Chest,
+        Abdominal,
+        CNS,
+        GI,
+        Review,
+        Summary,
         Diagnosis,
-        Treament,
-        Adittional_Info,
-        date
+        Treatment,
+        any,
+        Lab_type,
+        Lab_ID,
+        Description,
+        surgical,
+        Drugs,
+        Remarks,
+        String_Date
      });
 
     //saving a new user to database

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const UserSchema =mongoose.Schema({
-Patients_Name: {
+    Full_Name: {
     type: String,
     require: true
 },
@@ -20,36 +20,190 @@ Doctor_Name: {
     require: true
 },
 
-Patient_Complaints: {
+Birth_Date: {
     type: String,
     require: true
 },
 
-Patient_History: {
+Address: {
     type: String,
     require: true
 },
 
-Diagnosis: {
+Telephone: {
     type: String,
     require: true
 },
 
-Treament: {
+Reffered : {
     type: String,
     require: true
 },
 
-Adittional_Info: {
+Site: {
     type: String,
     require: true
 },
 
 
-date: {
-    type: Date,
-    default: Date.now
+Onset: {
+    type: String,
+    require: true
 },
+
+Time_Course: {
+    type: String,
+    require: true
+},
+Severity: {
+    type: String,
+    require: true
+},
+
+Charater : {
+    type: String,
+    require: true
+},
+
+ Radiations: {
+    type: String,
+    require: true
+},
+
+Associations: {
+    type: String,
+    require: true
+},
+
+Relieving : {
+    type: String,
+    require: true
+},
+
+Family: {
+    type: String,
+    require: true
+},
+
+
+Prior : {
+    type: String,
+    require: true
+},
+
+Present: {
+    type: String,
+    require: true
+},
+
+Medication: {
+    type: String,
+    require: true
+},
+
+Sedentary: {
+    type: String,
+    require: true
+},
+
+Work : {
+    type: String,
+    require: true
+},
+
+Habits: {
+    type: String,
+    require: true
+},
+
+
+OE: {
+    type: String,
+    require: true
+},
+
+CVS: {
+    type: String,
+    require: true
+},
+Chest: {
+    type: String,
+    require: true
+},
+
+Abdominal : {
+    type: String,
+    require: true
+},
+
+CNS: {
+    type: String,
+    require: true
+},
+
+GI: {
+    type: String,
+    require: true
+},
+
+Review : {
+    type: String,
+    require: true
+},
+
+Summary: {
+    type: String,
+    require: true
+},
+
+
+Diagnosis : {
+    type: String,
+    require: true
+},
+
+Treatment: {
+    type: String,
+    require: true
+},
+
+any : {
+    type: String,
+    require: true
+},
+
+Lab_type: {
+    type: String,
+    require: true
+},
+
+
+Lab_ID: {
+    type: String,
+    require: true
+},
+
+
+surgical: {
+    type: String,
+    require: true
+},
+
+
+Drugs: {
+    type: String,
+    require: true
+},
+
+Remarks: {
+    type: String,
+    require: true
+},
+String_Date: {
+    type: String,
+    require: true
+},
+
 
 })
 

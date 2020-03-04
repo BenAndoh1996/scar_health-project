@@ -1,0 +1,346 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+    <link href="../Assets/css/medreport.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="s007">
+      <form action="/dashboard/MedicalForm"  method="POST">
+        <div class="inner-form">
+          <div class="basic-search">
+            <div class="input-field">
+              <div class="icon-wrap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+                </svg>
+              </div>
+              <input id="search" type="text" placeholder="MEDICAL HISTORY- REPORT FORM" />
+              <div class="result-count">
+                <span>01</span>Adult</div>
+            </div>
+          </div>
+          <%if(MedReport.length > 0){ %>
+            <% MedReport.forEach(function(row){%>
+          <div class="advance-search">
+            <span class="desc"><h3><b>PERSONAL INFORMATION</b></h3></span>
+            <% include ./partials/messages %>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="Full_Name" value="<%= row.Full_Name %>" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Patient ID</label>
+                  <input type="text" name="Patient_ID" value="<%= row.Patient_ID %>" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Date of Birth(DOB)</label>
+                  <input type="date" name="Birth_Date" value="<%= row.Birth_Date %>" id="Patient  ID Number" required/>
+              </div>
+              </div>
+
+            </div>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <input type="text" name="Address" value="<%= row.Address %>" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Telephone</label>
+                  <input type="text" name="Telephone" value="<%= row.Telephone %>" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Refering Physcian</label>
+                  <input type="text" name="Reffered" value="<%= row.Reffered %>" id="Patient  ID Number" required/>
+              </div>
+              </div>
+            </div>
+            <br>
+          
+            <span class="desc"><h3><b>PRESENTING COMPLAINT(PC)</b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="site">Site</label>
+                    <input type="text" size="15" value="<%= row.Site %>" name="Site" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="onset">Onset</label>
+                  <input type="text" size="15" value="<%= row.Onset %>" name="Onset" id="Patient Full Name" />
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Time Course</label>
+                  <input type="text" size="15" value="<%= row.Time_Course %>" name="Time_Course" id="Patient  ID Number" />
+              </div>
+              </div>
+               <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Severity</label>
+                  <input type="text" size="15" name="Severity" value="<%= row.Severity %>" id="Patienit  ID Number" />
+              </div>
+            </div>
+            </div>
+
+            <div class="main_row">
+              <div class="group-Sub">
+                <h4>Characters</h4>
+             <p><%= row.Charater %> </p>
+              </div>
+
+                  <div class="group-Sub">
+                    <h4>Associations</h4>
+                    <p><%= row.Associations %> </p>
+                  </div>
+
+                  <div class="group-Sub">
+                    <h4>Radiations</h4>
+                    <p><%= row.Radiations %> </p>
+                  </div>
+            </div>
+              
+            <div class="One_row">
+              <div class="">
+                <h4>Relieving Factors</h4>
+                <p><%= row.Relieving %> </p>
+              </div>
+            </div>
+             
+
+
+        
+
+            <br>
+            <span class="desc"><h3><b>PREVIOUS MEDICAL HISTORY</b></h3></span>
+            <div class="main_row">
+              <div class="group-Sub">
+                <h4>Family Illnesses</h4>
+                <p><%= row.Family %></p>
+              </div>
+
+                <div class="group-Sub">
+                  <h4>Prior Illnesses</h4>
+                  <p><%= row.Prior %></p>
+                </div>
+
+                  <div class="group-Sub">
+                    <h4>Present Illnesses</h4>
+                    <p><%= row.Present %></p>
+                  </div>
+            </div>
+            
+             <br>
+          <span class="desc"><h3><b>HISTORY OF MEDICATION</b></h3></span>
+          <div class="One_row">
+          <div class="">
+            <h4>Past Medication</h4>
+            <p><%= row.Medication %> </p>
+          </div>
+        </div>
+          <br>
+
+          <span class="desc"><h3><b>SOCIAL HISTORY</b></h3></span>
+          <div class="main_row">
+            <div class="group-Sub">
+              <h4>Sedentary Lifestyle</h4>
+              <p><%= row.Sedentary %></p>
+            </div>
+
+              <div class="group-Sub">
+                <h4>Type of Work / Occupation</h4>
+                <p><%= row.Work %></p>
+              </div>
+
+                <div class="group-Sub">
+                  <h4>Habits</h4>
+                  <p><%= row.Habits %></p>
+                </div>
+          </div>
+          <br>
+          <span class="desc"><h3><b>EXAMINATIONS</b></h3></span>
+          <div class="main_row">
+            <div class="group-Sub">
+              <h4>O/E</h4>
+              <p><%= row.OE %></p>
+            </div>
+
+              <div class="group-Sub">
+                <h4>CVS</h4>
+                <p><%= row.CVS %></p>
+              </div>
+
+                <div class="group-Sub">
+                  <h4>Chest Findings</h4>
+                  <p><%= row.Chest %></p>
+                </div>
+          </div>
+          <div class="main_row">
+            <div class="group-Sub">
+              <h4>Abdominal Findings</h4>
+              <p><%= row.Abdominal %></p>
+            </div>
+
+              <div class="group-Sub">
+                <h4>GI</h4>
+                <p><%= row.GI %></p>
+              </div>
+
+                <div class="group-Sub">
+                  <h4>CNS</h4>
+                  <p><%= row.CNS %></p>
+                </div>
+          </div>
+
+        <br>
+          <span class="desc"><h3><b>REVIEW SYSTEMS / SUMMARY</b></h3></span>
+          <div class="main_row">
+            <div class="group-Sub">
+              <h4>Review Of Systems (RoR)</h4>
+              <p><%= row.Review %></p>
+            </div>
+
+              <div class="group-Sub">
+                <h4>Summary Of History</h4>
+                <p><%= row.Summary %></p>
+              </div>
+
+          </div>
+          <br>
+          <br>
+          <span class="desc"><h2><b>DOCTORS REVIEW REPORT</b></h2></span>
+              <div class="One_row">
+                <div class="">
+                  <h4>Doctor's Diagnosis</h4>
+                  <p><%= row.Diagnosis %> </p>
+                </div>
+              </div>
+
+              <div class="One_row">
+                <div class="">
+                  <h4>Propose Treatment</h4>
+                  <p><%= row.Treatment %> </p>
+                </div>
+              </div>
+          <br>
+          <h4>LABORATORY REPORT</h4>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Any Lab Report</label>
+                    <input type="text" name="any" size="5" value="<%= row.any %>" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Lab Type</label>
+                  <input type="text" name="Lab_type" size="15" value="<%= row.Lab_type %>" id="Patient Full Name"/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Lab File ID</label>
+                  <input type="text" size="40" name="Lab_ID" value="<%= row.Lab_ID %>" id="Patient  ID Number" />
+              </div>
+              </div>
+            </div>
+
+            
+              <div class="One_row">
+                <div class="">
+                  <h4>Brief description of the stated lab</h4>
+                  <p><%= row.Description %> </p>
+                </div>
+              </div>
+        <br>
+        <div class="One_row">
+          <div class="">
+            <h4>Any surgical treatment (if yes, Provide brief description)</h4>
+            <p><%= row.surgical %> </p>
+          </div>
+        </div>
+        <br>
+        <div class="One_row">
+          <div class="">
+            <h4>Drugs Prescription</h4>
+            <p><%= row.Drugs %> </p>
+          </div>
+        </div>
+        <br>
+        <div class="One_row">
+          <div class="">
+            <h4>Any other statement / Remarks</h4>
+            <p><%= row.Remarks %> </p>
+          </div>
+        </div>
+    <%});%>
+    <%}else{%> 
+              
+      <% } %>
+
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="../Assets/js/choices.js"></script>
+    <script>
+      const customSelects = document.querySelectorAll("select");
+      const deleteBtn = document.getElementById('delete')
+      const choices = new Choices('select',
+      {
+        searchEnabled: false,
+        removeItemButton: true,
+        itemSelectText: '',
+      });
+      for (let i = 0; i < customSelects.length; i++)
+      {
+        customSelects[i].addEventListener('addItem', function(event)
+        {
+          if (event.detail.value)
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('valid')
+            parent.classList.remove('invalid')
+          }
+          else
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('invalid')
+            parent.classList.remove('valid')
+          }
+        }, false);
+      }
+      deleteBtn.addEventListener("click", function(e)
+      {
+        e.preventDefault()
+        const deleteAll = document.querySelectorAll('.choices__button')
+        for (let i = 0; i < deleteAll.length; i++)
+        {
+          deleteAll[i].click();
+        }
+      });
+
+    </script>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -57,6 +57,45 @@ Doctor_UserName: {
     require: true
 },
 
+Month: {
+    type: String,
+    require: true
+},
+
+Current_Date: {
+    type: Date,
+    require: true
+},
+
+Doctor_Name: {
+    type: String,
+    require: true
+},
+
+Deparment: {
+    type: String,
+    require: true
+},
+
+String_Date: {
+    type: String,
+    require: true
+},
+
+Year: {
+    type: String,
+    require: true
+},
+
+Hospital_UserName: {
+    type: String,
+    require: true
+},
+
+Status: {
+    type: String,
+    require: true
+},
 
 })
 

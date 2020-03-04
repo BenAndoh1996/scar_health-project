@@ -21,6 +21,14 @@ router.get('/DocDashboard', function(req, res){
 router.get('/PharmDashboard',  function(req, res){
     res.render('pharmdashboard', {
         Hospital: req.user.Hospital, Name: req.user.Name} )   
+
+        
+} );// routes for pharmacy page
+router.get('/AdminDashboard',  function(req, res){
+    res.render('admindasboard', {
+        Hospital: req.user.Hospital, Name: req.user.Name} )   
 } );
+
+
 module.exports = router;
 

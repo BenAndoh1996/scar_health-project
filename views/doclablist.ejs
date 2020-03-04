@@ -139,43 +139,32 @@
           <div class="card-header">
             <i class="fas fa-user"></i>
             Patients Database List  
-           <button type="button" class="btn-sm active btn-primary">Add new Patient</button>
-            <button type="button" class="btn-sm active btn-danger">Delete Patient</button>
-            <button type="button" class="btn-sm active btn-dark">Request Doctors Appointment</button>
-            
+            <a href="/dashboard/LabRequest" class="btn btn-dark btn-sm active" role="button" aria-pressed="true">Request New Lab</a>    
            </div>      
            </div>
-
+           <h4>Below Is The List Of All Your The Lab You Requested That Are Ready</h4>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover " id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Full Name</th>
                     <th>Patient (ID</th>
+                    <th>Activity Unique ID</th>
                     <th>Laboratory Name</th>
                     <th> Lab File ID</th>
                     <th>Lab Type</th>
                     <th>Lab Description</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Full Name</th>
-                    <th>Patient (ID</th>
-                    <th>Laboratory Name</th>
-                    <th> Lab File ID</th>
-                    <th>Lab Type</th>
-                    <th>Lab Description</th>
-                   
-                  </tr>
-                </tfoot>
+      
                 <tbody>
                     <%if(DocLabArray.length > 0){ %>
                         <% DocLabArray.forEach(function(row){%>
                           <tr>
                             <td><%= row.Patients_Name %></td>
                             <td><%= row.Patient_ID %></td>
+                            <td><%= row._id %></td>
                             <td><%= row.Lab_name %></td>
                             <td><%= row.Lab_ID %></td>
                             <td><%= row.Lab_Type %></td>
@@ -239,6 +228,38 @@
       </div>
     </div>
   </div>
+     
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var hidform = document.getElementById('hid_form')
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].ondblclick= function(){
+            var c = confirm('Do You Want Delete This Row?');
+            if(c === true){
+                index = this.parentElement.rowIndex;
+             
+             var PatientId = this.cells[1].innerHTML;
+              var ID = this.cells[2].innerHTML;
+              console.log(ID);
+              console.log (PatientId);
+             
+
+              $.ajax({
+                type: 'DELETE',
+                url: '/dashboard/DocLabdelete/'+ ID,
+                success:  function(data){
+                  location.reload();
+                  
+                }
+              })
+            }
+            
+   };
+}
+
+</script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>

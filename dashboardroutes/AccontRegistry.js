@@ -17,7 +17,7 @@ router.get('/GetBills', function(req, res, next){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
-        var query = {Hospital_UserName: req.user.UserName, String_Date: Today };
+        var query = {Hospital_UserName: req.user.UserName, String_Date: Today, Status:'No' };
         db.collection('bills').find(query).toArray(function(err,docs){
             docs.forEach(function(doc){
                 if (req.user.UserName = doc.Hospital_UserName){
@@ -35,7 +35,7 @@ router.get('/GetBills', function(req, res, next){
 
 });
 
-// Handle for Medical report Generation
+// Handle for Daily Account Check 
 router.post('/AccountCheck', function(req, res,next){
 
     const UserArray = []
@@ -165,5 +165,34 @@ router.get('/DocLabList', function(req, res, next){
 
 });
 
+ 
+        //route for  deleting Account view at doctor side
+        router.delete('/Accountdelete/:ID', function(req, res){
+          var ObjectId = require('mongodb').ObjectId
+          let item = req.params.ID
+          let searchId = new ObjectId(item)
+        console.log(searchId)
+          Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+          assert.equal(null, err);
+          console.log('sucessesfully connected');
+          let db = client.db('scarhealth')
+          let query = {Hospital_UserName: req.user.UserName, _id : searchId};
+          let UpdateObj = {
+            $set: {
+              Status: 'Viewed' }
+          }
+          db.collection('bills').updateOne(query,UpdateObj,(function(err,data){
+            if(err){
+              console.log(err)
+            }else{
+              res.json(data)
+              console.log('Updated successfully')
+            }
+        }));
+        
+        });
+          
+        } );
+        
 
 module.exports = router;

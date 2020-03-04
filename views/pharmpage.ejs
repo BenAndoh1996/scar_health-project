@@ -183,7 +183,10 @@
        </div>
    </div>   
    
-   
+   <div id="hid_form">
+    <form action="/dashboard/DeleteVitals" method="POST" class="" id="myForms">
+    </form>
+ </div>
      
    <div class="card-body">
     <div class="table-responsive">
@@ -214,7 +217,7 @@
             <th>Dosage</th> 
             <th>Drug Ten</th> 
             <th>Dosage</th> 
-            <th>Take Action</th> 
+            <th>UNique Id</th> 
           </tr>
            </thead>        
          <tbody>
@@ -245,9 +248,7 @@
                 <td><%= row.Dosage_Nine %></td> 
                 <td><%= row.Drug_Ten %></td> 
                 <td><%= row.Dosage_Ten %></td> 
-                <td class="float-right">
-                  <button class="btn btn-danger badge-pill">Remove</button>
-              </td> 
+                <td><%= row._id %></td> 
               </tr>
             <%});%>
           <%}else{%>
@@ -303,18 +304,35 @@
 
   
   <script>
+      
     var index, table = document.getElementById('dataTable');
+    var hidform = document.getElementById('hid_form')
      for(var i = 1; i < table.rows.length; i++){
 
-        table.rows[i].cells[24].onclick = function(){
+        table.rows[i].onclick= function(){
             var c = confirm('Do You Want Delete This Row?');
             if(c === true){
                 index = this.parentElement.rowIndex;
-            table.deleteRow(index);
-             //console.log(index);
+             
+             var PatientId = this.cells[1].innerHTML;
+              var ID = this.cells[24].innerHTML;
+              console.log(ID);
+              console.log (PatientId);
+             
+
+              $.ajax({
+                type: 'DELETE',
+                url: '/dashboard/Pharmdelete/'+ ID,
+                success:  function(data){
+                  location.reload();
+                  
+                }
+              })
             }
+            
    };
 }
+
 </script>
 
   <!-- Bootstrap core JavaScript-->

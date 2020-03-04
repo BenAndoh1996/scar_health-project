@@ -24,6 +24,19 @@
                     <form action="/dashboard/PatientVital" method="POST" class="register-form" id="register-form">
                         <% include ./partials/messages %>
                         <h2>PATIENT VITALS-FORM</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Current Month</label>
+                                <input type="month" name="Month" id="Patients Full Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder(ID)">Current Date</label>
+                                    <input type="date" name="Current_Date" id="Folder(ID)" required/>
+                                </div>
+                            </div>
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="Patients Full Name">Patients Full Name</label>
@@ -77,6 +90,16 @@
                         </div>
                 </div>   
                         
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Pulse Rate(BP/mm)">Name Of Consulting Doctor</label>
+                        <input type="text" name="Doctor_Name" id="Pulse Rate(BP/mm)" required/>
+                    </div>
+                        <div class="form-group">
+                            <label for="Doctor_UserName">Deparment</label>
+                            <input type="text" name="Deparment" id="Doctor_UserName" required/>
+                        </div>
+                  </div>   
                         <div class="form-submit">
                             <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
                             <input type="submit" value="Create Folder" class="submit" name="submit" id="submit" />

@@ -83,36 +83,6 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Patients</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-tools"></i>
-          <span>Laboratory</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-heartbeat"></i>
-          <span>Pharmary</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Administrator</span></a>
-      </li>
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-bell"></i>
@@ -139,15 +109,18 @@
           <div class="card-header">
             <i class="fas fa-user"></i>
             Patients Database List  
-           <button type="button" class="btn-sm active btn-primary">Add new Patient</button>
-            <button type="button" class="btn-sm active btn-danger">Delete Patient</button>
-            <button type="button" class="btn-sm active btn-dark">Request Doctors Appointment</button>
-            
+            <a href="/dashboard/Appointment" class="btn btn-dark btn-sm active" role="button" aria-pressed="true">Add New Appointment</a>      
            </div>      
            </div>
+
+           <div id="hid_form">
+            <form action="/dashboard/DeleteVitals" method="POST" class="" id="myForms">
+            </form>
+         </div>
+
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover table-dark" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Full Name</th>
@@ -226,6 +199,39 @@
       </div>
     </div>
   </div>
+
+     <script>
+      
+        var index, table = document.getElementById('dataTable');
+        var hidform = document.getElementById('hid_form')
+         for(var i = 1; i < table.rows.length; i++){
+    
+            table.rows[i].onclick= function(){
+                var c = confirm('Do You Want Delete This Row?');
+                if(c === true){
+                    index = this.parentElement.rowIndex;
+                 
+                 var Name = this.cells[0].innerHTML;
+                  var ID = this.cells[1].innerHTML;
+                  console.log(ID);
+                  console.log (Name);
+                 
+    
+                  $.ajax({
+                    type: 'DELETE',
+                    url: '/dashboard/Appointdelete/'+ ID,
+                    Name,
+                    success:  function(data){
+                      location.reload();
+                      
+                    }
+                  })
+                }
+                
+       };
+    }
+    
+    </script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>

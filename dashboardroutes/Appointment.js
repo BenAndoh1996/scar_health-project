@@ -76,4 +76,30 @@ router.get('/AppointList', function(req, res, next){
     
 
 });
+
+//Doctors Appointment form delete
+router.delete('/Appointdelete/:ID', function(req, res){
+  let item = req.params.ID;
+  console.log(item)
+ 
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+   assert.equal(null, err);
+   console.log('sucessesfully connected');
+   let db = client.db('scarhealth')
+   let query = {Doctor_UserName: req.user.inputEmail, patient_ID:item };
+   
+  db.collection('appoints').deleteOne(query,(function(err,data){
+    if(err){
+      console.log(err)
+    }else{
+      res.json(data)
+      console.log('Updated successfully')
+    }
+}));
+    
+ });
+   
+ } );
+
+
 module.exports = router;

@@ -15,6 +15,10 @@ router.get('/GetDrugs', function(req, res){
     res.render('medform') 
 } );
 
+router.get('/Prescriptions', function(req, res){
+  res.render('prescription') 
+} );
+
 
 //
 router.post('/GetDrugs', function(req, res){
@@ -45,7 +49,7 @@ router.post('/GetDrugs', function(req, res){
     let Dosage_Ten= req.body.Dosage_Ten
     let Drug_Ten= req.body.Drug_Ten
     let String_Date = new Date().toLocaleDateString().split(",")[0]
-   
+  
       const newUser = new drug({
           Patients_Name,
            Patient_ID,
@@ -86,7 +90,7 @@ router.post('/GetDrugs', function(req, res){
                     
 });
 
-//handle for viewing prescribed drugs at the pharmacy
+//handle for viewingprescribed  drugs at the pharmacy
 //var url = 'mongodb://localhost:27017/scarhealth';
 var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
@@ -116,5 +120,28 @@ router.get('/Pharmpage', function(req, res, next){
 
 });
 
-
+router.delete('/Pharmdelete/:ID', function(req, res){
+  var ObjectId = require('mongodb').ObjectId
+          let item = req.params.ID
+          let searchId = new ObjectId(item)
+        console.log(searchId)
+ 
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+   assert.equal(null, err);
+   console.log('sucessesfully connected');
+   let db = client.db('scarhealth')
+   let query = {Hospital_UserName: req.user.UserName, _id:searchId};
+   
+  db.collection('drugs').deleteOne(query,(function(err,data){
+    if(err){
+      console.log(err)
+    }else{
+      res.json(data)
+      console.log('Updated successfully')
+    }
+}));
+    
+ });
+   
+ } );
 module.exports = router;

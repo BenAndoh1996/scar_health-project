@@ -4,6 +4,7 @@ const bcrypt= require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+
 const billing = require('../models/BillSchema')
 
 
@@ -32,8 +33,8 @@ router.post('/Billing', function(req, res){
     let Purpose_Three = req.body.Purpose_Three
     let String_Date = new Date().toLocaleDateString().split(",")[0]
     let Total = Number(Billing_One)+ Number(Billing_Two) + Number(Billing_Three)
-    let Status  = "No"
-
+     let Status = 'No'
+    
       const newUser = new billing({
           Patients_Name,
            Patient_ID,
@@ -61,7 +62,7 @@ router.post('/Billing', function(req, res){
         console.log(req.body);
         })
       .catch(err => console.log(err));  
-                    
+                       
 });
 
 module.exports = router;

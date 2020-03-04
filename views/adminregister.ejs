@@ -23,28 +23,17 @@ d
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register a Physician</div>
-      <p><strong>Password should be more 7 than characters long</strong></p>
+      <div class="card-header">Register An Administrator</div>
       <div class="card-body">
          <% include ./partials/messages %>
-        <form  id="myForms" method="post" action="/dashboard/DocRegister" >
+        <form  id="myForms" method="post" action="/dashboard/Adminregistry" >
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Hospital" autofocus="autofocus" >
-                  <label for="firstName">Hospital Name</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Department" autofocus="autofocus" >
+                  <label for="firstName">Department</label>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Username" name="UserName" required="required" >
-                  <label for="lastName">Hospital's UserName</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
+  
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">

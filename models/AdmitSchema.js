@@ -6,8 +6,8 @@ const AdmitSchema =mongoose.Schema({
     require: true
 },
 
-Admission_Date: {
-    type: String,
+Current_Date: {
+    type: Date,
     require: true
 },
 
@@ -44,12 +44,32 @@ Bed: {
     require: true
 },
 
-
 Reason: {
     type: String,
     require: true
 },
 
+Month: {
+    type: String,
+    require: true
+},
+
+
+Month: {
+    type: String,
+    require: true
+},
+
+
+String_Date: {
+    type: String,
+    require: true
+},
+
+Year: {
+    type: String,
+    require: true
+},
 
 })
 

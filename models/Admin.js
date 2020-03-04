@@ -25,10 +25,16 @@ password: {
     require: true
 },
 
-date: {
-    type: Date,
-    default: Date.now
+String_Date: {
+    type: String,
+     require: true
 },
+
+Department: {
+    type: String,
+     require: true
+},
+
 
 })
 

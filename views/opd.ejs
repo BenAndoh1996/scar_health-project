@@ -9,13 +9,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - 404 Error</title>
+  <title>SB Admin - Tables</title>
 
   <!-- Custom fonts for this template-->
-  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href=".../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="../Assets/css/sb-admin.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="index.html">ScarHealth</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -89,69 +89,91 @@
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-home"></i>
-          <span>Dashboard</span>
+          <span>Home</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Patients</span>
-      </a>
-      </li>
-        
-        
-      <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="login.html">
+          <i class="fas fa-fw fa-bell"></i>
+          <span>Logout</span></a>
       </li>
     </ul>
-
+             
     <div id="content-wrapper">
-
+      <p> <h4> <%= Hospital %></h4> </p>
       <div class="container-fluid">
-        <p> <h3> <%= Hospital %></h3> </p>
+
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-          <id="OPD">
-            <h3>General OPD</h3>
-            <div class="card-header">
-              <i class="fas fa-user"></i>
-              General IPD SECTION. 
-              <a href="/dashboard/PatientList" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">View Patient List</a>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><b></b></li>
+            <div>
+              <a href="/dashboard/patientlist" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">View Patient List</a>
               <a href="/dashboard/patientregister" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Add New Patient</a>
-              <a href="/dashboard/PatientVital" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Create Patient Vitals</a>
+              <a href="/dashboard/patientvital" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Create Patient Vitals</a>
+               
+              
               <a href="/dashboard/IPDMAIN" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">IPD Registrations</a>
-           
-             </div>     
-             </div>
+              <a href="/dashboard/GetUsers" class="btn btn-dark btn-sm active" role="button" aria-pressed="true">Registered Users</a>            
+              <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn-sm btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Hospital Bedding System
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" href="/dashboard/AddBedForm">Add New Bed</a>
+                  <a class="dropdown-item" href="/dashboard/EmptyBedList">Available Beds</a>
+                  <a class="dropdown-item" href="/dashboard/OccupiedBedList">Occupied Beds</a>
+                </div>
+              </div>
+              <a href="/dashboard/Billing" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Hospital Billings</a>
+             </div>        
+               
+                   </div>
+          </ol>
+        </nav>
+        
+        
 
-            </id>
-          </li>
-        </ol>
+        <!-- DataTables Example -->
         <div class="card mb-3">
-
-          
-
-        <!-- Page Content -->
-        <div class="container">
-          <div class="card card-login mx-auto mt-5">
+          <div class="card-header">
+            <i class="fas fa-user-circle">
+              <b>GENERAL MANAGEMENT FOR  OPD- IPD SECTION</b></i>
+            </div> 
+          <div class="card-body">
             
-          
-    
-       
+            
+          </div>
+          <div class="card-footer small text-muted">Scar-Health Wish You The Very Best As You Continue To deliver Quality Health Care</div>
+        </div>
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading"><i class="fas fa-user-circle"></i> <b>GENERAL OPD-IPD SECTION</b></h4>
+          <p><b>Patients Registration and IPD Operations are available Here in this Page, add new Patient, assign bed and ID Numbers and other OPD 
+            Operations.(Remenber to Save After Operations)</b>
+          </p>
+          <hr>
+          <p class="mb-0" ><b>Scar-Health works on the web, to ensure that all medical data and Records are saved , ensure that you are on internet connection.</b></p>
+        </div>
+
+        <p class="small text-center text-muted my-5">
+          <em></em>
+        </p>
+
       </div>
       <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Scar Tech</span>
+          </div>
+        </div>
+      </footer>
 
     </div>
     <!-- /.content-wrapper -->
@@ -183,30 +205,23 @@
     </div>
   </div>
 
-  
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
+  <!-- Bootstrap core JavaScript-->
+  <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Core plugin JavaScript-->
+  <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="../Assets/vendor/jquery/jquery.min.js"></script>
-<script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../Assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../Assets/js/sb-admin.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../Assets/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="../Assets/js/demo/datatables-demo.js"></script>
-  <script src="../Assets/js/demo/chart-area-demo.js"></script>
+  <script src="../Assetsjs/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>

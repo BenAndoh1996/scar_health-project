@@ -46,6 +46,16 @@ Description: {
     require: true
 },
 
+String_Date: {
+    type: String,
+    require: true
+},
+
+Status: {
+    type: String,
+    require: true
+},
+
 
 })
 

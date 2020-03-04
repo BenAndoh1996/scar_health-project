@@ -49,7 +49,10 @@ Description: {
 },
 
 
-
+String_Date: {
+    type: String,
+    require: true
+},
 
 })
 

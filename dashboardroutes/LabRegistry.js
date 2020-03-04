@@ -80,7 +80,8 @@ router.post('/LabInput', upload.single('file'), function(req, res){
     let Lab_ID = req.body.Lab_ID
     let Lab_Type = req.body.Lab_Type
     let Description= req.body.Description
-    
+    let String_Date = new Date().toLocaleDateString().split(",")[0]
+    let Status = 'NoView'
    
       const newUser = new labresults({
         Hospital_username,
@@ -92,6 +93,8 @@ router.post('/LabInput', upload.single('file'), function(req, res){
         Doctor_UserName,
          Lab_Type,
         Description,
+        String_Date,
+        Status,
            
         });
 
@@ -107,10 +110,60 @@ router.post('/LabInput', upload.single('file'), function(req, res){
 });
 
 
+// lab billing Handle
+router.get('/LabBilling', function(req, res){
+    res.render('labbillform') 
+ } );
+
+router.post('/LabBillPost', function(req, res){
+    
+    const labbills = require('../models/LabBillSchema')
+
+    let Patients_Name= req.body.Patients_Name
+    let Patient_ID = req.body.Patient_ID
+    let Hospital_UserName = req.user.UserName
+    let Doctor_Name= req.user.Name
+    let Month = req.body.Month ;
+    let Current_Date = req.body.Current_Date
+    let Billing_One= req.body.Billing_One
+    let Purpose_One= req.body.Purpose_One
+    let Billing_Two= req.body.Billing_Two
+    let Purpose_Two= req.body.Purpose_Two
+    let String_Date = new Date().toLocaleDateString().split(",")[0]
+    let Total = Number(Billing_One)+ Number(Billing_Two) 
+    
+
+      const newUser = new labbills({
+          Patients_Name,
+           Patient_ID,
+           Hospital_UserName,
+           Doctor_Name,
+           Month ,
+           Current_Date,
+           String_Date,
+           Billing_One,
+           Purpose_One,
+           Billing_Two,
+           Purpose_Two,
+           Total,
+          
+        });
+
+     //saving a new user to database
+        newUser.save()
+      .then(function(){
+        req.flash('success_msg', 'The new bills have been added succesfully to Laboratory Billing')  
+       res.redirect('/dashboard/LabBilling');
+        console.log(req.body);
+        })
+      .catch(err => console.log(err));  
+                    
+});
+
 //LabList Handle
 
 router.get('/LabList', function(req, res, next){
-    //var url = 'mongodb://localhost:27017/scarhealth';
+   // var url = 'mongodb://localhost:27017/scarhealth';
     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const labArray = []
   
@@ -162,6 +215,143 @@ router.get('/RequestList', function(req, res, next){
   
   } );
 
+
+  //route for lab account summary
+ router.get('/LabBills', function(req, res, next){
+    //var url = 'mongodb://localhost:27017/scarhealth';
+     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+   
+    var Today = new Date().toLocaleDateString().split(",")[0]
+    const PatientArray = []
+
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        var db = client.db('scarhealth');
+        var query = {Hospital_UserName: req.user.UserName, String_Date: Today };
+        db.collection('labbills').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName){
+                    PatientArray.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(PatientArray);
+             console.log(PatientArray.length)
+               res.render('labbill', { Labbill: PatientArray});
+    });
+    });
+    
+
+});
+
+//route for lab Monthly Account Summar
+router.post('/LabMonthAccount', function(req, res, next){
+    //var url = 'mongodb://localhost:27017/scarhealth';
+     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+      const Total = []
+      const Money = []
+      let DateToday = req.body.search
+      
+      assert.equal(null, err);
+      console.log('sucessesfully connected');
+      let db = client.db('scarhealth');
+      let myObj =  [
+        {$match: { Hospital_UserName: req.user.UserName, Month: DateToday} },
+      {$group: {_id: "$String_Date", total: {$sum: "$Total"}}}
+      ]
+  
+      let ObJ =  [
+        {$match: { Hospital_UserName:  req.user.UserName, Month: DateToday} },
+      {$group: {_id: "$Hospital_UserName", total: {$sum: "$Total"}}}
+      ]
+      
+      db.collection('labbills').aggregate(myObj).toArray(function(error,sums){
+        sums.forEach(function(sum){
+                    Total.push(sum)    
+           },function(){
+            client.close
+           })         
+        });
+  
+          db.collection('labbills').aggregate(ObJ).toArray(function(error,sums){
+            sums.forEach(function(sum){
+                        Money.push(sum)    
+               },function(){
+                client.close
+               })
+               console.log(Total);
+               console.log(Money);
+               console.log(DateToday)
+               
+               res.render('monthlab', { Total: Total, Money: Money, date: req.body.search})
+               
+              });
+    }) ;
+  });
+
+
+  // Handle for Daily Lab Accounts
+router.post('/DailyLabAccounts', function(req, res,next){
+   // var url = 'mongodb://localhost:27017/scarhealth';
+    var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+
+    const UserArray = []
+    let DateToday = new Date(req.body.search)
+  
+    Mongoclient.connect(process.env.MONGODB_URI ||url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let query = {Hospital_UserName: req.user.UserName, Current_Date: DateToday };
+  
+        db.collection('labbills').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName ){
+                  
+                    UserArray.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(UserArray);
+               console.log(UserArray.length);
+              
+    });
+    });
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+      const Total = []
+      const Money = []
+      let DateToday = new Date(req.body.search)
+      
+      assert.equal(null, err);
+      console.log('sucessesfully connected');
+      let db = client.db('scarhealth');
+      let myObj =  [
+        {$match: { Hospital_UserName: req.user.UserName, Current_Date: DateToday} },
+      {$group: {_id: "$Hospital_Username", total: {$sum: "$Total"}}}
+      ]
+      
+      db.collection('labbills').aggregate(myObj).toArray(function(error,sums){
+        sums.forEach(function(sum){
+                    Total.push(sum)    
+           },function(){
+            client.close
+           })
+           console.log(Total);
+           console.log(DateToday)
+           
+           res.render('dailylab', { Check: UserArray, Total: Total, Money: Money,  date: req.body.search})
+           
+          });
+    }) ;
+  
+  });
+
+
   // route for getting lab result the actual document
  router.post('/SearchLab', function(req, res){
     var SearchID = req.body.LabSearch
@@ -177,5 +367,8 @@ router.get('/RequestList', function(req, res, next){
          readstream.pipe(res)
      })
  })
+
+
+
 
 module.exports = router;
