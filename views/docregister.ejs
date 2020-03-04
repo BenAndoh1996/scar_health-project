@@ -1,4 +1,4 @@
-d
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,31 +23,48 @@ d
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register a Physician</div>
+      <div class="card-header">Register New User</div>
+ 
       <div class="card-body">
-         <% include ./partials/messages %>
-        <form  id="myForms" method="post" action="/dashboard/DocRegister" >
-
+        <% include ./partials/messages %>
+        <form  id="myForms" method="post" action="/users/register" >
           <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Department" autofocus="autofocus" >
-                  <label for="firstName">Department</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Hospital" autofocus="autofocus" >
+                  <label for="firstName">Hospital Name</label>
                 </div>
               </div>
-            
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">
-              <label for="Name">Doctor's Name</label>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="lastName" class="form-control" placeholder="Hospital UserName" name="UserName" >
+                  <label for="lastName">Hospital Username</label>
+                </div>
+              </div>
             </div>
           </div>
-
           <div class="form-group">
             <div class="form-label-group">
               <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required="required">
-              <label for="inputEmail">Doctor's Email address</label>
+              <label for="inputEmail">Email address</label>
             </div>
           </div>
+         
+           <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="Department" class="form-control" placeholder="Department" name="Department" required="required">
+              <label for="Department">Department</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">
+              <label for="Name">Name of Registrar</label>
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">

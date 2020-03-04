@@ -61,7 +61,19 @@
         </a>
         </a>
       </li>     
+        
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard/DocPage">
+          <i class="fas fa-fw fa-balance-scale"></i>
+          <span>Doctors</span></a>
+      </li>
       
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard/PharmPage">
+          <i class="fas fa-fw fa-balance-scale"></i>
+          <span>Pharmacy</span></a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link" href="/dashboard/GetBills">
           <i class="fas fa-fw fa-balance-scale"></i>
@@ -71,6 +83,12 @@
         <a class="nav-link" href="/dashboard/Labpage">
           <i class="fas fa-fw fa-heartbeat"></i>
           <span>Laboratory</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard/Admin">
+          <i class="fas fa-fw fa-heartbeat"></i>
+          <span>Administrator</span></a>
       </li>
 
       <li class="nav-item active">
@@ -87,8 +105,8 @@
           <li class="breadcrumb-item active" aria-current="page"><b></b></li>
           <div>
             
-            <h5><b>Welcome to your Dashboard <%= Hospital %> (General User)</b></h5>
-             
+            <h5><b>Welcome to your Dashboard <%= Hospital %> (<%= Name %> Logged in as <%= Department %>  )</b></h5>
+                <% include ./partials/messages %>
                  </div>
         </ol>
       </nav>

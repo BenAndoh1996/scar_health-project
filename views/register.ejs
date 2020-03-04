@@ -1,4 +1,4 @@
-d
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +24,7 @@ d
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
-      <p><strong>Password should be more 7 than characters long</strong></p>
+ 
       <div class="card-body">
         <% include ./partials/messages %>
         <form  id="myForms" method="post" action="/users/register" >
@@ -38,8 +38,8 @@ d
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Username" name="UserName" required="required" >
-                  <label for="lastName">Username</label>
+                  <input type="text" id="lastName" class="form-control" placeholder="Hospital UserName" name="UserName" required="required" >
+                  <label for="lastName">Hospital Username</label>
                 </div>
               </div>
             </div>
@@ -50,6 +50,21 @@ d
               <label for="inputEmail">Email address</label>
             </div>
           </div>
+         
+           <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="Department" value="Administrator" class="form-control" placeholder="Department" name="Department" required="required">
+              <label for="Department">Department</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">
+              <label for="Name">Name of Registrar</label>
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">

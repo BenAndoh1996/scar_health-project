@@ -39,16 +39,14 @@ mongoose.connect(process.env.MONGODB_URI || db,
      console.log (err)
  })
  
-
-
  /*mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scarhealth", {useNewUrlParser: true} );
 
 mongoose.connection.once('open', function(){
     console.log('connection has ben made')
 }).on('error', function(error){
     console.log(error)
-})*/
-
+})
+*/
 // later added to form upload
 app.use(bodyparser.json())
 app.use(methodOverride('_method'));

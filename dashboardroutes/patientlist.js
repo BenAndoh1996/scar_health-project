@@ -7,9 +7,8 @@ const assert = require('assert');
 
 //var url = 'mongodb://localhost:27017/scarhealth';
 var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
-router.get('/patientlist', function(req, res, next){
+router.get('/patientlist', function(req, res){
    
-   let UserName = req.user.UserName
     const PatientArray = []
 
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -25,8 +24,8 @@ router.get('/patientlist', function(req, res, next){
                },function(){
                 client.close
                })
-               console.log(PatientArray);
-             console.log(UserName)
+              
+             
                res.render('patientlist', { Patients: PatientArray});
     });
     });

@@ -95,9 +95,10 @@ router.post('/GetDrugs', function(req, res){
 var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/Pharmpage', function(req, res, next){
+   if(req.user.Department === 'Pharmacist'){
+        
     var dateToday = new Date().toLocaleDateString().split(",")[0]
     const DrugArray = []
-
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
@@ -116,6 +117,12 @@ router.get('/Pharmpage', function(req, res, next){
                res.render('pharmpage', { Drug: DrugArray});
     });
     });
+
+   }else{
+    req.flash('success_msg', 'Based on your role Assigned by Administrator, You cannot access this page. This page can only be access by Pharmacist. Please Contact your Admin')  
+    res.redirect('/dashboard');
+   }
+
     
 
 });

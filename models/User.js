@@ -11,11 +11,21 @@ UserName: {
     require: true
 },
 
-email: {
+inputEmail: {
     type: String,
     require: true
 },
 password: {
+    type: String,
+    require: true
+},
+
+Department: {
+    type: String,
+    require: true
+},
+
+Name: {
     type: String,
     require: true
 },

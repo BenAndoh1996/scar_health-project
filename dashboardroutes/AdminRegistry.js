@@ -149,8 +149,13 @@ router.post('/AdminLogin', (req, res, next) => {
 
 // routes for Admin page
 router.get('/Admin', function(req, res, next){
-    res.render('Admin' )
-    console.log(req.user.inputEmail)
+    if(req.user.Department === 'Administrator'){
+        res.render('Admin' )
+        console.log(req.user.inputEmail)   
+    }else{
+        req.flash('success_msg', 'Based on your role Assigned by Administrator, You cannot access this page. This page can only be access by Admin. Please Contact your Admin')  
+        res.redirect('/dashboard');
+    }
     
 } );
 
@@ -472,14 +477,14 @@ router.post('/Dailydischarge', function(req, res,next){
 router.get('/GetUsers', function(req, res, next){
    
     const Doctors = []
-    const Admins = []
 
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
-        var query = {UserName: req.user.UserName};
-        db.collection('doctors').find(query).toArray(function(err,docs){
+        var query = {UserName: req.user.UserName, Department: 'Doctor'};
+        var queryOne = {UserName: req.user.UserName, Department: 'Pharmacist'};
+        db.collection('users').find(query).toArray(function(err,docs){
             docs.forEach(function(doc){
                 if (req.user.UserName = doc.UserName){
                     Doctors.push(doc);      
@@ -488,7 +493,7 @@ router.get('/GetUsers', function(req, res, next){
                 client.close
                })
             })
-               db.collection('pharmacies').find(query).toArray(function(err,docs){
+               db.collection('users').find(queryOne).toArray(function(err,docs){
                 const Pharmacies = []
                 docs.forEach(function(doc){
                     if (req.user.UserName = doc.UserName){

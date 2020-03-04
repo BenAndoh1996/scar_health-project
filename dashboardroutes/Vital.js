@@ -79,28 +79,33 @@ router.post('/PatientVital', function(req, res){
   var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/DocPage', function(req, res, next){
-   
-    const vitalArray = []
-    const DateToday = new Date().toLocaleDateString().split(",")[0]
-    Mongoclient.connect(process.env.MONGODB_URI || url, {useNewUriParser: true}, function(err, client){
-        assert.equal(null, err);
-        console.log('sucessesfully connected');
-        var db = client.db('scarhealth');
-        var query = {Doctor_UserName: req.user.inputEmail, Status: 'Noview', String_Date: DateToday, Hospital_UserName: req.user.UserName };
-        db.collection('vitals').find(query).toArray(function(err,docs){
-            docs.forEach(function(doc){
-                if (req.user.inputEmail = doc.Doctor_UserName){
-                    vitalArray.push(doc);      
-             }              
-               },function(){
-                client.close
-               })
-               console.log(vitalArray);
-             console.log(vitalArray.length)
-             res.render('docpage',{ Vitals: vitalArray} );  
-    });
-    });
-    
+      
+    if(req.user.Department === 'Doctor'){
+      const vitalArray = []
+      const DateToday = new Date().toLocaleDateString().split(",")[0]
+      Mongoclient.connect(process.env.MONGODB_URI || url, {useNewUriParser: true}, function(err, client){
+          assert.equal(null, err);
+          console.log('sucessesfully connected');
+          var db = client.db('scarhealth');
+          var query = {Doctor_UserName: req.user.inputEmail, Status: 'Noview', String_Date: DateToday, Hospital_UserName: req.user.UserName };
+          db.collection('vitals').find(query).toArray(function(err,docs){
+              docs.forEach(function(doc){
+                  if (req.user.inputEmail = doc.Doctor_UserName){
+                      vitalArray.push(doc);      
+               }              
+                 },function(){
+                  client.close
+                 })
+                 console.log(vitalArray);
+               console.log(vitalArray.length)
+               res.render('docpage',{ Vitals: vitalArray} );  
+      });
+      });
+
+    }else{
+      req.flash('success_msg', 'Based on your role Assigned by Administrator, You cannot access this page. This page can only be access by Doctors. Please Contact your Admin')  
+      res.redirect('/dashboard');
+    }
 
 });
 // handle deleting Vitals

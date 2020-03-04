@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Login</title>
+  <title>SB Admin - Register</title>
 
   <!-- Custom fonts for this template-->
   <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,45 +21,78 @@
 </head>
 
 <body class="bg-dark">
-
   <div class="container">
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Doctor's Login</div>
-   
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+ 
       <div class="card-body">
-        <form id="myForms" method="post" action="/dashboard/DocLogin" >
+        <% include ./partials/messages %>
+        <form  id="myForms" method="post" action="/users/register" >
           <div class="form-group">
-            <div class="form-label-group">
-              <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="inputEmail" required="required" autofocus="autofocus">
-              <label for="inputEmail">Email Address</label>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Hospital" autofocus="autofocus" >
+                  <label for="firstName">Hospital Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="lastName" class="form-control" placeholder="Hospital UserName" name="UserName" required="required" >
+                  <label for="lastName">Hospital Username</label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required">
-              <label for="password">Password</label>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required="required">
+              <label for="inputEmail">Email address</label>
             </div>
           </div>
+         
+           <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="Department" value="Administrator" class="form-control" placeholder="Department" name="Department" required="required">
+              <label for="Department">Department</label>
+            </div>
+          </div>
+
           <div class="form-group">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me">
-                Remember Password
-              </label>
+            <div class="form-label-group">
+              <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">
+              <label for="Name">Name of Registrar</label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" >Login</button>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password  " name="password" required="required"  >
+                  <label for="inputPassword">Password</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" name="confirmPassword" required="required" >
+                  <label for="confirmPassword">Confirm password</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" >Register</button>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="/dashboard/DocLogin">Register an Account</a>
+          <a class="d-block small mt-3" href="/users/login">Login Page</a>
           <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
         </div>
       </div>
     </div>
   </div>
-
+      <!--personal javascript-->
+      <script src="../Assets/js/my-validation.js"></script>
   <!-- Bootstrap core JavaScript-->
-  
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
