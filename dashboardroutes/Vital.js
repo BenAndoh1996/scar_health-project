@@ -79,7 +79,6 @@ router.post('/PatientVital', function(req, res){
   var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/DocPage', function(req, res, next){
-      
     if(req.user.Department === 'Doctor'){
       const vitalArray = []
       const DateToday = new Date().toLocaleDateString().split(",")[0]
@@ -98,7 +97,7 @@ router.get('/DocPage', function(req, res, next){
                  })
                  console.log(vitalArray);
                console.log(vitalArray.length)
-               res.render('docpage',{ Vitals: vitalArray} );  
+               res.render('docpage',{ Vitals: vitalArray, Name: (req.user.Name).toUpperCase()} );  
       });
       });
 
