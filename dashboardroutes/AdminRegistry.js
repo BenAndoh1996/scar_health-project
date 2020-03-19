@@ -516,7 +516,7 @@ router.post('/DeleteDoctor', function(req, res){
         let db = client.db('scarhealth')
         let query = {UserName: req.user.UserName,  inputEmail:req.body.UserName, Name:req.body.Name};
         
-        db.collection('doctors').deleteOne(query,(function(err,docs){
+        db.collection('users').deleteOne(query,(function(err,docs){
            if(err){
              console.log(err)
            }else{
@@ -536,7 +536,7 @@ router.post('/DeletePharmacist', function(req, res){
       let db = client.db('scarhealth')
       let query = {UserName: req.user.UserName,  inputEmail:req.body.UserName, Name:req.body.Name};
       
-      db.collection('pharmacies').deleteOne(query,(function(err,docs){
+      db.collection('users').deleteOne(query,(function(err,docs){
          if(err){
            console.log(err)
          }else{
@@ -556,7 +556,7 @@ router.post('/DeleteAdmin', function(req, res){
       let db = client.db('scarhealth')
       let query = {UserName: req.user.UserName,  inputEmail:req.body.UserName, Name:req.body.Name};
       
-      db.collection('admins').deleteOne(query,(function(err,docs){
+      db.collection('users').deleteOne(query,(function(err,docs){
          if(err){
            console.log(err)
          }else{

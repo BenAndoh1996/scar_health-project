@@ -6,12 +6,11 @@ const assert = require('assert');
 
 
 //var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
-router.get('/patientlist', function(req, res){
-   
-    const PatientArray = []
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
 
-    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+router.get('/patientlist', function(req, res){
+    const PatientArray = []
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -24,18 +23,14 @@ router.get('/patientlist', function(req, res){
                },function(){
                 client.close
                })
-              
-             
                res.render('patientlist', { Patients: PatientArray});
     });
     });
-    
-
 });
 
 // Handle for Medical report Generation
 
-router.post('/MedicalReport', function(req, res, next){
+ router.post('/MedicalReport', function(req, res, next){
    
     var Search = req.body.Search
     const MedReport = []
@@ -94,9 +89,7 @@ router.post('/LabRecord', function(req, res, next){
 
 //handle for lab search in the doctors department
 router.get('/DocLabList', function(req, res, next){
-   
     const DocLabArray = []
-
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');

@@ -78,13 +78,13 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-home"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
           <span>LogOut</span></a>
       </li>
@@ -136,7 +136,7 @@
                           <tr>
                               <td><%= row.Patient_Name %></td>
                               <td><%= row.Patient_ID %></td>
-                              <td><%= row.current_Date %></td>                             
+                              <td><%= row.String_Date %></td>                             
                               <td><%= row.Doctor_Name %></td>
                               <td><%= row.Deparment %></td>  
                               <td><%= row.Ward %></td>  
@@ -219,7 +219,7 @@
   <!-- Demo scripts for this page-->
   <script src="../Assets/js/demo/datatables-demo.js"></script>
 
-  <script src="./partials/click.js"></script>
+  
 
 </body>
 

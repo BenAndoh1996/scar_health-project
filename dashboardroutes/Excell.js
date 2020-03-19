@@ -1,69 +1,85 @@
 var express = require('express');
 const router = express.Router();
-var app = express();
+const multer = require('multer')
+const mongoose = require('mongoose')
+const Mongoclient = require('mongodb');
 
-var multer = require('multer');
-var xlstojson = require("xls-to-json-lc");
-var xlsxtojson = require("xlsx-to-json-lc");
+const path = require('path')
+const crypto = require('crypto')
+const GridFsStorage = require('multer-gridfs-storage')
+const Grid= require('gridfs-stream')
+const methodOverride = require('method-override')
 
 
-var storage = multer.diskStorage({ //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, './uploads/')
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-});
-var upload = multer({ //multer settings
-                storage: storage,
-                fileFilter : function(req, file, callback) { //file filter
-                    if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
-                        return callback(new Error('Wrong extension type'));
-                    }
-                    callback(null, true);
-                }
-            }).single('file');
-/** API path that will upload the files */
- router.post('/upload', function(req, res) {
-    var exceltojson;
-    upload(req,res,function(err){
-        if(err){
-             res.json({error_code:2,err_desc:err});
-             return;
-        }
-        /** Multer gives us file info in req.file object */
-        if(!req.file){
-            res.json({error_code:1,err_desc:"No file passed"});
-            return;
-        }
-        /** Check the extension of the incoming file and
-         *  use the appropriate module
-         */
-        if(req.file.originalname.split('.')[req.file.originalname.split('.').length-1] === 'xlsx'){
-            exceltojson = xlsxtojson;
-        } else {
-            exceltojson = xlstojson;
-        }
-        try {
-            exceltojson({
-                input: req.file.path,
-                output: null, //since we don't need output.json
-                lowerCaseHeaders:true
-            }, function(err,result){
-                if(err) {
-                    return res.json({error_code:1,err_desc:err, data: null});
-                }
-                res.json({error_code:0,err_desc:null, data: result});
-            });
-        } catch (e){
-            res.json({error_code:1,err_desc:"Corupted excel file"});
-        }
-    })
-});
-router.get('/PharmUpload',function(req,res){
-  res.render('uploadexcell');
+var xlsx = require('xlsx')
+
+//const mongoUri = 'mongodb://localhost:27017/scarhealth';
+const mongoUri = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+const conn = mongoose.createConnection(mongoUri)
+
+// init gfs
+let gfs 
+
+conn.once('open', function(){
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('excelluploads');
 })
 
+//create storage object
+const storage = new GridFsStorage(
+    {
+        url: mongoUri,
+        file: (reg, file) =>{
+            return new Promise((resolve, reject) => {
+                crypto.randomBytes(16, (err, buf) => {
+                    if(err){
+                        return reject(err);
+                    }
+                        const filename = buf.toString('hex') + path.extname(file.originalname);
+                        const fileinfo = {
+                            filename:filename,
+                            bucketName: 'excelluploads'
+                        };
+                        resolve(fileinfo);
+                })
+            })
+        }
+    
+        
+    }
+)
+const upload = multer({storage})
+
+
+//Doctors login Handle
+router.get('/UploadExcell', function(req, res){
+    res.render('uploadexcell') 
+ } );
+  
+//search post route
+router.post('/excellupload', upload.single('file'), function(req, res){
+    const FileInfo = []
+    //res.json({file: req.file})
+    FileInfo.push(req.file)
+    console.log(FileInfo)
+    res.render('excell', {
+    FileInfo: FileInfo} ) 
+    console.log(req.file.filename)
+} );
+
+router.post('/Excellfile/:filename', function(req, res){
+    var search = req.params.filename
+    console.log(search)
+     gfs.files.findOne({filename:search}, function(err, file){
+         if(!file || file.length === 0){
+             return res.status(404).json({
+                 err:'no file exists which matches the ID, Please consult your Laboratory for details'
+             })
+         }
+         //file exist
+         //read document or text
+         const readstream = gfs.createReadStream(file.filename);
+         readstream.pipe(res)
+     })
+ })
 module.exports = router;

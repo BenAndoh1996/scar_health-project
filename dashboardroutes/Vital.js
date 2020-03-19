@@ -75,7 +75,7 @@ router.post('/PatientVital', function(req, res){
 });
 
 
-//var url = 'mongodb://localhost:27017/scarhealth';
+  //var url = 'mongodb://localhost:27017/scarhealth';
   var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/DocPage', function(req, res, next){

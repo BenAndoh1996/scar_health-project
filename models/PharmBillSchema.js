@@ -87,7 +87,7 @@ Month: {
 },
 
 Current_Date: {
-  type: Date(),
+  type: Date,
     require: true
 },
 String_Date: {

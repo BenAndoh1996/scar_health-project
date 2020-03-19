@@ -35,6 +35,11 @@ date: {
     default: Date.now
 },
 
+String_Date: {
+    type: String,
+    require: true
+},
+
 })
 
 const User = mongoose.model('User', UserSchema);

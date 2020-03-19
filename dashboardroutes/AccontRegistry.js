@@ -4,6 +4,30 @@ const mongoose = require('mongoose');
 const Mongoclient = require('mongodb');
 const assert = require('assert');
 
+router.get('/Billing', function(req, res){
+  res.render('billings') 
+} );
+
+
+
+//Post Receipt Handle
+router.post('/GenerateReceipt', function(req, res){
+  
+  let Patients_Name= req.body.Name
+  let Patient_ID = req.body.UserName
+  let Hospital = req.user.Hospital
+  let Billing_One= Number(req.body.Billing_One)
+  let Purpose_One= req.body.Billing_One_Purpose
+  let Billing_Two= Number(req.body.Billing_Two)
+  let Purpose_Two= req.body.Billing_Two_Purpose
+  let Billing_Three = Number(req.body.Billing_Three)
+  let Purpose_Three = req.body.Billing_Three_Purpose
+  let Message = 'Type your Name Here'
+
+  const Bill = [{Amount:Billing_One, Purpose: Purpose_One}, {Amount: Billing_Two, Purpose: Purpose_Two}, {Amount: Billing_Three, Purpose:Purpose_Three}]
+
+  res.render('receipt', {Bill : Bill, Hospital: Hospital, User:Patients_Name , PatientID:Patient_ID, Message:Message})
+})
 
 //var url = 'mongodb://localhost:27017/scarhealth';
 var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '

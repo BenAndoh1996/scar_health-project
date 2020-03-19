@@ -3,13 +3,17 @@ const router = express.Router();
 const bcrypt= require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose');
+const Mongoclient = require('mongodb');
+const assert = require('assert');
+
 
 const doctor =require('../models/DocSchema')
 
 
 //Doctors login Handle
-router.get('/DocLogin', function(req, res){
-    res.render('doclogin') 
+router.get('/Vitals', function(req, res){
+    res.render('vitaltwo') 
 } );
 
 //Doctors Registration Handle
@@ -137,5 +141,59 @@ router.post('/DocLogin', (req, res, next) => {
         failureFlash:true
     })(req, res, next);
 });
+
+//var url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
+
+router.get('/RegisteredPatient', function(req, res, next){
+    const Registered = []
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        var db = client.db('scarhealth');
+        var query = {Hospital_UserName: req.user.UserName };
+        db.collection('addpatientschemas').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName){
+                    Registered.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(Registered);
+             console.log(Registered.length)
+               res.render('registeredlist', { Hospital: req.user.Hospital, Name: req.user.Name ,Registered: Registered});
+    });
+    });
+});
+
+router.post('/PatientSearchPost', function(req, res,next){
+
+    const Patient = []
+    
+    let PatientId = req.body.search
+   
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let query = {Patient_ID_Number: req.body.search };
+        db.collection('addpatientschemas').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (PatientId = doc.Patient_ID_Number){
+                    Patient.push(doc);      
+             }   
+            
+               },function(){
+                client.close
+               })
+               console.log(Patient);
+               console.log(Patient.length);
+               
+               res.render('Patientsearch', { Patient: Patient, PatientId: req.body.search});
+              
+    });
+    });
+})
 
 module.exports = router;

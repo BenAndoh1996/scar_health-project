@@ -19,6 +19,10 @@ const methodOverride = require('method-override')
 const mongoUri = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 const conn = mongoose.createConnection(mongoUri)
 
+
+var url = 'mongodb://localhost:27017/scarhealth';
+var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+
 // init gfs
 let gfs 
 
@@ -148,12 +152,11 @@ router.post('/LabBillPost', function(req, res){
            Total,
           
         });
-
+      const Bill = [{Amount : Billing_One, Purpose: Purpose_One}, {Amount: Billing_Two, Purpose:Purpose_Two}]
      //saving a new user to database
         newUser.save()
       .then(function(){
-        req.flash('success_msg', 'The new bills have been added succesfully to Laboratory Billing')  
-       res.redirect('/dashboard/LabBilling');
+       res.render('labreceipt', {Bill : Bill, User : Patients_Name, ID: Patient_ID, Hospital : req.user.Hospital})
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -163,8 +166,6 @@ router.post('/LabBillPost', function(req, res){
 //LabList Handle
 
 router.get('/LabList', function(req, res, next){
-   // var url = 'mongodb://localhost:27017/scarhealth';
-    var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
     const labArray = []
   
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -190,8 +191,6 @@ router.get('/LabList', function(req, res, next){
 // handle for view lab request handle
 
 router.get('/RequestList', function(req, res, next){
-    //var url = 'mongodb://localhost:27017/scarhealth';
-    var url = 'mongodb+srv://ben:<ben>@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
     const ViewArray = []
   
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -218,9 +217,6 @@ router.get('/RequestList', function(req, res, next){
 
   //route for lab account summary
  router.get('/LabBills', function(req, res, next){
-    //var url = 'mongodb://localhost:27017/scarhealth';
-     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
-   
     var Today = new Date().toLocaleDateString().split(",")[0]
     const PatientArray = []
 
@@ -248,9 +244,6 @@ router.get('/RequestList', function(req, res, next){
 
 //route for lab Monthly Account Summar
 router.post('/LabMonthAccount', function(req, res, next){
-    //var url = 'mongodb://localhost:27017/scarhealth';
-     var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
-
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
       const Total = []
       const Money = []
@@ -296,9 +289,6 @@ router.post('/LabMonthAccount', function(req, res, next){
 
   // Handle for Daily Lab Accounts
 router.post('/DailyLabAccounts', function(req, res,next){
-   // var url = 'mongodb://localhost:27017/scarhealth';
-    var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
-
     const UserArray = []
     let DateToday = new Date(req.body.search)
   

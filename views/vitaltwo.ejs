@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="/dashboard/PatientVital" method="POST" class="register-form" id="register-form">
+                        <h2>PATIENT VITALS-FORM</h2>
+                        <% include ./partials/messages %>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Patients Full Name</label>
+                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder(ID)">Patient (ID)</label>
+                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Temperature Level(TL)</label>
+                                <input type="text" name="Temperature" id="Temperature Level(TL)" required/>
+                            </div>
+                    
+                        <div class="form-group">
+                            <label for="Blood Level(BP)">Blood Level(BP)</label>
+                            <input type="text" name="Blood_Level" id="Blood Level(BP)" required/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                         <div class="form-group">
+                            <label for="Body Weight(BM)">Body Weight(BM)</label>
+                            <input type="text" name="Body_Weight" id="Body Weight(BM)" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Sugar Level(SL)">Sugar Level(SL)</label>
+                            <input type="text" name="Sugar_Level" id="Sugar Level(SL)" required/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                        <div class="form-group">
+                                <label for="Height(H)">Height(H)</label>
+                                <input type="text" name="Height" id="Height(H)" required/>
+                            </div>
+                        <div class="form-group">
+                            <label for="Age">Age:</label>
+                            <input type="text" name="Age" id="Age">
+                        </div>
+                </div>
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="Pulse Rate(BP/mm)">Pulse Rate(BP/mm)</label>
+                        <input type="text" name="Pulse_Rate" id="Pulse Rate(BP/mm)" required/>
+                    </div>
+                        <div class="form-group">
+                            <label for="Doctor_UserName">Consulting Doctor UserName</label>
+                            <input type="text" name="Doctor_UserName" id="Doctor_UserName" required/>
+                        </div>
+                </div>   
+                        
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Pulse Rate(BP/mm)">Name Of Consulting Doctor</label>
+                        <input type="text" name="Doctor_Name" id="Pulse Rate(BP/mm)" required/>
+                    </div>
+                        <div class="form-group">
+                            <label for="Doctor_UserName">Deparment</label>
+                            <input type="text" name="Deparment" id="Doctor_UserName" required/>
+                        </div>
+                  </div>   
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Create Folder" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

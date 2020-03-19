@@ -16,14 +16,14 @@
   <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="../Assets/css/form.css">
 
 </head>
 
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register New User</div>
+      <div class="card-header"><h5 style="text-align: center;">Register New User</h5></div>
  
       <div class="card-body">
         <% include ./partials/messages %>
@@ -53,15 +53,24 @@
          
            <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="Department" class="form-control" placeholder="Department" name="Department" required="required">
-              <label for="Department">Department</label>
+              <div class="form-group">
+                <div class="form-label-group">
+                  <label for="Department">Role Of User</label>
+                  <select name="Department" id="state" required="required" >
+                    <option value=""></option>
+                    <option value="Male">Doctor</option>
+                    <option value="Male">Pharmacist</option>
+                    <option value="Male">General User</option>
+                </select>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="Name" class="form-control" placeholder="Name" name="Name" required="required">
-              <label for="Name">Name of Registrar</label>
+              <label for="Name">Name Of User</label>
             </div>
           </div>
 
@@ -83,9 +92,7 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block" >Register</button>
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="/users/login">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        <div class="text-center">    
         </div>
       </div>
     </div>

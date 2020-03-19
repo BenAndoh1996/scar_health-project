@@ -53,7 +53,7 @@ router.post('/LabRequest', function(req, res){
       .catch(err => console.log(err));  
                     
 });
-//var url = 'mongodb://localhost:27017/scarhealth';
+// var url = 'mongodb://localhost:27017/scarhealth';
  var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 //Doctors Appointment form delete
 router.delete('/Labdelete/:ID', function(req, res){

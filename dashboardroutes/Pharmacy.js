@@ -26,7 +26,7 @@ router.post('/InventoryForm', function(req, res){
 
   const stocks = require('../models/InventorySchema')
     
-    let Drug_Name = req.body.Drug_Name
+    let Drug_Name = (req.body.Drug_Name).toLowerCase()
     let Drug_Type = req.body.Drug_Type
     let Quantity = req.body.Quantity
     let Price = req.body.Price
@@ -73,8 +73,9 @@ router.post('/UpdateStocks', function(req, res, next){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         let Quantity = Number(req.body.Quantity)
+        let drugName = (req.body.Drug_Name).toLowerCase()
         let db = client.db('scarhealth')
-        var query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_Name};
+        var query = {Hospital_UserName: req.user.UserName, Drug_Name:drugName};
         var UpdateObj = {
           $inc: {
             Quantity: Quantity, AddedQuantity: Quantity, OverallQuantity: Quantity }
@@ -96,22 +97,24 @@ router.post('/UpdateStocks', function(req, res, next){
 
 //handle for pharmacy billings
 router.post('/PharmBill', function(req, res, next){
+  
+  const Message = 'Pharmacy billings for medicine dispensing'
 
   const pharmbills = require('../models/PharmBillSchema')
     
-    let Drug_One = req.body.Drug_One
+    let Drug_One = (req.body.Drug_One).toLowerCase()
     let Quantity_One = req.body.Quantity_One
     let Amount_One = req.body.Amount_One
-    let Drug_Two= req.body.Drug_Two
+    let Drug_Two= (req.body.Drug_Two).toLowerCase()
     let Quantity_Two = req.body.Quantity_Two
     let Amount_Two = req.body.Amount_Two
-    let Drug_Three = req.body.Drug_Three
+    let Drug_Three = (req.body.Drug_Three).toLowerCase()
     let Quantity_Three = req.body.Quantity_Three
     let Amount_Three = req.body.Amount_Three
-    let Drug_Four = req.body.Drug_Four
+    let Drug_Four = (req.body.Drug_Four).toLowerCase()
     let Quantity_Four = req.body.Quantity_Four
     let Amount_Four = req.body.Amount_Four
-    let Drug_Five = req.body.Drug_Five
+    let Drug_Five = (req.body.Drug_Five).toLowerCase()
     let Quantity_Five = req.body.Quantity_Five
     let Amount_Five = req.body.Amount_Five
     let Total = Number(Amount_One)+ Number(Amount_Two) + Number(Amount_Three) + Number(Amount_Four) + Number(Amount_Five)
@@ -147,14 +150,14 @@ router.post('/PharmBill', function(req, res, next){
         InputEmail
         });
 
-
+        const Bill = [{Name: Drug_One, Quantity: Quantity_One, }, {Name:Drug_Two, Quantity:Quantity_Two}]
       // handle for updating 
       Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         let Quantity = Number(req.body.Quantity_One)
         let db = client.db('scarhealth')
-        let query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_One};
+        let query = {Hospital_UserName: req.user.UserName, Drug_Name:Drug_One};
         let UpdateObj = {
           $inc: {
             SoldQuantity: Quantity, Quantity: -Quantity }
@@ -174,7 +177,7 @@ router.post('/PharmBill', function(req, res, next){
     console.log('sucessesfully connected');
     let Quantity = Number(req.body.Quantity_Two)
     let db = client.db('scarhealth')
-    let query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_Two};
+    let query = {Hospital_UserName: req.user.UserName, Drug_Name: Drug_Two};
     let UpdateObj = {
       $inc: {
         SoldQuantity: Quantity, Quantity: -Quantity }
@@ -194,7 +197,7 @@ router.post('/PharmBill', function(req, res, next){
     console.log('sucessesfully connected');
    let Quantity = Number(req.body.Quantity_Three)
    let db = client.db('scarhealth')
-   let query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_Three};
+   let query = {Hospital_UserName: req.user.UserName, Drug_Name: Drug_Three};
    let UpdateObj = {
      $inc: {
       SoldQuantity: Quantity, Quantity: -Quantity }
@@ -215,7 +218,7 @@ router.post('/PharmBill', function(req, res, next){
   console.log('sucessesfully connected');
   let Quantity = Number(req.body.Quantity_Four)
   let db = client.db('scarhealth')
-  let query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_Four};
+  let query = {Hospital_UserName: req.user.UserName, Drug_Name: Drug_Four};
   let UpdateObj = {
     $inc: {
       SoldQuantity: Quantity, Quantity: -Quantity }
@@ -236,7 +239,7 @@ router.post('/PharmBill', function(req, res, next){
    console.log('sucessesfully connected');
    let Quantity = Number(req.body.Quantity_Five)
    let db = client.db('scarhealth')
-   let query = {Hospital_UserName: req.user.UserName, Drug_Name:req.body.Drug_Five};
+   let query = {Hospital_UserName: req.user.UserName, Drug_Name: Drug_Five};
    let UpdateObj = {
     $inc: {
       SoldQuantity: Quantity, Quantity: -Quantity }
@@ -254,8 +257,7 @@ router.post('/PharmBill', function(req, res, next){
      
 newUser.save()
 .then(function(){
-  req.flash('success_msg', 'The Stated Bills Have Added to Pharmacy Billing')  
- res.redirect('/dashboard/Billing');
+   res.render('pharmreceipt',{ Total: Total,  Message:Message, Name: Name, Hospital:req.user.Hospital, Date:Current_Date} )
   console.log(InputEmail);
   })
 .catch(err => console.log(err)); 

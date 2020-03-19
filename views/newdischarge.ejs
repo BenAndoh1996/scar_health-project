@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="../Assets/css/sb-admin.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="../Assets/css/andoh.css">
 </head>
 
 <body id="page-top">
@@ -32,56 +32,6 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Monthdischarge">
-      <div class="input-group">
-        <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-    
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Dailydischarge">
-      <div class="input-group">
-        <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        </div>
-      </li>
-    </ul>
-
   </nav>
 
   <div id="wrapper">
@@ -89,13 +39,13 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-home"></i>
           <span>Dashboard</span>
         </a>
      
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
           <span>LogOut</span></a>
       </li>
@@ -107,11 +57,35 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active"> Patients Database list</li>
-          
+        
+          <div class="mySearch-group">
+            <div class="my-searchOne">
+              Monthly Check Search
+               <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Monthdischarge">
+                <div class="input-group">
+                  <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+              </form>
+             </div>
+            <!-- Navbar Search -->
+             <div class="my-search">
+               Daily Check Search 
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Dailydischarge">
+                    <div class="input-group">
+                      <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
         </ol>
 
         <!-- DataTables  Content -->
@@ -123,7 +97,7 @@
             <a href="/dashboard/DischargeList" class="btn btn-success btn-sm active"  role="button" aria-pressed="true">Discharge Patients List</a>
          
            </div>     
-           <h4>List of Patient Discharge Today From The Hospital</h4> 
+           <h4 style="text-align: center;"><b>List of Patient Discharge Today From The Hospital</b></h4> 
            </div>
           <div class="card-body">
             <div class="table-responsive">

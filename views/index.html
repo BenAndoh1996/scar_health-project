@@ -1,204 +1,418 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>ScarHealth. Admin - Dashboard</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-
-  <!-- Page level plugin CSS-->
-  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="img/favicon.png" type="image/png">
+	<title>Scar-Health Home</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../Assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../Assets/vendor/linericon/style.css">
+	<link rel="stylesheet" href="../Assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../Assets/vendor/owl-carousel/owl.carousel.min.css/">
+	<link rel="stylesheet" href="../Assets/vendor/lightbox/simpleLightbox.css">
+	<link rel="stylesheet" href="../Assets/vendor/nice-select/css/nice-select.css">
+	<link rel="stylesheet" href="../Assets/vendor/animate-css/animate.css">
+	<!-- main css -->
+	<link rel="stylesheet" href="../Assets/css/styleindex.css">
 </head>
 
-<body id="page-top">
+<body>
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+	<!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+		<div class="header-top">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-6 col-sm-6 col-4 header-top-left">
+						<a href="tel:+9530123654896">
+							<span class="lnr lnr-phone"></span>
+							<span class="text">
+								<span class="text">+233547981218  +233277732456</span>
+							</span>
+						</a>
+						<a href="mailto:support@colorlib.com">
+							<span class="lnr lnr-envelope"></span>
+							<span class="text">
+								<span class="text">ScarHealth@gmail.com</span>
+							</span>
+						</a>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-8 header-top-right">
+						<a href="regi.html" class="text-uppercase">Login</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <a class="navbar-brand mr-1" href="index.html">Scar-Health</a>
+		<div class="main_menu">
+			<div class="search_input" id="search_input_box">
+				<div class="container">
+					<form class="d-flex justify-content-between" method="" action="">
+						<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+						<button type="submit" class="btn"></button>
+						<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+					</form>
+				</div>
+			</div>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="index.html"><img src="img/move.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
+							<li class="nav-item"><a class="nav-link" href="test.html">Register</a></li>
+							<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!--================ End Header Menu Area =================-->
 
-    
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-      
-      
-      
-      
-    </ul>
+	<!--================ Start Home Banner Area =================-->
+	<section class="home_banner_area">
+		<div class="banner_inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="banner_content">
+							<h2>
+								We Rank the Best <br>
+								HealthCare Software In Ghana.
+							</h2>
+							<p>
+							A Health management software providing Hospitals and Clinics a realiable and secure
+							way of protecting Patient Medical Data on the Web.Providing the Best Hospital Web-based Management System.
+							</p>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Home Banner Area =================-->
 
-  </nav>
+	<!--================ Start Feature Area =================-->
+	<section class="feature_area">
+		<div class="container">
+			<div class="row justify-content-end">
+				<div class="col-lg-4">
+					<div class="single_feature d-flex flex-row pb-30">
+						<div class="icon">
+							<span class="lnr lnr-screen"></span>
+						</div>
+						<div class="desc">
+							<h4>Simple UI Operation</h4>
+							<p>
+								Scar-Health , provide simple userinterface for medical professionals to be able 
+								navigate the software with ease, to speed up their work.
+							</p>
+						</div>
+					</div>
+					<div class="single_feature d-flex flex-row pb-30">
+						<div class="icon">
+							<span class="fa fa-user"></span>
+						</div>
+						<div class="desc">
+							<h4>Organized Hospital OPD-IPD</h4>
+							<p>
+								The Software provides an Oranganized OPD and IPD Operation Dashboard which
+								will assist Nurses and Doctors work with ease.
+							</p>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Feature Area =================-->
 
-  <div id="wrapper">
+	<!--================ Start Department Area =================-->
+	<div class="department_area section_gap">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="dpmt_courses">
+						<div class="row">
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/uii.png" alt="">
+									</div>
+									<h4>Simple UserInterface</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/db.png" alt="">
+									</div>
+									<h4> Patient Insight</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/50.png" alt="">
+									</div>
+									<h4>Cloud Database</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/HS.png" alt="">
+									</div>
+									<h4>OPD</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/IPD.png" alt="">
+									</div>
+									<h4>IPD</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/01.png" alt="">
+									</div>
+									<h4>Accounts & Billings</h4>
+								</div>
+							</div>
+							<!-- single course -->
+							<div class="offset-lg-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+								<div class="single_department">
+									<div class="dpmt_icon">
+										<img src="img/dpmt/mess.png" alt="">
+									</div>
+									<h4>Messageing</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-home"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <a class="nav-link" href="/dashboard/patient">
-          <i class="fas fa-fw fa-user"></i>
-          <span>General OPD </span>
-        </a>
-        </a>
-      </li>     
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard/DocPage">
-          <i class="fas fa-fw fa-balance-scale"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard/Labpage">
-          <i class="fas fa-fw fa-heartbeat"></i>
-          <span>Laboratory</span></a>
-      </li>
+				<div class="offset-lg-1 col-lg-5">
+					<div class="dpmt_right">
+						<h1>Scar-Health Offer The Best Health Management System on the Web</h1>
+						<p>Scar-Health provides cloud based medical Data protection, with simple user-interface, better Patient insight and Data management.These options generate categorized income reports such as admissions, operations/procedures, pharmacy sales, laboratory income reports, and high-level executive revenue reports on a daily, monthly, and yearly basis.
+							It includes different modules such as a Patient Admission Module, Operation Theatre Management Module, Pharmacy Module, Laboratory Module, Reports Module, Settings & Configuration Module, Users Management Module, and Database Backup & Restore Module. All these modules are very well-documented and also come along with the development guide.</p>
+						</p>
+						<a href="test.html" class="primary-btn text-uppercase">Register Now</a>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="login.html">
-          <i class="fas fa-fw fa-bell"></i>
-          <span>Logout</span></a>
-      </li>
-    </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================ End Department Area =================-->
 
-    <div id="content-wrapper">
-      <div class="container-fluid">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><b></b></li>
-          <div>
-            
-            <h5><b>Welcome to your Dashboard <%= Hospital %> (Dr. <%= Name %>)</b></h5>
-             
-                 </div>
-        </ol>
-      </nav>
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fas fa-home">
-            <b>GENERAL MANAGEMENT DASHBOARD</b></i>
-          </div> 
-        
-        <div class="card-footer small text-muted">Scar-Health Technologies</div>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><b></b></li>
-            <div>
-              <a href="/dashboard/patient" class="btn btn-info btn-sm success" role="button" aria-pressed="true"><b>GENERAL OPD</b></a>
-               <a href="/dashboard/DocPage" class="btn btn-success btn-sm success" role="button" aria-pressed="true"><b>DOCTORS</b></a>  
-      
-              
-               <a href="/dashboard/Labpage" class="btn btn-dark btn-sm bg-dark" role="button" aria-pressed="true"><b>LABORATORY</b></a>
-    
-               
-                   </div>
-          </ol>
-        </nav>
-      </div>
-      <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading"><i class="fas fa-home"></i> <b>HOSPITAL MANGEMENT SYSTEM WEB-BASED SOFTWARE</b></h4>
-        <p><b>Scar-Health Hospital Mangement system Operates on the avaliabilty of internet to help keep track of all medical 
-          database.By this Operation the Hospital or clinic can save all of their medical Database Online
-        </b>
-        </p>
-        <hr>
-        <p class="mb-0" ><b>Scar-Health works on the web, to ensure that all medical data and Records are saved correctly ensure constant internet connection.</b></p>
-      </div>
-      
-      
-      
-      </div>
-    </div>
+	<!--================ Start Popular Courses Area =================-->
+	<div class="popular_courses lite_bg">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<div class="main_title">
+						<h2>Pricing</h2>
+						<p>Choose your prefred Pricing Package to enable you have access to your Mangement System Online
+							begin with a choice and proceed from there.The avaliable pricing Pakages are degsigned to help every Hospital 
+							and clinic to sign on to Scar-Health.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="demo">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+							<div class="pricingTable">
+								<div class="pricingTable-header">
+									<h3 class="title">Basic</h3>
+								</div>
+								<div class="price-value">
+									<span class="amount">₵100.00</span>
+									<span class="amount-sm">00</span>
+								</div>
+								<ul class="pricing-content">
+									<li>50GB Cloud Space</li>
+									<li>Database Management</li>
+									<li class="disable">50GB Bandwidth</li>
+									<li class="disable">15 Subdomains</li>
+								</ul>
+								<div class="pricingTable-signup">
+									<a href="#">Get started</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="pricingTable">
+								<div class="pricingTable-header">
+									<h3 class="title">Standard</h3>
+								</div>
+								<div class="price-value">
+									<span class="amount">₵200.00</span>
+									<span class="amount-sm">00</span>
+								</div>
+								<ul class="pricing-content">
+									<li>500GB Cloud Space</li>
+									<li>Database Management</li>
+									<li class="disable">Web Management</li>
+									<li class="disable">15 Subdomains</li>
+								</ul>
+								<div class="pricingTable-signup">
+									<a href="#">Get started</a>
+								</div>
+							</div>
+						</div>
+						
 
-      
-      
-  
+						<div class="col-md-4 col-sm-6">
+							<div class="pricingTable blue">
+								<div class="pricingTable-header">
+									<h3 class="title">Premium</h3>
+								</div>
+								<div class="price-value">
+									<span class="amount">₵800.00</span>
+									<span class="amount-sm">00</span>
+								</div>
+								<ul class="pricing-content">
+									<li>50GB Disk Space</li>
+									<li>Database Management</li>
+									<li>50GB Bandwidth</li>
+									<li class="disable">15 Subdomains</li>
+								</ul>
+								<div class="pricingTable-signup">
+									<a href="#">Get started</a>
+								</div>
+							</div>
+							
+							
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			</div>
+			
+			
+							
+			
+	<!--================ End Popular Courses Area =================-->
 
+	<!--================ Start Fact Area =================-->
 
+	
+	<!--================ Start footer Area  =================-->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Top Services</h4>
+					<ul>
+						<li><a href="#">Website Management</a></li>
+						<li><a href="#">Online Database</a></li>
+						<li><a href="#">Hospital And clinic IT Solutions</a></li>
+						<li><a href="#">Branding Services</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="#">Hospital Management</a></li>
+						<li><a href="#">IT Solutions</a></li>
+						<li><a href="#">Online Database Management</a></li>
+						<li><a href="#">Terms of Service</a></li>
+					</ul>
+				</div>
+				
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="#">Guides</a></li>
+						<li><a href="#">Research</a></li>
+						<li><a href="#">Experts</a></li>
+						<li><a href="#">Agencies</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-4 col-md-6 single-footer-widget">
+					<h4>Talk to Us</h4>
+					<p>You can trust us. we only send promo offers,</p>
+					<div class="form-wrap" id="mc_embed_signup">
+						<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+						 method="get" class="form-inline">
+							<input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'"
+							 required="" type="email">
+							<button class="click-btn btn btn-default">
+								<span>subscribe</span>
+							</button>
+							<div style="position: absolute; left: -5000px;">
+								<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+							</div>
 
-        
-        
-      
-      
-      <!-- /.container-fluid -->
+							<div class="info"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row footer-bottom d-flex justify-content-between">
+				<p class="col-lg-8 col-sm-12 footer-text m-0 text-white">Copyright © 2020 All rights reserved |
+				  <a href="#">Scar-Health</a></p>
+				<div class="col-lg-4 col-sm-12 footer-social">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--================ End footer Area  =================-->
 
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © Scar Industries</span>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="../Assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="../Assets/vendor/chart.js/Chart.min.js"></script>
-  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  
-
-  <!-- Demo scripts for this page-->
-  <script src="../Assets/js/demo/datatables-demo.js"></script>
-  <script src="../Assets/js/demo/chart-area-demo.js"></script>
-
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="../Assets/js/jquery-3.2.1.min.js"></script>
+	<script src="../Assets/js/popper.js"></script>
+	<script src="../Assets/js/bootstrap.min.js"></script>
+	<script src="../Assets/js/stellar.js"></script>
+	<script src="../Assets/js/countdown.js"></script>
+	<script src="../Assets/vendor/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="../Assets/vendor/owl-carousel/owl.carousel.min.js"></script>
+	<script src="../Assets/js/owl-carousel-thumb.min.js"></script>
+	<script src="../Assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="../Assets/vendor/counter-up/jquery.counterup.js"></script>
+	<script src="../Assets/js/mail-script.js"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="../Assets/js/gmaps.min.js"></script>
+	<script src="../Assets/js/theme.js"></script>
 </body>
 
 </html>

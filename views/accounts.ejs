@@ -19,7 +19,10 @@
   <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
+  
+  <link rel="stylesheet" href="../Assets/css/bootstrap.css">
   <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="../Assets/css/andoh.css">
 
 </head>
 
@@ -32,30 +35,7 @@
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-      
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/AccountMonthSearch">
-        <div class="input-group">
-          <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-  
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/AccountCheck">
-        <div class="input-group">
-          <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-  
+
 
     <!-- Navbar -->
    
@@ -66,7 +46,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-home"></i>
           <span>Dashboard</span>
         </a>
@@ -74,7 +54,7 @@
       
             </li>
       <li class="nav-item">
-        <a class="nav-link" href="login.html">
+        <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
           <span>LogOut</span></a>
       </li>
@@ -82,41 +62,60 @@
 
   
   <div id="content-wrapper">
-
+  
       <div class="container-fluid">
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="index.html">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Account Section</li>
+        
+          <div class="mySearch-group">
+            <div class="my-searchOne">
+              Monthly Check Search
+               <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/AccountMonthSearch">
+                <div class="input-group">
+                  <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+              </form>
+             </div>
+            <!-- Navbar Search -->
+             <div class="my-search">
+               Daily Check Search 
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/AccountCheck">
+                    <div class="input-group">
+                      <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
         </ol>
-
+      
         <!-- Page Content -->
-        <h1>Account Section</h1>
+        <h2 style="text-align: center; color:black; line-height: 2rem;"><b>Account Section</b></h2>
 
   <div class="card mb-3">
-
       <div class="card-header">
         <i class="fas fa-user"></i>
         ACCOUNT SECTION        
-        <a href="" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Yearly Accounts Summary</a>
-        <a href="/dashboard/newadischargeview" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Discharge Patient Bills</a>
+        <a href="/dashboard/newadischargeview" class="btn btn-secondary btn lg" role="button" aria-pressed="true"><b> DISCHARGED PATIENTS BILLS</b></a>
+        <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal"><b>GENERATE RECEIPTS</b></button>
        
        </div>
-
+  
        <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Welcome To the Account Section</h4>
-        <p>Here The Accounts Department Can View All Patient Bills, Accept Payments And Generate Receipts.</p>
-        <hr>
+        <h4 class="alert-heading"><b>Welcome To the Account Section</b> </h4>
+        <p> <b>The Accounts Department Can View All Patient Bills, Accept Payments And Generate Receipts.</b> </p>
        </div>
    </div>   
-   
-   <div id="hid_form">
-    <form action="/dashboard/DeleteVitals" method="POST" class="" id="myForms">
-    </form>
- </div>
+  
      
    <div class="card-body">
     <div class="table-responsive">
@@ -170,7 +169,95 @@
        </table>
     </div>
    </div>
-        
+
+   <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+              
+                <div class="modal-body">
+                   
+                    <h4>Receipt Generation Form</h4> <br>
+                    <form  id="myForms" method="post" action="/dashboard/GenerateReceipt" >
+                      <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="text" id="firstName" class="form-control" placeholder="Name of Patient" required="required" name="Name" autofocus="autofocus" >
+                              <label for="firstName">Name of Patient</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="text" id="lastName" class="form-control" placeholder="Patient ID" name="UserName" required="required" >
+                              <label for="lastName">Patient ID</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="number" id="AmountOne" class="form-control" placeholder="Bill One" required="required" name="Billing_One" autofocus="autofocus" >
+                              <label for="AmountOne">Billing One</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="text" id="BillOne" class="form-control" placeholder="Bill One Purpose" name="Billing_One_Purpose"  >
+                              <label for="BillOne">Billing One Purpose</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     
+                       <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="number" id="Amount" class="form-control" placeholder="Bill Two" name="Billing_Two" autofocus="autofocus" >
+                              <label for="Amount">Billing Two</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="text" id="BillTwo" class="form-control" placeholder="Billing Two Purpose" name="Billing_Two_Purpose" required="required" >
+                              <label for="BillTwo">Billing Two Purpose</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+            
+                      <div class="form-group">
+                        <div class="form-row">
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="number" id="Bill" class="form-control" placeholder="Billing Three  " name="Billing_Three"   >
+                              <label for="Bill">Billing Three</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-label-group">
+                              <input type="" id="BillThree" class="form-control" placeholder="Billing Three Purpose" name="Billing_Three_Purpose"  >
+                              <label for="BillThree">Billing Three Purpose</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-block" >Generate Receipt</button>
+                    </form>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->

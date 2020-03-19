@@ -6,6 +6,9 @@ const LocalStrategy = require('passport-local').Strategy;
 // User model
 const User =require('../models/User')
 
+router.get('/About', function(req, res){
+    res.render('about')
+})
 
 //login page
 router.get('/login', function(req, res){
@@ -36,6 +39,8 @@ router.post('/register', function(req, res){
     let confirmPassword = req.body.confirmPassword
     let Department = req.body.Department
     let Name = req.body.Name
+    let String_Date = new Date().toLocaleDateString().split(",")[0]
+    
    
     let errors = []
    
@@ -57,14 +62,15 @@ router.post('/register', function(req, res){
           if (Department === 'Administrator'){
               UserName = req.body.UserName
              //validation passed
-          User.findOne({UserName:UserName, inputEmail: inputEmail })
-          .then(user => {
+            User.findOne({UserName:UserName })
+            .then(user => {
               if(user){
                   //user exist
-                  errors.push({msg: 'UserName or Email allready exist'})
-                  res.render('register', {
+                  errors.push({msg: 'UserName allready exist'})
+                  res.render('docregister', {
                       errors
                   })
+        
               }else{
                   const newUser = new User({
                       Hospital:Hospital,
@@ -72,7 +78,8 @@ router.post('/register', function(req, res){
                       inputEmail,
                       password,
                       Department,
-                      Name
+                      Name,
+                      String_Date
                   });
        
                   // Hash Password
@@ -88,9 +95,11 @@ router.post('/register', function(req, res){
                            req.flash('success_msg', 'You are now registered and you can log in')  
                              res.redirect('/users/login');
                            console.log(req.body);
+                           console.log('Administrator added')
                           })
-                         .catch(err => console.log(err));  
+                         .catch(err => console.log(err)); 
                       }));
+                    
               }
           })  
         } else{
@@ -111,7 +120,9 @@ router.post('/register', function(req, res){
                       inputEmail,
                       password,
                       Department,
-                      Name
+                      Name,
+                      String_Date
+                      
                   });
        
                   // Hash Password
@@ -127,8 +138,10 @@ router.post('/register', function(req, res){
                            req.flash('success_msg', 'The new user has been registered and can login ')  
                              res.redirect('/users/UserRegister');
                            console.log(req.body);
+                           console.log('Users Added')
                           })
                          .catch(err => console.log(err));  
+                        
                       }));
               }
           })

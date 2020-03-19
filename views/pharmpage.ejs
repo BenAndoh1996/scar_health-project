@@ -34,11 +34,11 @@
     </button>
 
     <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/PatientSearchPost">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for ID..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Search for ID..." name="search" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
+          <button class="btn btn-primary" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -79,51 +79,14 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-home"></i>
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="blank.html">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Patients</span></a>
-        </li>
-      
-      
-      <li class="nav-item active">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tools"></i>
-            <span>Laboratory</span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="">
-              <i class="fas fa-fw fa-heartbeat"></i>
-              <span>Pharmary</span></a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Adminstartor</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="Admin.html">
-                <i class="fas fa-fw fa-envelope"></i>
-                <span>Departments</span></a>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="">
-                <i class="fas fa-fw fa-balance-scale"></i>
-                <span>Accounts</span></a>
-            </li>
+    
       <li class="nav-item">
-        <a class="nav-link" href="login.html">
+        <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
           <span>LogOut</span></a>
       </li>
@@ -137,7 +100,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="index.html">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Pharmacy Section</li>
         </ol>
@@ -150,38 +113,40 @@
       <div class="card-header">
         <i class="fas fa-user"></i>
         PHARMACY SECTION        
-        <a href="/dashboard/PharmBill" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Pharmacy Billings</a>
-        <a href="/dashboard/InventoryForm" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Stock Inventory</a>
+        <a href="/dashboard/PharmBill" class="btn btn-success btn-sm active" role="button" aria-pressed="true"><b>PHARMACY BILLING</b></a>
+        <a href="/dashboard/InventoryForm" class="btn btn-success btn-sm active" role="button" aria-pressed="true"><b>STOCK INVENTORY</b></a>
+        <a href="/dashboard/UploadExcell" class="btn btn-success btn-sm active" role="button" aria-pressed="true"><b>EXCELL UPLOAD</b></a>
 
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Check Stocks
+            <b>CHECK STOCKS</b>
           </button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="/dashboard/ViewStock">Available Stocks</a>
             <a class="dropdown-item" href="/dashboard/ViewStock">Sold Stocks</a>
           </div>
         </div>
-
+  
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sales Summary
+            <b>SALE SUMMARY</b> 
           </button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/dashboard/UserSales">User</a>
+            <a class="dropdown-item" href="/dashboard/UserSales"><b>User</b></a>
             <a class="dropdown-item" href="/dashboard/PharmSales">Pharmacy</a>
             <a class="dropdown-item" href="/dashboard/StaffSales">Staff Sales</a>
           </div>
         </div>
-       </div>     
-       </div>
+       </div>  
+    </div>   
+      
 
        <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Welcome To the Pharmacy Section</h4>
-        <p>Here the Pharmacist  can view the Doctor's prescription of any particular patient, Administer the medicine, bill and generate receipt.</p>
-        <hr>
+        <h4 class="alert-heading"><b>Welcome To the Pharmacy Section</b></h4>
+        <p><b>Here the Pharmacist  can view the Doctor's prescription of any particular patient, Administer the medicine, bill and generate receipt.</b></p>
        </div>
-   </div>   
+   
+       
    
    <div id="hid_form">
     <form action="/dashboard/DeleteVitals" method="POST" class="" id="myForms">
@@ -207,16 +172,6 @@
             <th>Dosage</th> 
             <th>Drug Five</th> 
             <th>Dosage</th> 
-            <th>Drug Six</th> 
-            <th>Dosage</th> 
-            <th>Drug Seven</th> 
-            <th>Dosage</th>
-            <th>Drug Eight</th> 
-            <th>Dosage</th> 
-            <th>Drug Nine</th> 
-            <th>Dosage</th> 
-            <th>Drug Ten</th> 
-            <th>Dosage</th> 
             <th>UNique Id</th> 
           </tr>
            </thead>        
@@ -238,16 +193,6 @@
                 <td><%= row.Dosage_Four %></td> 
                 <td><%= row.Drug_Five %></td> 
                 <td><%= row.Dosage_Five %></td> 
-                <td><%= row.Drug_Six %></td> 
-                <td><%= row.Dosage_Six %></td> 
-                <td><%= row.Drug_Seven %></td> 
-                <td><%= row.Dosage_Seven %></td> 
-                <td><%= row.Drug_Eight %></td> 
-                <td><%= row.Dosage_Eight %></td> 
-                <td><%= row.Drug_Nine %></td> 
-                <td><%= row.Dosage_Nine %></td> 
-                <td><%= row.Drug_Ten %></td> 
-                <td><%= row.Dosage_Ten %></td> 
                 <td><%= row._id %></td> 
               </tr>
             <%});%>
@@ -271,13 +216,11 @@
           </div>
         </div>
       </footer>
-
     </div>
     <!-- /.content-wrapper -->
-
-  </div>
+  
   <!-- /#wrapper -->
-
+ </div>
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -301,7 +244,7 @@
       </div>
     </div>
   </div>
-
+  </div>
   
   <script>
       

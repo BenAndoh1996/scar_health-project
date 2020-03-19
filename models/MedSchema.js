@@ -183,6 +183,10 @@ Lab_ID: {
     require: true
 },
 
+Description: {
+    type: String,
+    require: true
+},
 
 surgical: {
     type: String,

@@ -184,7 +184,7 @@ router.post('/IPDDischarge', function(req, res){2
             assert.equal(null, err);
             console.log('sucessesfully connected');
             let db = client.db('scarhealth')
-            let query = {Hospital_UserName: req.user.UserName, Bed_Number:req.body.Bed, Ward:req.body.Ward};
+            let query = {Hospital_UserName: req.user.UserName, Bed_Number:(req.body.Bed).toLowerCase(), Ward:req.body.Ward};
             let UpdateObj = {
               $set: {
                 Bed_Status: 'Empty' }
@@ -228,19 +228,28 @@ router.post('/IPDDischarge', function(req, res){2
 });
 
 // Handle for Adding new bed 
-router.post('/BedPost', function(req, res){2
+router.post('/BedPost', function(req, res){
 
   const beds=require('../models/BedSchema')
     
     let Hospital_UserName = req.user.UserName
     let Hospital_Name = req.user.Name
-    let Bed_Number= req.body.Bed_Number
+    let Bed_Number= (req.body.Bed_Number).toLowerCase()
     let Bed_Type = req.body.Bed_Type
     let Ward= req.body.Ward
     let Cost= req.body.Cost;
     let Bed_Status = 'Empty' 
     let String_Date = new Date().toLocaleDateString().split(",")[0]
     
+    beds.findOne({inputEmail:inputEmail })
+    .then(bed => {
+        if(bed){
+            //user exist
+            errors.push({msg: 'Email allready exist'})
+            res.render('addbed', {
+                errors
+            })
+        }  else{
       const newUser = new beds({
         Hospital_UserName,
         Hospital_Name,
@@ -250,9 +259,8 @@ router.post('/BedPost', function(req, res){2
         Cost,
         Bed_Status,
         String_Date,
-
         });
-
+       
      //saving a new user to database
         newUser.save()
       .then(function(){
@@ -261,7 +269,9 @@ router.post('/BedPost', function(req, res){2
         console.log(req.body);
         })
       .catch(err => console.log(err));  
-});
+      }
+  });
+})
 
 
 

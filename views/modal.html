@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+    <link rel="stylesheet" href="../Assets/css/bootstrap.css">
+   
+  
+</head>
+<body>
+    <div class="main">
+        <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                      
+                        <div class="modal-body">
+                           <form>
+                            <h4>Hospital Billing Form</h4>
+
+                            <div class="form-row">
+                              <div class="form-group">
+                                   <label for="Patients Full Name">Patients Full Name</label>
+                                     <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                              </div>
+                                    
+                                    <div class="form-group">
+                                     <label for="Folder(ID)">Patient (ID)</label>
+                                     <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                </div>
+                            </div>
+          
+                            
+            
+                                <div class="form-row">
+                                  <div class="form-group">
+                                  <label for="Temperature Level(TL)">Billing One</label>
+                                      <input type="number" name="Billing_One" id="Temperature Level(TL)" />
+                                  </div>
+                          
+                                <div class="form-group">
+                                  <label for="Blood Level(BP)">Billing One Purpose</label>
+                                  <input type="text" name="Purpose_One" id="Blood Level(BP)" />
+                                </div>
+                               </div>  
+                                <div class="form-row">
+                                  <div class="form-group">
+                                  <label for="Temperature Level(TL)">Billing Two</label>
+                                      <input type="number" name="Billing_Two" id="Temperature Level(TL)" />
+                                  </div>
+                          
+                                <div class="form-group">
+                                  <label for="Blood Level(BP)">Billing Two Purpose</label>
+                                  <input type="text" name="Purpose_Two" id="Blood Level(BP)" />
+                                </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                    <label for="Temperature Level(TL)">Billing Three</label>
+                                        <input type="number" name="Billing_Two" id="Temperature Level(TL)" />
+                                    </div>
+                            
+                                  <div class="form-group">
+                                    <label for="Blood Level(BP)">Billing Three Purpose</label>
+                                    <input type="text" name="Purpose_Two" id="Blood Level(BP)" />
+                                  </div>
+                                  </div>
+  
+                               
+                                <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
+                              </form>
+                             </form>
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+</html>
