@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+    <link href="../Assets/css/medreport.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="s007">
+      <form action="/dashboard/MedicalForm"  method="POST">
+        <div class="inner-form">
+          <div class="basic-search">
+            <div class="input-field">
+              <div class="icon-wrap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+                </svg>
+              </div>
+              <input id="search" type="text" placeholder="MEDICAL HISTORY- REPORT FORM" />
+              <div class="result-count">
+                <span>01</span>Adult</div>
+            </div>
+          </div>
+          <div class="advance-search">
+            <span class="desc"><h3><b>PERSONAL INFORMATION</b></h3></span>
+
+            <% include ./partials/messages %>
+            <div class="row">
+              
+                <div class="form-row">
+                  <div class="form-group">
+                      <label for="name">FORM ID </label>
+                      <input type="text" value="" name="FormID" id="FORMID" required/>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <%if(Total.length > 0){ %>
+                <% Total.forEach(function(row){%>
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" value="<%= row.Name %>" name="Full_Name" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Patient ID</label>
+                  <input type="text" value="<%= row.patientID %>" name="Patient_ID" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Date of Birth(DOB)</label>
+                  <input type="text" value="<%= row.birthdate %>" name="Birth_Date" id="Patient  ID Number" required/>
+              </div>
+              </div>
+
+            </div>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <input type="text" value="<%= row.Address %>" name="Address" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Telephone</label>
+                  <input type="text" value="<%= row.Telephone %>" name="Telephone" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Refering Physcian</label>
+                  <input type="text" value="<%= Doctor %>" name="Reffered" id="Patient  ID Number" required/>
+              </div>
+              </div>
+            </div>
+            <br>
+          
+          
+          <span class="desc"><h2><b>DOCTORS REVIEW REPORT</b></h2></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <h4>Diagnosis</h4>
+                    <label for="comment"></label>
+                    <textarea type="text" rows="6" cols="55" name="Diagnosis" id="Patient Full Name" ></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Propose Treatment</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="6" cols="55" name="Treatment" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+          </div>
+          <br>
+          <span class="desc"><h3><b>LABORATORY REPORT </b></h3></span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Any Lab Report</label>
+                    <input type="text" size="5" name="any" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Lab Type</label>
+                  <input type="text" size="15" name="Lab_type" id="Patient Full Name"/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Lab File ID</label>
+                  <input type="text" size="40" name="Lab_ID" id="Patient  ID Number" />
+              </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="form-row">
+              <div class="form-group">
+                <h4>Brief Description Lab Report</h4>
+                  <label for="comment"></label>
+                  <textarea type="text" rows="3" cols="115" name="Description" id="Patient Full Name" ></textarea>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Any Surgical Treatment (if any, provide brief description)</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="4" cols="115" name="surgical" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="form-row">
+            <div class="form-group">
+              <h4>Drugs Prescriptions</h4>
+                <label for="comment"></label>
+                <textarea type="text" rows="3" cols="115" name="Drugs" id="Patient Full Name" ></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-row">
+          <div class="form-group">
+            <h4> Any Other Statement/ Remarks</h4>
+              <label for="comment"></label>
+              <textarea type="text" rows="4" cols="115" name="Remarks" id="Patient Full Name" ></textarea>
+          </div>
+      </div>
+    </div> 
+    <%});%>
+          <%}else{%>
+            <p>WE HAVE NOT SELECTED ANY PATIENT TO CREATE REPORT FOR</p>
+            <% } %>
+            <div class="row third">
+              <div class="input-field">
+                <button type="submit" class="btn-search">Save And Update</button>
+                <button type="submit" class="btn-delete" id="delete">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="../Assets/js/choices.js"></script>
+    
+    <script>
+      var submit = document.getElementById('submit')
+       submit.addEventListener("click", (e)=>{  
+           e.preventDefault();          
+            let Patients_Name =document.getElementById('Patients_Name').value
+            let Patient_ID =document.getElementById('Patient_ID').value
+            let Month =document.getElementById('Month').value
+            let Current_Date =document.getElementById('Current_Date').value
+            let Department =document.getElementById('Department').value
+            let Billing_One =document.getElementById('Billing_One').value
+            let Purpose_One=document.getElementById('Purpose_One').value
+            let Billing_Two =document.getElementById('Billing_Two').value
+            let Purpose_Two=document.getElementById('Purpose_Two').value
+            let Purpose_One=document.getElementById('Purpose_One').value
+            let Billing_Two =document.getElementById('Billing_Two').value
+            let Purpose_Two=document.getElementById('Purpose_Two').value
+ 
+ 
+            let Data = { Patients_Name:Patients_Name, Patient_ID:Patient_ID, Month:Month, Current_Date:Current_Date,Department:Department, Billing_One:Billing_One, Purpose_One:Purpose_One, Billing_Two:Billing_Two,Purpose_Two:Purpose_Two }
+            console.log(Data)
+          $.ajax({
+                type: 'POST',
+                url: '/dashboard/Billing',
+                ContentType: 'application/json',
+                data: Data,             
+                success:  function(data){
+                 window.location.reload();
+           
+                }
+              }); 
+        })
+      </script> 
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

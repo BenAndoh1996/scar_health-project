@@ -18,6 +18,7 @@ const methodOverride = require('method-override')
 var xlstojson = require("xls-to-json-lc");
 var xlsxtojson = require("xlsx-to-json-lc");
 var xlsx = require('xlsx')
+const client = require ('socket.io').listen(4000).sockets;
 
 //routes for add patient
 //var indexes = require('./dashboardControllers/indexes');
@@ -28,7 +29,7 @@ const app = express();
 //require('./config/passport')(passport);
 //require('./config/AdminPassport')(passport);
 
-const db = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+/*const db = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
  //connect to mongo
 mongoose.connect(process.env.MONGODB_URI || db, 
@@ -39,15 +40,15 @@ mongoose.connect(process.env.MONGODB_URI || db,
  .catch(function(err){
      console.log (err)
  })
- 
- /*mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scarhealth", {useNewUrlParser: true} );
+ */
+ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scarhealth", {useNewUrlParser: true} );
 
 mongoose.connection.once('open', function(){
     console.log('connection has ben made')
 }).on('error', function(error){
     console.log(error)
 })
-*/
+
 
 // later added to form upload
 app.use(bodyparser.json())
@@ -113,6 +114,7 @@ app.use('/dashboard', require('./dashboardroutes/AdminRegistry'));
  app.use('/dashboard', require('./dashboardroutes/Pharmacy'));
  app.use('/dashboard', require('./dashboardroutes/Excell'));
  app.use('/dashboard', require('./dashboardroutes/AccontRegistry'));
+ app.use('/dashboard', require('./dashboardroutes/Chat'));
  
 
 

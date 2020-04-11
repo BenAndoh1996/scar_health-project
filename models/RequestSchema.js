@@ -54,6 +54,12 @@ String_Date: {
     require: true
 },
 
+
+Status: {
+    type: String,
+    require: true
+},
+
 })
 
 const request= mongoose.model('request', RequestSchema);

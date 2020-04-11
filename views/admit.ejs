@@ -11,6 +11,8 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
+
 </head>
 <body>
 
@@ -21,58 +23,63 @@
                
                 </div>
                 <div class="signup-form"> 
-                    <form action="/dashboard/IPDAdmit" method="POST" class="register-form" id="register-form">
+                    <form action="" method="" class="register-form" id="register-form">
                         <% include ./partials/messages %>
                         <h2>PATIENTS ADMITTION FORM</h2>
+                        <%if(Info.length > 0){ %>
+                            <% Info.forEach(function(row){%>
                         <div class="form-row">
                         <div class="form-group">
-                                <label for="Patients Full Name">Current Month</label>
-                                <input type="month" name="Month" id="Patients Full Name" required/>
+                                <label for="Month">Current Month</label>
+                                <input type="month"  name="Month" id="Month" required/>
                          </div>
                        <div class="form-group">
-                            <label for="Patients Full Name">Date Of Admission</label>
-                            <input type="date" name="Current_Date" id="Patients Full Name" required/>
+                            <label for="Current_Date">Date Of Admission</label>
+                            <input type="date"  name="Current_Date" id="Current_Date" required/>
                          </div>
                       </div>
 
                           <div class="form-row">
                             <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patient_Name" id="Patients Full Name" required/>
+                                <label for="Patient_Name">Patients Full Name</label>
+                                <input type="text" value="<%= row.Name %>" name="Patient_Name" id="Patient_Name" required/>
                            </div>
             
                             <div class="form-group">
-                                <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                <label for="Patient_ID">Patient (ID)</label>
+                                    <input type="text" value="<%= row.patientID %>" name="Patient_ID" id="Patient_ID" required/>
                                 </div>
                             </div>
 
                          <div class="form-row">
                             <div class="form-group">
-                            <label for="Temperature Level(TL)">Treating Doctor</label>
-                                <input type="text" name="Doctor_Name" id="Temperature Level(TL)" required/>
+                            <label for="Doctor_Name">Treating Doctor</label>
+                                <input type="text" name="Doctor_Name" id="Doctor_Name" required/>
                             </div>
                         <div class="form-group">
-                            <label for="Blood Level(BP)">Department</label>
-                            <input type="text" name="Deparment" id="Blood Level(BP)" required/>
+                            <label for="Deparment">Department</label>
+                            <input type="text" name="Deparment" id="Deparment" required/>
                       </div>
 
                       </div>
                         <div class="form-row">
                          <div class="form-group">
-                            <label for="Body Weight(BM)">Selected Ward</label>
-                            <input type="text" name="Ward" id="Body Weight(BM)" required/>
+                            <label for="Ward">Selected Ward</label>
+                            <input type="text"value="<%= row.Ward %>"  name="Ward" id="Ward" required/>
                         </div>
                         <div class="form-group">
-                            <label for="Sugar Level(SL)">Selected Bed</label>
-                            <input type="text" name="Bed" id="Sugar Level(SL)" required/>
+                            <label for="Bed">Selected Bed</label>
+                            <input type="text" value="<%= row.Bed %>" name="Bed" id="Bed" required/>
                         </div>
                     </div>
                       <div class="form-group">
-                            <label for="Sugar Level(SL)">Reasons For Admittion</label>
-                            <input type="text" name="Reason" id="Sugar Level(SL)" required/>
+                            <label for="Reason">Reasons For Admittion</label>
+                            <input type="text" name="Reason" id="Reason" required/>
                         </div>
-                        
+                        <%});%>
+                        <%}else{%>
+                            <p>NO BED OR PATIENT HAVE BEEN SELECTED</p>
+                            <% } %>
                         <div class="form-submit">
                             <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
                             <input type="submit" value="Admit Patient" class="submit" name="submit" id="submit" />
@@ -83,9 +90,39 @@
         </div>
 
     </div>
-
+     
+    <script>
+        var submit = document.getElementById('submit')
+         submit.addEventListener("click", (e)=>{  
+             e.preventDefault();          
+              let Patient_Name =document.getElementById('Patient_Name').value
+              let Patient_ID =document.getElementById('Patient_ID').value
+              let Month=document.getElementById('Month').value
+              let Current_Date =document.getElementById('Current_Date').value
+              let Deparment =document.getElementById('Deparment').value
+              let Doctor_Name =document.getElementById('Doctor_Name').value
+              let Ward=document.getElementById('Ward').value
+              let Bed =document.getElementById('Bed').value
+              let Reason = document.getElementById('Reason').value
+   
+              let Data = { Patient_Name:Patient_Name, Patient_ID:Patient_ID, Month:Month, Current_Date:Current_Date,Deparment:Deparment, Doctor_Name:Doctor_Name, Ward:Ward, Bed:Bed,Reason:Reason }
+              console.log(Data)
+            $.ajax({
+                  type: 'POST',
+                  url: '/dashboard/IPDAdmit',
+                  ContentType: 'application/json',
+                  data: Data,             
+                  success:  function(data){
+                   window.location.reload();
+             
+                  }
+                }); 
+          })           
+          
+      </script>
     <!-- JS -->
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
     <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

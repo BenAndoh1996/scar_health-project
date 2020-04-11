@@ -121,14 +121,15 @@
               <table class="table table-bordered table-hover"  id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
-                    <th>Doctor's Name</th>
-                    <th>Doctor UserName </th>
-                    <th>Requested for</th>
-                    <th> Requested for(ID)</th>
+                    <th>Request_Status</th>
+                    <th>Doctor's_Name</th>
+                    <th>Doctor_UserName </th>
+                    <th>Requested_for</th>
+                    <th> Requested_for(ID)</th>
                     <th>Date</th>
-                    <th>Sample No</th>
-                    <th>Type  Of  Lab</th>                 
-                    <th>Laboratory Description</th>
+                    <th>Sample_No</th>
+                    <th>Type_Of_Lab</th>                                  
+                     <th>Laboratory__Description......</th>  
                     <th>Unique Activity Id</th>
                 </thead>
               
@@ -202,7 +203,7 @@
                 index = this.parentElement.rowIndex;
              
              var PatientId = this.cells[1].innerHTML;
-              var ID = this.cells[8].innerHTML;
+              var ID = this.cells[9].innerHTML;
               console.log(ID);
               console.log (PatientId);
              

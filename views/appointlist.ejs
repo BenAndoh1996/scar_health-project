@@ -128,6 +128,7 @@
                     <th> Contact</th>
                     <th> Date</th>  
                     <th>Purpose Of Appointment</th>   
+                    <th>Appointment ID</th>
                   </tr>
                 </thead>
                 
@@ -139,7 +140,8 @@
                               <td><%= row.patient_ID %></td>
                               <td><%= row.Contact %></td>                             
                               <td><%= row.Appointment_Date %></td>
-                              <td><%= row.Purpose %></td>                          
+                              <td><%= row.Purpose %></td>  
+                              <td><%= row._id %></td>               
                           </tr>
                         <%});%>
                       <%}else{%>
@@ -210,17 +212,12 @@
                 var c = confirm('Do You Want Delete This Row?');
                 if(c === true){
                     index = this.parentElement.rowIndex;
-                 
-                 var Name = this.cells[0].innerHTML;
-                  var ID = this.cells[1].innerHTML;
-                  console.log(ID);
-                  console.log (Name);
-                 
-    
+                    var ID = this.cells[5].innerHTML;
+                     console.log(ID);
+        
                   $.ajax({
                     type: 'DELETE',
                     url: '/dashboard/Appointdelete/'+ ID,
-                    Name,
                     success:  function(data){
                       location.reload();
                       

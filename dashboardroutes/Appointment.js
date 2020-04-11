@@ -8,16 +8,21 @@ const appoints=require('../models/AppointSchema')
 
 
 //Doctors Appointment form handle
-router.get('/Appointment', function(req, res){
-    res.render('appointments') 
+router.get('/Appointment:Infostring', function(req, res){
+  const Info = []
+  let data = req.params.Infostring
+  let dataObject = JSON.parse(data)
+  Info.push(dataObject)
+  console.log(Info)
+    res.render('appointments', {Info:Info, userName:req.user.inputEmail}) 
 } );
 
 
 router.post('/Appointment', function(req, res){
     
-    let Doctor_UserName= req.body.Doctor_UserName
+    let Doctor_UserName= (req.body.Doctor_UserName).replace(/\s/g,'')
     let patient_name= req.body.patient_name
-    let patient_ID= req.body.patient_ID
+    let patient_ID= (req.body.patient_ID).replace(/\s/,'')
     let date = req.body.date
     let Appointment_Date = req.body.Appointment_Date
     let Purpose = req.body.Purpose
@@ -40,7 +45,8 @@ router.post('/Appointment', function(req, res){
         newUser.save()
       .then(function(){
         req.flash('success_msg', 'The new appoint has been saved successfully')  
-       res.redirect('/dashboard/Appointment');
+        data = req.body
+       res.json(data)
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -48,8 +54,8 @@ router.post('/Appointment', function(req, res){
 });
 
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+ var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/AppointList', function(req, res, next){
    
@@ -79,7 +85,9 @@ router.get('/AppointList', function(req, res, next){
 
 //Doctors Appointment form delete
 router.delete('/Appointdelete/:ID', function(req, res){
-  let item = req.params.ID;
+  var ObjectId = require('mongodb').ObjectId
+  let itemstring = (req.params.ID).replace(/\s/g,'');
+  let item = new ObjectId(itemstring)
   console.log(item)
  
   Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){

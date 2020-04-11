@@ -5,8 +5,8 @@ const Mongoclient = require('mongodb');
 const assert = require('assert');
 
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
 
 router.get('/patientlist', function(req, res){
     const PatientArray = []
@@ -28,11 +28,14 @@ router.get('/patientlist', function(req, res){
     });
 });
 
-// Handle for Medical report Generation
+// Handle for Medical report Generation all the medical records of patient
 
- router.post('/MedicalReport', function(req, res, next){
-   
-    var Search = req.body.Search
+ router.get('/MedicalReport:Infostring', function(req, res, next){
+  
+  let Info = req.params.Infostring
+  let Infodata = JSON.parse(Info)
+    var Search = Infodata.patientID
+    console.log(Search)
     const MedReport = []
 
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -59,9 +62,13 @@ router.get('/patientlist', function(req, res){
 
 
 //handle for lab search in the doctors department
-router.post('/LabRecord', function(req, res, next){
-   
-    var Patient_ID = req.body.Patient_ID
+router.get('/LabRecord:Infostring', function(req, res, next){
+     
+      let Info = req.params.Infostring
+      let Infodata = JSON.parse(Info)
+      
+     
+    var Patient_ID = Infodata.patientID
     const LabRecord = []
 
     Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -169,10 +176,11 @@ router.get('/DocLabList', function(req, res, next){
               } );
 
 
-              router.post('/PatientReport', function(req, res, next){
+              router.get('/PatientReport:reportID', function(req, res, next){
+                const obj = {Name: 'Benny', age :23, height: 5}
                 const MedReport = []
                 var ObjectId = require('mongodb').ObjectId
-                var Search = req.body.Search
+                var Search = req.params.reportID
                 let searchId = new ObjectId(Search)
                console.log(searchId)
                 Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
@@ -190,7 +198,7 @@ router.get('/DocLabList', function(req, res, next){
                            })
                            console.log(MedReport);
                          console.log(MedReport.length)
-                           res.render('medicals', { Hospital: req.user.Hospital, Name: req.user.Name , MedReport: MedReport});
+                           res.render('medicals', { Hospital: req.user.Hospital, Name: req.user.Name , MedReport: MedReport, obj:JSON.stringify(obj)});
                 });
                 });
                 

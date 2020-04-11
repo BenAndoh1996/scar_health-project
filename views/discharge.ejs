@@ -11,6 +11,8 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
+    
 </head>
 <body>
 
@@ -21,64 +23,67 @@
                
                 </div>
                 <div class="signup-form"> 
-                    <form action="/dashboard/IPDDischarge" method="POST" class="register-form" id="register-form">
+                    <form action="" method="" class="register-form" id="register-form">
                         <% include ./partials/messages %>
                         <h2>PATIENT DISCHARGE FORM</h2>
+                        <%if(Info.length > 0){ %>
+                            <% Info.forEach(function(row){%>
                         <div class="form-row">
                         <div class="form-group">
-                                <label for="Patients Full Name">Current Month</label>
-                                <input type="month" name="Month" id="Patients Full Name" required/>
+                                <label for="Month">Current Month</label>
+                                <input type="month" name="Month" id="Month" required/>
                          </div>
                          <div class="form-group">
-                            <label for="Patients Full Name">Date Of Discharge</label>
-                            <input type="date" name="Date_Discharge" id="Patients Full Name" required/>
+                            <label for="Date_Discharge">Date Of Discharge</label>
+                            <input type="date" name="Date_Discharge" id="Date_Discharge" required/>
                        </div>
                    </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                                <label for="Patients_Name">Patients Full Name</label>
+                                <input type="text" value="<%= row.PatientName %>" name="Patients_Name" id="Patients_Name" required/>
                             </div>
                             
                             <div class="form-group">
-                                <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                <label for="Patient_ID">Patient (ID)</label>
+                                    <input type="text" value="<%= row.PatientId %>" name="Patient_ID" id="Patient_ID" required/>
                                 </div>
                             </div>
                             <div class="form-row">
                             <div class="form-group">
-                            <label for="Temperature Level(TL)">Treating Doctor</label>
-                                <input type="text" name="Doctor_Name" id="Temperature Level(TL)" required/>
+                            <label for="Doctor_Name">Treating Doctor</label>
+                                <input type="text" value="<%= row.Doctor %>" name="Doctor_Name" id="Doctor_Name" required/>
                             </div>
                     
                         <div class="form-group">
-                            <label for="Blood Level(BP)">Department</label>
-                            <input type="text" name="Deparment" id="Blood Level(BP)" required/>
+                            <label for="Department">Department</label>
+                            <input type="text" value="<%= row.Department %>" name="Department" id="Department" required/>
                         </div>
                     </div>
                         <div class="form-row">
                          <div class="form-group">
-                            <label for="Body Weight(BM)"> Ward</label>
-                            <input type="text" name="Ward" id="Body Weight(BM)" required/>
+                            <label for="Ward"> Ward</label>
+                            <input type="text" value="<%= row.Ward %>" name="Ward" id="Ward" required/>
                         </div>
                         <div class="form-group">
-                            <label for="Sugar Level(SL)"> Bed</label>
-                            <input type="text" name="Bed" id="Sugar Level(SL)" required/>
+                            <label for="Bed"> Bed</label>
+                            <input type="text" value="<%= row.Bed %>" name="Bed" id="Bed" required/>
                         </div>
                     </div>
 
                 <div class="form-row">
                  <div class="form-group">
-                    <label for="Body Weight(BM)"> Number of Day Spent</label>
-                    <input type="text" name="Duration" id="Body Weight(BM)" required/>
+                    <label for="Duration"> Number of Day Spent</label>
+                    <input type="text" name="Duration" id="Duration" required/>
                 </div>
                 <div class="form-group">
-                    <label for="Sugar Level(SL)"> Billings</label>
-                    <input type="number" name="Billings" id="Sugar Level(SL)" required/>
+                    <label for="Billings"> Billings</label>
+                    <input type="number" name="Billings" id="Billings" required/>
                 </div>
             </div>
-                        
+             <%});%>
+            <%} %>
                         <div class="form-submit">
                             <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
                             <input type="submit" value="Discharge Patient" class="submit" name="submit" id="submit" />
@@ -89,9 +94,41 @@
         </div>
 
     </div>
+        
+    <script>
+        var submit = document.getElementById('submit')
+         submit.addEventListener("click", (e)=>{  
+             e.preventDefault();          
+              let Patients_Name =document.getElementById('Patients_Name').value
+              let Patient_ID =document.getElementById('Patient_ID').value
+              let Month=document.getElementById('Month').value
+              let Date_Discharge =document.getElementById('Date_Discharge').value
+              let Department =document.getElementById('Department').value
+              let Doctor_Name =document.getElementById('Doctor_Name').value
+              let Ward=document.getElementById('Ward').value
+              let Bed =document.getElementById('Bed').value
+              let Duration = document.getElementById('Duration').value
+              let Billings = document.getElementById('Billings').value
+   
+              let Data = { Patients_Name:Patients_Name, Patient_ID:Patient_ID, Month:Month, Date_Discharge:Date_Discharge,Department:Department, Doctor_Name:Doctor_Name, Ward:Ward, Bed:Bed,Duration:Duration, Billings:Billings }
+              console.log(Data)
+            $.ajax({
+                  type: 'POST',
+                  url: '/dashboard/IPDDischarge',
+                  ContentType: 'application/json',
+                  data: Data,             
+                  success:  function(data){
+                   window.location.reload();
+             
+                  }
+                }); 
+          })           
+          
+      </script>
 
     <!-- JS -->
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
     <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

@@ -6,10 +6,11 @@
 <meta name="author" content="colorlib.com">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
     <link href="../Assets/css/medreport.css" rel="stylesheet" />
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
   </head>
   <body>
     <div class="s007">
-      <form action="/dashboard/MedicalForm"  method="POST">
+      <form action=""  method="">
         <div class="inner-form">
           <div class="basic-search">
             <div class="input-field">
@@ -27,23 +28,24 @@
             <span class="desc"><h3><b>PERSONAL INFORMATION</b></h3></span>
             <% include ./partials/messages %>
             <div class="row">
-              
+              <%if(Total.length > 0){ %>
+                <% Total.forEach(function(row){%>
               <div class="form-row">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" name="Full_Name" id="Patient Full Name" required/>
+                    <input type="text" value="<%= row.Name %>" name="Full_Name" id="Full_Name" required/>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                   <label for="name">Patient ID</label>
-                  <input type="text" name="Patient_ID" id="Patient Full Name" required/>
+                  <input type="text" value="<%= row.patientID %>" name="Patient_ID" id="Patient_ID" required/>
               </div>
           </div>
           <div class="form-row">
               <div class="form-group">
               <label for="father_name">Date of Birth(DOB)</label>
-                  <input type="date" name="Birth_Date" id="Patient  ID Number" required/>
+                  <input type="text" value="<%= row.birthdate %>" name="Birth_Date" id="Birth_Date" required/>
               </div>
               </div>
 
@@ -53,19 +55,19 @@
               <div class="form-row">
                 <div class="form-group">
                     <label for="name">Address</label>
-                    <input type="text" name="Address" id="Patient Full Name" required/>
+                    <input type="text" name="Address" id="Address" required/>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                   <label for="name">Telephone</label>
-                  <input type="text" name="Telephone" id="Patient Full Name" required/>
+                  <input type="text" value="<%= row.Telephone %>" name="Telephone" id="Telephone" required/>
               </div>
           </div>
           <div class="form-row">
               <div class="form-group">
               <label for="father_name">Refering Physcian</label>
-                  <input type="text" name="Reffered" id="Patient  ID Number" required/>
+                  <input type="text" value="<%= Doctor %>" name="Reffered" id="Reffered" required/>
               </div>
               </div>
             </div>
@@ -77,25 +79,25 @@
               <div class="form-row">
                 <div class="form-group">
                     <label for="site">Site</label>
-                    <input type="text" size="15" name="Site" id="Patient Full Name" />
+                    <input type="text" size="15" name="Site" id="Site" />
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                   <label for="onset">Onset</label>
-                  <input type="text" size="15" name="Onset" id="Patient Full Name" />
+                  <input type="text" size="15" name="Onset" id="Onset" />
               </div>
           </div>
           <div class="form-row">
               <div class="form-group">
               <label for="father_name">Time Course</label>
-                  <input type="text" size="15" name="Time_Course" id="Patient  ID Number" />
+                  <input type="text" size="15" name="Time_Course" id="Time_Course" />
               </div>
               </div>
                <div class="form-row">
               <div class="form-group">
               <label for="father_name">Severity</label>
-                  <input type="text" size="15" name="Severity" id="Patienit  ID Number" />
+                  <input type="text" size="15" name="Severity" id="Severity" />
               </div>
               </div>
 
@@ -106,28 +108,28 @@
                 <div class="form-group">
                   <h4>Charater</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="4" cols="20" name="Charater" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="4" cols="20" name="Charater" id="Charater" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>Radiations</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="4" cols="20" name="Radiations" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="4" cols="20" name="Radiations" id="Radiations" ></textarea>
               </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <h4>Associations</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="4" cols="20" name="Associations" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="4" cols="20" name="Associations" id="Associations" ></textarea>
             </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <h4>Relieving Factors</h4>
               <label for="comment"></label>
-              <textarea type="text" rows="4" cols="20" name="Relieving" id="Patient Full Name" ></textarea>
+              <textarea type="text" rows="4" cols="20" name="Relieving" id="Relieving" ></textarea>
           </div>
       </div>
             
@@ -141,21 +143,21 @@
                 <div class="form-group">
                   <h4>Family Illnesses</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="6" cols="30" name="Family" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="6" cols="30" name="Family" id="Family" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>Prior Illnesses</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="6" cols="30" name="Prior" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="6" cols="30" name="Prior" id="Prior" ></textarea>
               </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <h4>Present Illnesses</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="6" cols="30" name="Present" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="6" cols="30" name="Present" id="Present" ></textarea>
             </div>
         </div>
             
@@ -168,7 +170,7 @@
                 <div class="form-group">
                   <h4>Medication History</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="3" cols="115" name="Medication" id="Patient Full Name"></textarea>
+                    <textarea type="text" rows="3" cols="115" name="Medication" id="Medication"></textarea>
                 </div>
             </div>
           </div>
@@ -180,21 +182,21 @@
                 <div class="form-group">
                   <h4>Sedentary Lifestyle</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="5" cols="30" name="Sedentary" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="5" cols="30" name="Sedentary" id="Sedentary" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>Work or Occupation</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="5" cols="30" name="Work" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="5" cols="30" name="Work" id="Work" ></textarea>
               </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <h4>Habits</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="5" cols="30" name="Habits" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="5" cols="30" name="Habits" id="Habits" ></textarea>
             </div>
         </div>
             
@@ -207,21 +209,21 @@
                 <div class="form-group">
                   <h4>O/E</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="5" cols="30" name="OE" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="5" cols="30" name="OE" id="OE" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>CVS</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="5" cols="30" name="CVS" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="5" cols="30" name="CVS" id="CVS" ></textarea>
               </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <h4>Chest Findings</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="5" cols="30" name="Chest" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="5" cols="30" name="Chest" id="Chest" ></textarea>
             </div>
         </div>
             
@@ -232,21 +234,21 @@
               <div class="form-group">
                 <h4>Abdominal Findings</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="5" cols="30" name="Abdominal" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="5" cols="30" name="Abdominal" id="Abdominal" ></textarea>
               </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <h4>CNS</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="5" cols="30" name="CNS" id="Patient Full Name"></textarea>
+                <textarea type="text" rows="5" cols="30" name="CNS" id="CNS"></textarea>
             </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <h4>GI</h4>
               <label for="comment"></label>
-              <textarea type="text" rows="5" cols="30" name="GI" id="Patient Full Name" ></textarea>
+              <textarea type="text" rows="5" cols="30" name="GI" id="GI" ></textarea>
           </div>
       </div>
           
@@ -259,14 +261,14 @@
                 <div class="form-group">
                   <h4>Review System(ROS)</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="6" cols="55" name="Review" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="6" cols="55" name="Review" id="Review" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>Summary of History</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="6" cols="55" name="Summary" id="Patient Full Name"></textarea>
+                  <textarea type="text" rows="6" cols="55" name="Summary" id="Summary"></textarea>
               </div>
           </div>
           </div>
@@ -279,14 +281,14 @@
                 <div class="form-group">
                   <h4>Diagnosis</h4>
                     <label for="comment"></label>
-                    <textarea type="text" rows="6" cols="55" name="Diagnosis" id="Patient Full Name" ></textarea>
+                    <textarea type="text" rows="6" cols="55" name="Diagnosis" id="Diagnosis" ></textarea>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <h4>Propose Treatment</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="6" cols="55" name="Treatment" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="6" cols="55" name="Treatment" id="Treatment" ></textarea>
               </div>
           </div>
           </div>
@@ -297,19 +299,19 @@
               <div class="form-row">
                 <div class="form-group">
                     <label for="name">Any Lab Report</label>
-                    <input type="text" size="5" name="any" id="Patient Full Name" />
+                    <input type="text" size="5" name="any" id="any" />
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                   <label for="name">Lab Type</label>
-                  <input type="text" size="15" name="Lab_type" id="Patient Full Name"/>
+                  <input type="text" size="15" name="Lab_type" id="Lab_type"/>
               </div>
           </div>
           <div class="form-row">
               <div class="form-group">
               <label for="father_name">Lab File ID</label>
-                  <input type="text" size="40" name="Lab_ID" id="Patient  ID Number" />
+                  <input type="text" size="40" name="Lab_ID" id="Lab_ID" />
               </div>
               </div>
             </div>
@@ -318,7 +320,7 @@
               <div class="form-group">
                 <h4>Brief Description Lab Report</h4>
                   <label for="comment"></label>
-                  <textarea type="text" rows="3" cols="115" name="Description" id="Patient Full Name" ></textarea>
+                  <textarea type="text" rows="3" cols="115" name="Description" id="Description" ></textarea>
               </div>
           </div>
         </div>
@@ -327,7 +329,7 @@
             <div class="form-group">
               <h4>Any Surgical Treatment (if any, provide brief description)</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="4" cols="115" name="surgical" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="4" cols="115" name="surgical" id="surgical" ></textarea>
             </div>
         </div>
       </div>
@@ -336,7 +338,7 @@
             <div class="form-group">
               <h4>Drugs Prescriptions</h4>
                 <label for="comment"></label>
-                <textarea type="text" rows="3" cols="115" name="Drugs" id="Patient Full Name" ></textarea>
+                <textarea type="text" rows="3" cols="115" name="Drugs" id="Drugs" ></textarea>
             </div>
         </div>
       </div>
@@ -345,14 +347,20 @@
           <div class="form-group">
             <h4> Any Other Statement/ Remarks</h4>
               <label for="comment"></label>
-              <textarea type="text" rows="4" cols="115" name="Remarks" id="Patient Full Name" ></textarea>
+              <textarea type="text" rows="4" cols="115" name="Remarks" id="Remarks" ></textarea>
           </div>
       </div>
     </div> 
+          
+       <%});%>
+          <%}else{%>
+            <p>WE HAVE NOT SELECTED ANY PATIENT TO CREATE REPORT FOR</p>
+            <% } %>
             <div class="row third">
               <div class="input-field">
-                <button type="submit" class="btn-search">Save And Update</button>
-                <button type="submit" class="btn-delete" id="delete">Save</button>
+                <button type="submit" id="submittwo" class="btn-delete">Save and continue later</button>
+                <button type="submit" id="submit" class="btn-search">Save Permanently</button>
+               
               </div>
             </div>
           </div>
@@ -360,44 +368,131 @@
       </form>
     </div>
 
-    <script src="../Assets/js/choices.js"></script>
     <script>
-      const customSelects = document.querySelectorAll("select");
-      const deleteBtn = document.getElementById('delete')
-      const choices = new Choices('select',
-      {
-        searchEnabled: false,
-        removeItemButton: true,
-        itemSelectText: '',
-      });
-      for (let i = 0; i < customSelects.length; i++)
-      {
-        customSelects[i].addEventListener('addItem', function(event)
-        {
-          if (event.detail.value)
-          {
-            let parent = this.parentNode.parentNode
-            parent.classList.add('valid')
-            parent.classList.remove('invalid')
-          }
-          else
-          {
-            let parent = this.parentNode.parentNode
-            parent.classList.add('invalid')
-            parent.classList.remove('valid')
-          }
-        }, false);
-      }
-      deleteBtn.addEventListener("click", function(e)
-      {
-        e.preventDefault()
-        const deleteAll = document.querySelectorAll('.choices__button')
-        for (let i = 0; i < deleteAll.length; i++)
-        {
-          deleteAll[i].click();
-        }
-      });
 
-    </script>
+      var submit = document.getElementById('submit')   
+      var submittwo = document.getElementById('submittwo')
+     submit.addEventListener("click", (e)=>{  
+           e.preventDefault(); 
+            let Full_Name =document.getElementById('Full_Name').value
+            let Patient_ID =document.getElementById('Patient_ID').value
+            let Birth_Date =document.getElementById('Birth_Date').value
+            let Address =document.getElementById('Address').value
+            let Telephone =document.getElementById('Telephone').value
+            let Reffered =document.getElementById('Reffered').value
+            let Site = document.getElementById('Site').value
+            let Onset = (document.getElementById('Onset').value).replace(/\//g, '-')
+            let Time_Course = document.getElementById('Time_Course').value
+            let Severity =document.getElementById('Severity').value
+            let Charater =document.getElementById('Charater').value
+            let Radiations =document.getElementById('Radiations').value
+            let Associations =document.getElementById('Associations').value
+            let Relieving =document.getElementById('Relieving').value
+            let Family =document.getElementById('Family').value
+            let Prior = document.getElementById('Prior').value
+            let Present =document.getElementById('Present').value
+            let Medication = document.getElementById('Medication').value
+            let Sedentary = document.getElementById('Sedentary').value
+            let Habits =document.getElementById('Habits').value
+            let OE =document.getElementById('OE').value
+            let Work =document.getElementById('Work').value
+            let CVS =document.getElementById('CVS').value
+            let Chest =document.getElementById('Chest').value
+            let Abdominal =document.getElementById('Abdominal').value
+            let CNS = document.getElementById('CNS').value
+            let GI =document.getElementById('GI').value
+            let Review = document.getElementById('Review').value
+            let Summary = document.getElementById('Summary').value
+            let Diagnosis =document.getElementById('Diagnosis').value
+            let Treatment =document.getElementById('Treatment').value
+            let any =document.getElementById('any').value
+            let Lab_ID =document.getElementById('Lab_ID').value
+            let Lab_type =document.getElementById('Lab_type').value
+            let Description =document.getElementById('Description').value
+            let surgical = document.getElementById('surgical').value
+            let Drugs =document.getElementById('Drugs').value
+            let Remarks = document.getElementById('Remarks').value
+
+            console.log(Address)
+           
+ 
+            let Data = { Full_Name:Full_Name, Patient_ID:Patient_ID, Birth_Date:Birth_Date, Address:Address,Telephone:Telephone, Reffered:Reffered, Site:Site, Onset:Onset,Time_Course:Time_Course, Severity:Severity,Charater:Charater, Radiations:Radiations, Associations:Associations, Relieving:Relieving, Family:Family, Prior:Prior, Present:Present, Medication:Medication, Sedentary:Sedentary, Habits:Habits, OE:OE, Work:Work, CVS:CVS, Chest:Chest, Abdominal:Abdominal, CNS:CNS, GI:GI, Review:Review, Summary:Summary, Diagnosis:Diagnosis, Treatment:Treatment, any:any, Lab_ID:Lab_ID,Lab_type:Lab_type, Description:Description, surgical:surgical, Drugs:Drugs,Remarks:Remarks }
+            console.log(Data)
+            
+           
+            
+           $.ajax({
+                type: 'POST',
+                url: '/dashboard/MedicalForm',
+                ContentType: 'application/json',
+                data: Data,             
+                success:  function(data){
+                 window.location.reload();
+           
+                }
+              }); 
+        })
+    
+        submittwo.addEventListener("click", (e)=>{  
+           e.preventDefault(); 
+           let Full_Name =document.getElementById('Full_Name').value
+            let Patient_ID =document.getElementById('Patient_ID').value
+            let Birth_Date =document.getElementById('Birth_Date').value
+            let Address =document.getElementById('Address').value
+            let Telephone =document.getElementById('Telephone').value
+            let Reffered =document.getElementById('Reffered').value
+            let Site = document.getElementById('Site').value
+            let Onset =document.getElementById('Onset').value
+            let Time_Course = document.getElementById('Time_Course').value
+            let Severity =document.getElementById('Severity').value
+            let Charater =(document.getElementById('Charater').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Radiations =(document.getElementById('Radiations').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Associations =(document.getElementById('Associations').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Relieving =(document.getElementById('Relieving').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Family =(document.getElementById('Family').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Prior = (document.getElementById('Prior').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Present =(document.getElementById('Present').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Medication = (document.getElementById('Medication').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Sedentary = (document.getElementById('Sedentary').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Habits =(document.getElementById('Habits').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let OE =(document.getElementById('OE').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Work =(document.getElementById('Work').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let CVS =(document.getElementById('CVS').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Chest =(document.getElementById('Chest').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Abdominal =(document.getElementById('Abdominal').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let CNS = (document.getElementById('CNS').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let GI =(document.getElementById('GI').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Review = (document.getElementById('Review').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Summary = (document.getElementById('Summary').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Diagnosis =(document.getElementById('Diagnosis').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Treatment =(document.getElementById('Treatment').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let any =(document.getElementById('any').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Lab_ID =(document.getElementById('Lab_ID').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Lab_type =(document.getElementById('Lab_type').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Description =(document.getElementById('Description').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let surgical = (document.getElementById('surgical').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Drugs =(document.getElementById('Drugs').value).replace(new RegExp('\r?\n','g'), '<br />')
+            let Remarks = (document.getElementById('Remarks').value).replace(new RegExp('\r?\n','g'), '<br />')
+           
+            let Data = { Full_Name:Full_Name, Patient_ID:Patient_ID, Birth_Date:Birth_Date, Address:Address,Telephone:Telephone, Reffered:Reffered, Site:Site, Onset:Onset,Time_Course:Time_Course, Severity:Severity,Charater:Charater, Radiations:Radiations, Associations:Associations, Relieving:Relieving, Family:Family, Prior:Prior, Present:Present, Medication:Medication, Sedentary:Sedentary, Habits:Habits, OE:OE, Work:Work, CVS:CVS, Chest:Chest, Abdominal:Abdominal, CNS:CNS, GI:GI, Review:Review, Summary:Summary, Diagnosis:Diagnosis, Treatment:Treatment, any:any, Lab_ID:Lab_ID,Lab_type:Lab_type, Description:Description, surgical:surgical, Drugs:Drugs,Remarks:Remarks }
+            console.log(Data)         
+
+           $.ajax({
+                type: 'POST',
+                url: '/dashboard/MedicalFormTwo',
+                ContentType: 'application/json',
+                data: Data,             
+                success:  function(data){
+                 window.location.reload();
+           
+                }
+              }); 
+        })
+
+    
+      </script> 
+       
+       <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+       <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

@@ -5,8 +5,8 @@ const Mongoclient = require('mongodb');
 const assert = require('assert');
 
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 
 //Medical report Form Handle
@@ -14,12 +14,24 @@ router.get('/IPDMAIN', function(req, res){
     res.render('ipdmain') 
 } );
 
-router.get('/IPDAdmit', function(req, res){
-  res.render('admit') 
+router.get('/IPDAdmit:INFOSTRING', function(req, res){
+  const Info = []
+  let data = req.params.INFOSTRING
+  let dataObject = JSON.parse(data)
+  Info.push(dataObject)
+  console.log(Info)
+  res.render('admit',{Info:Info}) 
 } );
 
-router.get('/IPDDischarge', function(req, res){
-  res.render('discharge') 
+router.get('/IPDDischarge:infostring', function(req, res){
+  const Info = []
+   let data = req.params.infostring
+   let dataObject = JSON.parse(data)
+   Info.push(dataObject)
+   console.log(Info)
+
+   //Fetching casestudy report
+  res.render('discharge',{Info : Info, Hospital:req.user.Hospital, Name:dataObject.PatientName}) 
 } );
 
 
@@ -27,8 +39,75 @@ router.get('/IPDSearch', function(req, res){
   res.render('admitsearch') 
 } );
 
-router.get('/IPDForm', function(req, res){
-  res.render('casestudy') 
+
+router.get('/AdmitMain', function(req, res){
+  const Registered = []
+  const AdmitArray = []
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        var db = client.db('scarhealth');
+        var query = {Hospital_UserName: req.user.UserName };
+        var querytwo = {Hospital_UserName: req.user.UserName, Bed_Status:'Empty'};
+        db.collection('addpatientschemas').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName){
+                    Registered.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(Registered);
+             console.log(Registered.length)
+             
+    });
+
+                 
+                  db.collection('beds').find(querytwo).toArray(function(err,docs){
+                      docs.forEach(function(doc){
+                          if (req.user.UserName = doc.Hospital_UserName){
+                              AdmitArray.push(doc);      
+                      }              
+                        },function(){
+                          client.close
+                        })
+                        console.log(AdmitArray);
+                      console.log(AdmitArray.length)
+                      res.render('admitmain', { Hospital: req.user.Hospital, Name: req.user.Name ,Registered: Registered, Beds:AdmitArray});
+                       
+              });
+    });
+} );
+
+router.get('/IPDForm:infostring', function(req, res){
+  const Info = []
+  let data = req.params.infostring
+  let dataObject = JSON.parse(data)
+  Info.push(dataObject)
+  console.log(Info)
+  //handle for fetching medical data from case study
+  var Search = dataObject.PatientId
+  const IpdArray = []
+
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+      assert.equal(null, err);
+      console.log('sucessesfully connected');
+      var db = client.db('scarhealth');
+      var query = {Patient_ID: Search };
+      db.collection('cases').find(query).toArray(function(err,docs){
+          docs.forEach(function(doc){
+              if (Search= doc.Patient_ID){
+                  IpdArray.push(doc);      
+           }              
+             },function(){
+              client.close
+             })
+             console.log(IpdArray);
+           console.log(IpdArray.length)
+             res.render('casestudy', { Hospital: req.user.Hospital, Name: dataObject.PatientName, ID: dataObject.PatientId, Doctor:dataObject.Doctor, CaseStudy: IpdArray});
+  });
+  });
+  
 } );
 
 //Handle For Bed systems
@@ -41,10 +120,10 @@ router.post('/IPDAdmit', function(req, res){
 
   const admit=require('../models/AdmitSchema')
     
-    let Hospital_UserName = req.user.UserName
+    let Hospital_UserName = (req.user.UserName).replace(/\s/g,'')
     let Current_Date= req.body.Current_Date
     let Patient_Name = req.body.Patient_Name
-    let Patient_ID= req.body.Patient_ID
+    let Patient_ID= (req.body.Patient_ID).replace(/\s/g,'')
     let Doctor_Name= req.body.Doctor_Name;
     let Deparment = req.body.Deparment
     let Ward= req.body.Ward
@@ -93,8 +172,9 @@ router.post('/IPDAdmit', function(req, res){
      //saving a new user to database
         newUser.save()
       .then(function(){
-        req.flash('success_msg', 'The Patient Has Been Admmited Sucessfully')  
-       res.redirect('/dashboard/IPDAdmit');
+        req.flash('success_msg', 'The Patient Has Been Admmited Sucessfully')
+         let data = req.body  
+       res.json(data);
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -107,7 +187,7 @@ router.post('/IPDForm', function(req, res){
   const cases=require('../models/CaseSchema')
     
   let Patients_Name= req.body.Patients_Name
-  let Patient_ID = req.body.Patient_ID
+  let Patient_ID = (req.body.Patient_ID).replace(/\s/g,'')
   let Temperature = req.body.Temperature
   let date = req.body.date
   let Blood_Level = req.body.Blood_Level;
@@ -135,7 +215,8 @@ router.post('/IPDForm', function(req, res){
         newUser.save()
       .then(function(){
         req.flash('success_msg', 'The Update has been saved Successfuly')  
-       res.redirect('/dashboard/IPDCase');
+       let  data = req.body
+       res.json(data)
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -151,7 +232,7 @@ router.post('/IPDDischarge', function(req, res){2
     let Hospital_UserName = req.user.UserName
     let Date_Discharge= req.body.Date_Discharge
     let Patients_Name = req.body.Patients_Name
-    let Patient_ID= req.body.Patient_ID
+    let Patient_ID= (req.body.Patient_ID).replace(/\s/g,'')
     let Doctor_Name= req.body.Doctor_Name;
     let Deparment = req.body.Deparment
     let Ward= req.body.Ward
@@ -220,7 +301,8 @@ router.post('/IPDDischarge', function(req, res){2
         newUser.save()
       .then(function(){
         req.flash('success_msg', 'The Patient Has Been Discharged Sucessfully')  
-       res.redirect('/dashboard/IPDDischarge');
+       let data = req.body
+       res.json(data)
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -241,11 +323,12 @@ router.post('/BedPost', function(req, res){
     let Bed_Status = 'Empty' 
     let String_Date = new Date().toLocaleDateString().split(",")[0]
     
-    beds.findOne({inputEmail:inputEmail })
+    beds.findOne({Bed_Number:Bed_Number, Hospital_UserName:Hospital_UserName })
     .then(bed => {
         if(bed){
             //user exist
-            errors.push({msg: 'Email allready exist'})
+            const errors = []
+            errors.push({msg: 'bed allready exist'})
             res.render('addbed', {
                 errors
             })
@@ -329,7 +412,7 @@ router.get('/DischargeList', function(req, res, next){
 
 
 
-        // Case study handle Performance
+        //Case study handle Performance
         router.post('/IPDSearch', function(req, res, next){
    
           var Search = req.body.Search
@@ -356,6 +439,7 @@ router.get('/DischargeList', function(req, res, next){
           
       
       });
+
       //Handle for Viewing Available Bed
     router.get('/EmptyBedList', function(req, res, next){
    

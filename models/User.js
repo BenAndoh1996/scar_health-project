@@ -25,6 +25,11 @@ Department: {
     require: true
 },
 
+UserDepartment: {
+    type: String,
+    require: true
+},
+
 Name: {
     type: String,
     require: true

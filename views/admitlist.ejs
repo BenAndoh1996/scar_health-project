@@ -116,7 +116,7 @@
            <h4>List Of Patients Admitted At The Hospital </h4>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="2">
                 <thead>
                   <tr>
                     <th>Full Name</th>
@@ -127,6 +127,7 @@
                     <th>Selected Ward</th>   
                     <th>Selected Bed</th> 
                     <th>Reasons For Admittion</th>   
+                    <th>Take Action</th>   
                   </tr>
                 </thead>
                 
@@ -142,6 +143,9 @@
                               <td><%= row.Ward %></td>  
                               <td><%= row.Bed %></td>   
                               <td><%= row.Reason %></td> 
+                              <td class="float-right">
+                                <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal">Take Action</button>
+                            </td> 
                           </tr>
                         <%});%>
                       <%}else{%>
@@ -161,6 +165,28 @@
         </p>
 
       </div>
+
+
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                  
+                    <div class="modal-body">
+                       
+                        <h4 style="color: darkred;">WHAT DO YOU WANT TO DO ?</h4> <br>
+                          
+                          <div id="admitlink" > <p><b> Do YOU WANT TO DISCHARGE THIS PATIENT? </b></p></div>
+                          <div id="caselink"> <p><b>DO YOU WANT CHECK ADMIT PATIENTS CASE PERFORMANCE?</b></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
@@ -201,6 +227,53 @@
       </div>
     </div>
   </div>
+    
+
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var admitlink = document.getElementById('admitlink')
+    var caselink = document.getElementById('caselink')
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].onclick= function(){
+          index = this.parentElement.rowIndex;
+             
+             var PatientName= this.cells[0].innerHTML;
+             var PatientId = this.cells[1].innerHTML;
+             var Doctor = this.cells[3].innerHTML;
+             var Department = this.cells[4].innerHTML;
+             var Ward= this.cells[5].innerHTML;
+             var Bed = this.cells[6].innerHTML;
+              
+
+              const Object = {PatientName:PatientName, PatientId:PatientId, Department:Department, Ward:Ward, Bed:Bed,Doctor:Doctor}
+              console.log (PatientId);
+              
+
+           caselink.onclick = function(){
+            var c = confirm('Do You Want Delete This Row?')
+            if(c === true){
+              let infostring = JSON.stringify(Object)
+              window.document.location = '/dashboard/IPDForm'+ infostring;
+            }
+             
+          };
+
+          admitlink.onclick = function(){
+            var c = confirm('Do you want to discharge this patient?');
+            if(c === true){
+              let infostring = JSON.stringify(Object)
+              window.document.location = '/dashboard/IPDDischarge'+ infostring;
+            }
+            
+          }
+          
+         
+   };
+}
+
+</script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>

@@ -38,8 +38,8 @@
 		
 		<div id="customer">
 
-            <textarea id="customer-title"> <%= User %>   
-               ID : <%= PatientID %>
+            <textarea id="customer-title">
+				<%= Name %>
           </textarea>
             <table id="meta">
                 <tr>
@@ -69,14 +69,14 @@
 		      <th>Repeating Unit</th>
 		      <th>Total Price</th>
 		  </tr>
-          <%if(Bill.length > 0){ %>
-            <% Bill.forEach(function(row){%>
+          <%if(Info.length > 0){ %>
+            <% Info.forEach(function(row){%>
 				<tr class="item-row">
-					<td class="item-name"><div class="delete-wpr"><textarea>Enter Name Here</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
-					<td class="description"><textarea><%= row.Purpose %></textarea></td>
-					<td><textarea class="cost"><%= row.Amount %></textarea></td>
+					<td class="item-name"><div class="delete-wpr"><textarea><%= row.Billby %></textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
+					<td class="description"><textarea><%= row.Department %> Bills</textarea></td>
+					<td><textarea class="cost"><%= row.Total %></textarea></td>
 					<td><textarea class="qty">1</textarea></td>
-					<td><span class="price"><%= row.Amount %></span></td>
+					<td><span class="price"><%= row.Total %></span></td>
 				</tr>
 			
                 <%});%>

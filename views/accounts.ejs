@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <meta http-equiv="refresh" content="30" >
   <title>Admin/Scar-Health</title>
 
   <!-- Custom fonts for this template-->
@@ -106,7 +106,7 @@
         <i class="fas fa-user"></i>
         ACCOUNT SECTION        
         <a href="/dashboard/newadischargeview" class="btn btn-secondary btn lg" role="button" aria-pressed="true"><b> DISCHARGED PATIENTS BILLS</b></a>
-        <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal"><b>GENERATE RECEIPTS</b></button>
+        <button type="button" class="btn btn-info btn lg" data-toggle="" data-target=""><b>GENERATE RECEIPTS</b></button>
        
        </div>
   
@@ -132,8 +132,6 @@
             <th> Purpose</th>
             <th>Bill (Two)</th>
             <th> Purpose</th>
-            <th>Bill(Three</th>
-            <th>Purpose</th>
             <th>Total Bill</th>  
             <th>Take Action </th>
 
@@ -152,11 +150,9 @@
                 <td><%= row.Purpose_One%></td> 
                 <td><%= row.Billing_Two %></td>
                 <td><%= row.Purpose_Two %></td> 
-                <td><%= row.Billing_Three %></td> 
-                <td><%= row.Purpose_Three %></td>  
                 <td><%= row.Total %></td> 
                 <td class="float-right">
-                  <button class="btn btn-danger badge-pill">Remove</button>
+                  <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal"><b>ACTION</b></button>
               </td> 
               </tr>
             <%});%>
@@ -182,77 +178,10 @@
                 <div class="modal-body">
                    
                     <h4>Receipt Generation Form</h4> <br>
-                    <form  id="myForms" method="post" action="/dashboard/GenerateReceipt" >
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="firstName" class="form-control" placeholder="Name of Patient" required="required" name="Name" autofocus="autofocus" >
-                              <label for="firstName">Name of Patient</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="lastName" class="form-control" placeholder="Patient ID" name="UserName" required="required" >
-                              <label for="lastName">Patient ID</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="number" id="AmountOne" class="form-control" placeholder="Bill One" required="required" name="Billing_One" autofocus="autofocus" >
-                              <label for="AmountOne">Billing One</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="BillOne" class="form-control" placeholder="Bill One Purpose" name="Billing_One_Purpose"  >
-                              <label for="BillOne">Billing One Purpose</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                     
-                       <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="number" id="Amount" class="form-control" placeholder="Bill Two" name="Billing_Two" autofocus="autofocus" >
-                              <label for="Amount">Billing Two</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="BillTwo" class="form-control" placeholder="Billing Two Purpose" name="Billing_Two_Purpose" required="required" >
-                              <label for="BillTwo">Billing Two Purpose</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-            
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="number" id="Bill" class="form-control" placeholder="Billing Three  " name="Billing_Three"   >
-                              <label for="Bill">Billing Three</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="" id="BillThree" class="form-control" placeholder="Billing Three Purpose" name="Billing_Three_Purpose"  >
-                              <label for="BillThree">Billing Three Purpose</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary btn-block" >Generate Receipt</button>
-                    </form>
-                     
+                      
+                      <div id="receiptlink"> <p><b> DO YOU WANT TO GENERATE RECEIPT  </b></p></div>
+                      <div id="detailink"> <p><b> DO YOU WANT RECORD DETAILS FOR PATIENT  </b></p></div>
+                      <div id="receipt"> <p><b><a id="deletelink" href="">DO YOU WANT TO DELETE THIS ROW</a></b></p></div>
                 </div>
             </div>
         </div>
@@ -302,20 +231,32 @@
   <script>
       
     var index, table = document.getElementById('dataTable');
-    var hidform = document.getElementById('hid_form')
+    var receiptlink = document.getElementById('receiptlink')
+    var deletelink = document.getElementById('deletelink')
+    var detailink = document.getElementById('detailink')
      for(var i = 1; i < table.rows.length; i++){
 
         table.rows[i].onclick= function(){
-            var c = confirm('Do You Want Delete This Row?');
-            if(c === true){
-                index = this.parentElement.rowIndex;
+          index = this.parentElement.rowIndex;
              
-             var PatientId = this.cells[1].innerHTML;
-              var ID = this.cells[2].innerHTML;
-              console.log(ID);
-              console.log (PatientId);
-             
+             var PatientName= this.cells[0].innerHTML;
+             var PatientId = (this.cells[1].innerHTML).replace(/\s/g,'');
+             var Billby = this.cells[3].innerHTML;
+             var date= this.cells[4].innerHTML;
+             var Department = this.cells[5].innerHTML;
+             var Total= this.cells[10].innerHTML;
+              var ID = (this.cells[2].innerHTML).replace(/\s/g,'');
 
+              const Object = {PatientName:PatientName, Billby:Billby, Department:Department, Total:Total}
+            
+              console.log(ID);
+              
+
+
+          deletelink.onclick = function(){
+            var c = confirm('Do You Want Delete This Row?')
+            if(c === true){
+                
               $.ajax({
                 type: 'DELETE',
                 url: '/dashboard/Accountdelete/'+ ID,
@@ -323,9 +264,29 @@
                   location.reload();
                   
                 }
-              })
+              });
             }
             
+          };
+          receiptlink.onclick = function(){
+            var c = confirm('Do You Want Delete This Row?');
+            if(c === true){
+              let infostring = JSON.stringify(Object)
+              window.location.href = "/dashboard/GenerateReceipt"+infostring;
+            }
+            
+          }
+          
+          detailink.onclick = function(){
+            var c = confirm('Do You Want View detail Record For This Patient?');
+            if(c === true){ 
+              let detail = {PatientId:PatientId,PatientName:PatientName}
+              let detailstring = JSON.stringify(detail)
+              window.document.location = '/dashboard/DetailReceipt'+detailstring;
+            }
+            
+          }
+         
    };
 }
 

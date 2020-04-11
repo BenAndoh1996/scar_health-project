@@ -15,13 +15,13 @@ const Grid= require('gridfs-stream')
 const methodOverride = require('method-override')
 
 
-//const mongoUri = 'mongodb://localhost:27017/scarhealth';
-const mongoUri = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+const mongoUri = 'mongodb://localhost:27017/scarhealth';
+//const mongoUri = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 const conn = mongoose.createConnection(mongoUri)
 
 
 var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 
 // init gfs
 let gfs 
@@ -65,9 +65,27 @@ router.get('/LabForm', function(req, res){
 //search post route
 router.post('/LabInput', upload.single('file'), function(req, res){
     //res.json({file: req.file})
-    res.render('labupload', {
-    LabID: req.file.filename} ) 
-    console.log(req.file.filename)
+
+    const ViewArray = []
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        var db = client.db('scarhealth');
+        var query = {Hospital_UserName: req.user.UserName };
+        db.collection('requests').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName){
+                    ViewArray.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(ViewArray);
+             console.log(ViewArray.length)
+               res.render('viewrequest', { ViewArray: ViewArray, LabID: (req.file.filename), UserName:req.user.UserName,Hospital:req.user.Hospital });
+     });
+  });
+   
 } );
 
 
@@ -75,15 +93,16 @@ router.post('/LabInput', upload.single('file'), function(req, res){
  router.post('/LabBrief', function(req, res){
     const labresults = require('../models/LabSchema')
 
-    let Patients_Name = req.body.Patients_Name
-    let Patient_ID = req.body.Patient_ID
-    let Hospital_username= req.body.Hospital_username
+    let Patients_Name = (req.body.Patients_Name)
+    let Patient_ID = (req.body.Patient_ID).replace(/\s/g, '')
+    let Hospital_username= (req.body.Hospital_username).replace(/\s/g, '')
     let Lab_name = req.body.Lab_name
     let date = req.body.date
-    let Doctor_UserName= req.body.Doctor_UserName;
-    let Lab_ID = req.body.Lab_ID
+    let Doctor_UserName= (req.body.Doctor_UserName).replace(/\s/g, '');
+    let Lab_ID = (req.body.Lab_ID).replace(/\s/g, '')
     let Lab_Type = req.body.Lab_Type
     let Description= req.body.Description
+    let Unique = (req.body.Unique).replace(/\s/g, '');
     let String_Date = new Date().toLocaleDateString().split(",")[0]
     let Status = 'NoView'
    
@@ -101,6 +120,28 @@ router.post('/LabInput', upload.single('file'), function(req, res){
         Status,
            
         });
+          
+        Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+          assert.equal(null, err);
+          console.log('sucessesfully connected');
+          let Quantity = Number(req.body.Quantity_One)
+          let db = client.db('scarhealth')
+          var ObjectId = require('mongodb').ObjectId
+          let searchId = new ObjectId(Unique)
+          let query = {Hospital_UserName: req.user.UserName, _id:searchId};
+          let UpdateObj = {
+            $set: {
+              Status: 'Completed' }
+          }
+          db.collection('requests').updateOne(query,UpdateObj,(function(err,docs){
+             if(err){
+               console.log(err)
+             }else{
+               console.log('Updated successfully')
+             }
+        }));
+        
+     });
 
      //saving a new user to database
         newUser.save()
@@ -124,7 +165,7 @@ router.post('/LabBillPost', function(req, res){
     const labbills = require('../models/LabBillSchema')
 
     let Patients_Name= req.body.Patients_Name
-    let Patient_ID = req.body.Patient_ID
+    let Patient_ID = (req.body.Patient_ID).replace(/\s/g,'')
     let Hospital_UserName = req.user.UserName
     let Doctor_Name= req.user.Name
     let Month = req.body.Month ;
@@ -341,10 +382,45 @@ router.post('/DailyLabAccounts', function(req, res,next){
   
   });
 
+  router.get('/LabBillTwo', function(req, res){
+    const Registered = []
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        var db = client.db('scarhealth');
+        var query = {Hospital_UserName: req.user.UserName };
+        db.collection('addpatientschemas').find(query).toArray(function(err,docs){
+            docs.forEach(function(doc){
+                if (req.user.UserName = doc.Hospital_UserName){
+                    Registered.push(doc);      
+             }              
+               },function(){
+                client.close
+               })
+               console.log(Registered);
+             console.log(Registered.length)
+               res.render('labbilltwo', { Hospital: req.user.Hospital, Name: req.user.Name ,Registered: Registered});
+    });
+    });
+
+  })
+   
+  router.get('/PharmRegistered:INFOSTRING', function(req,res){
+    const Info = []
+    let data = req.params.INFOSTRING;
+    let dataObject = JSON.parse(data);
+    Info.push(dataObject)
+    res.render('labbillform',{Info:Info, Department:req.user.Department})
+
+  })
+
+  
+
 
   // route for getting lab result the actual document
- router.post('/SearchLab', function(req, res){
-    var SearchID = req.body.LabSearch
+ router.get('/SearchLab:reportID', function(req, res){
+    var SearchID = req.params.reportID
+    console.log(SearchID)
      gfs.files.findOne({filename:SearchID}, function(err, file){
          if(!file || file.length === 0){
              return res.status(404).json({

@@ -159,8 +159,8 @@ router.get('/Admin', function(req, res, next){
     
 } );
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 
 
@@ -567,5 +567,148 @@ router.post('/DeleteAdmin', function(req, res){
       
  });
 });
+   
+router.get('/VisitDetails:ID', function(req,res){
+    const pharm = []
+    const lab = []
+    const Hospital = []
+    let DateToday = new Date().toLocaleDateString().split(",")[0]
+    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){  
+        let stringobj = req.params.ID
+        let obj = JSON.parse(stringobj)
+       let patientId = obj.ID
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let myObj =  [
+          {$match: { Patient_ID : patientId, String_Date:DateToday } },
+        {$group: {_id: "$Patient_ID", total: {$sum: "$Total"}}}
+        ]
+
+        db.collection('bills').aggregate(myObj).toArray(function(error,sums){
+          sums.forEach(function(sum){
+              Hospital.push(sum)    
+             },function(){
+              client.close
+             })
+             
+            })  
+
+            db.collection('labbills').aggregate(myObj).toArray(function(error,sums){
+                sums.forEach(function(sum){
+                  lab.push(sum)    
+                   },function(){
+                    client.close
+                   }) 
+             })  
+
+                  db.collection('pharmbills').aggregate(myObj).toArray(function(error,sums){
+                    sums.forEach(function(sum){
+                           pharm.push(sum)    
+                       },function(){
+                        client.close
+                       })
+                       console.log(patientId)
+                     res.render('visitdetail', {Pharm:pharm, Lab:lab, Hospital:Hospital, Name:obj.Name, ID:patientId})
+                })           
+    })       
+})
+
+router.get('/AdminLabVisit:ID', function(req,res){
+    const pharm = []
+    const lab = []
+    const Hospital = []
+    let DateToday = new Date().toLocaleDateString().split(",")[0]
+    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){  
+        let stringobj = req.params.ID
+        let obj = JSON.parse(stringobj)
+       let patientId = obj.ID
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let myObj =  { Patient_ID : patientId, String_Date:DateToday } 
+        
+        db.collection('labrequests').find(myObj).toArray(function(error,docs){
+          docs.forEach(function(doc){
+              Hospital.push(doc)    
+             },function(){
+              client.close
+             })
+             
+            })  
+
+            db.collection('labbills').find(myObj).toArray(function(error,docs){
+                docs.forEach(function(doc){
+                  lab.push(doc)    
+                   },function(){
+                    client.close
+                   }) 
+             })  
+
+                  db.collection('labresults').find(myObj).toArray(function(error,docs){
+                    docs.forEach(function(doc){
+                           pharm.push(doc)    
+                       },function(){
+                        client.close
+                       })
+                       console.log(patientId)
+                     res.render('labvisits', {Pharm:pharm, Lab:lab, Hospital:Hospital, Name:obj.Name, ID:patientId})
+                })           
+    })       
+})
+
+router.get('/AdminPharmVisit:ID', function(req,res){
+   
+    const lab = []
+    const Hospital = []
+    let DateToday = new Date().toLocaleDateString().split(",")[0]
+    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){  
+        let stringobj = req.params.ID
+        let obj = JSON.parse(stringobj)
+       let patientId = obj.ID
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let myObj =  { Patient_ID : patientId, String_Date:DateToday }   
+
+            db.collection('pharmbills').find(myObj).toArray(function(error,docs){
+                docs.forEach(function(doc){
+                  lab.push(doc)    
+                   },function(){
+                    client.close
+                   }) 
+                   res.render('pharmvisits', { Lab:lab, Hospital:Hospital, Name:obj.Name, ID:patientId})
+             })  
+
+                           
+    })       
+})
+
+router.get('/AdminHosVisit:ID', function(req,res){
+   
+    const Hospital = []
+    let DateToday = new Date().toLocaleDateString().split(",")[0]
+    Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){  
+        let stringobj = req.params.ID
+        let obj = JSON.parse(stringobj)
+       let patientId = obj.ID
+        assert.equal(null, err);
+        console.log('sucessesfully connected');
+        let db = client.db('scarhealth');
+        let myObj =  { Patient_ID : patientId, String_Date:DateToday } 
+        
+        db.collection('bills').find(myObj).toArray(function(error,docs){
+          docs.forEach(function(doc){
+              Hospital.push(doc)    
+             },function(){
+              client.close
+             })
+             res.render('hosvisits', { Hospital:Hospital, Name:obj.Name, ID:patientId})
+            }) 
+
+                           
+    })       
+})
+
 
 module.exports = router;

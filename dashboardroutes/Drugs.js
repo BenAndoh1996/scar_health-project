@@ -15,8 +15,34 @@ router.get('/GetDrugs', function(req, res){
     res.render('medform') 
 } );
 
-router.get('/Prescriptions', function(req, res){
-  res.render('prescription') 
+router.get('/Prescriptions:Infostring', function(req, res){
+ 
+  let data = req.params.Infostring
+  let dataObject = JSON.parse(data)
+  
+// Get All The Avalaible drugs
+const StockArray = []
+var Available
+Mongoclient.connect(url, {useUnifiedTopology: true}, function(err, client){
+    assert.equal(null, err);
+    console.log('sucessesfully connected');
+    let db = client.db('scarhealth');
+    let query = {Hospital_UserName: req.user.UserName};
+    db.collection('stocks').find(query).toArray(function(err,docs){
+        docs.forEach(function(doc){
+            if (req.user.UserName = doc.Hospital_UserName){
+             Available = doc.OverallQuantity - doc.SoldQuantity
+                StockArray.push(doc);      
+         }              
+           },function(){
+            client.close
+           })
+           console.log(StockArray);
+         console.log(StockArray.length)
+         res.render('prescription',{Name:dataObject.Name, patientID:dataObject.patientID, StockArray:StockArray})
+});
+});
+   
 } );
 
 
@@ -24,8 +50,8 @@ router.get('/Prescriptions', function(req, res){
 router.post('/GetDrugs', function(req, res){
     
     let Patients_Name= req.body.Patients_Name
-    let Patient_ID = req.body.Patient_ID
-    let Hospital_UserName = req.user.UserName
+    let Patient_ID = (req.body.Patient_ID).replace(/\s/g,'')
+    let Hospital_UserName = (req.user.UserName).replace(/\s/g,'')
     let Doctor_Name = req.user.Name
     let Current_Date= req.body.Current_Date;
     let Drug_One = req.body.Drug_One
@@ -83,7 +109,8 @@ router.post('/GetDrugs', function(req, res){
         newUser.save()
       .then(function(){
         req.flash('success_msg', 'The drug prescription has been sent to the pharmaccy')  
-       res.redirect('/dashboard/GetDrugs');
+        data = req.body
+       res.json(data)
         console.log(req.body);
         })
       .catch(err => console.log(err));  
@@ -91,11 +118,11 @@ router.post('/GetDrugs', function(req, res){
 });
 
 //handle for viewingprescribed  drugs at the pharmacy
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/Pharmpage', function(req, res, next){
-   if(req.user.Department === 'Pharmacist'){
+   if(req.user.Department === 'Pharmacist' || req.user.Department ==='Administrator'){
         
     var dateToday = new Date().toLocaleDateString().split(",")[0]
     const DrugArray = []

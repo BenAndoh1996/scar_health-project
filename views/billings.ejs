@@ -24,16 +24,16 @@
                     <form action="/dashboard/Billing" method="POST" class="register-form" id="register-form">
                         <% include ./partials/messages %>
                         <h2>Hospital Billing Form</h2>
-
+                       
                           <div class="form-row">
                             <div class="form-group">
                                  <label for="Patients Full Name">Patients Full Name</label>
-                                   <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                                   <input type="text" value="" name="Patients_Name" id="Patients Full Name" required/>
                             </div>
                                   
                                   <div class="form-group">
                                    <label for="Folder(ID)">Patient (ID)</label>
-                                   <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                   <input type="text" value="" name="Patient_ID" id="Folder(ID)" required/>
                               </div>
                           </div>
         
@@ -77,18 +77,10 @@
                               </div>
                               </div>
 
-                              <div class="form-row">
-                                <div class="form-group">
-                                <label for="Temperature Level(TL)">Billing Three</label>
-                                    <input type="number" name="Billing_Three" id="Temperature Level(TL)" />
-                                </div>
-                        
-                              <div class="form-group">
-                                <label for="Blood Level(BP)">Billing Three Purpose</label>
-                                <input type="text" name="Purpose_Three" id="Blood Level(BP)" />
-                              </div>
-                              </div>
-                              <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
+                              
+                              <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>   
+                            
+
                             </form>
                 </div>
             </div>

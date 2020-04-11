@@ -15,11 +15,12 @@
   <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href=".../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="../Assets/css/sb-admin.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="../Assets/css/andoh.css">
+  
 </head>
 
 <body id="page-top">
@@ -114,7 +115,7 @@
             <div>
               <a href="/dashboard/patientregister" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true"><b>Add New Patient</b></a>
               <a href="/dashboard/RegisteredPatient" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><b>Registered Patients</b></a>
-              <a href="/dashboard/Vitals" class="btn btn-success btn-sm active" role="button" aria-pressed="true"><b>New Patient Vitals</b></a>
+              <a href="/dashboard/OPDActivity" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><b>OPD Vitals </b></a>
               
               <a href="/dashboard/IPDMAIN" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><b>IPD Registrations</b></a>
               <a href="/dashboard/GetUsers" class="btn btn-dark btn-sm active" role="button" aria-pressed="true"><b>Registered Users</b></a>            
@@ -160,6 +161,9 @@
         </p>
 
       </div>
+
+     
+   
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
@@ -200,7 +204,35 @@
       </div>
     </div>
   </div>
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var tabletwo = document.getElementById('tableLike')
+    var patientName, patientID, PatientAge, doctorName, doctorEmail, Department
+    
+    var INFO = {Name:doctorName, patientID:doctorEmail}
+               
+     for(var i = 1; i < table.rows.length; i++){
 
+        table.rows[i].onclick= function(){
+            var c = confirm('Do You want Enter Bills For these Patient?');
+            if(c === true){
+                index = this.parentElement.rowIndex;
+             
+              patientName = this.cells[0].innerHTML;
+               patientID = this.cells[1].innerHTML; 
+               PatientAge = this.cells[2].innerHTML;
+
+             console.log(patientName)
+             console.log(PatientAge)
+              }
+            
+   };
+     }
+     
+     
+
+</script>
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -216,7 +248,7 @@
   <script src="../Assets/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="../Assetsjs/demo/datatables-demo.js"></script>
+  <script src="../Assets/js/demo/datatables-demo.js"></script>
 
 </body>
 

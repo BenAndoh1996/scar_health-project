@@ -16,8 +16,12 @@ router.get('/InventoryForm', function(req, res){
   res.render('inventory') 
 } );
 
-router.get('/PharmBill', function(req, res){
-  res.render('pharmbill') 
+router.get('/PharmBill:infostring', function(req, res){
+  const Info = []
+  let data = req.params.infostring
+  let dataObject = JSON.parse(data)
+  Info.push(dataObject)
+  res.render('pharmbill',{Info:Info}) 
 } );
 
 
@@ -63,8 +67,8 @@ router.post('/InventoryForm', function(req, res){
 
 //Handle for Updating Stock
 
- //var url = 'mongodb://localhost:27017/scarhealth';
-  var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+ var url = 'mongodb://localhost:27017/scarhealth';
+  //var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 
 router.post('/UpdateStocks', function(req, res, next){
@@ -122,6 +126,7 @@ router.post('/PharmBill', function(req, res, next){
     let Current_Date = new Date(req.body.Current_Date)
     let Hospital_UserName = req.user.UserName
     let String_Date = new Date().toLocaleDateString().split(",")[0]
+    let Patient_ID = req.body.Patient_ID  
     let Name = req.user.Name   
     let InputEmail = req.user.inputEmail
    
@@ -145,6 +150,7 @@ router.post('/PharmBill', function(req, res, next){
         Month,
         Current_Date,
         String_Date,
+        Patient_ID,
         Hospital_UserName,
         Name,
         InputEmail

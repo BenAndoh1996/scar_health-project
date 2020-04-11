@@ -11,26 +11,17 @@ router.get('/Billing', function(req, res){
 
 
 //Post Receipt Handle
-router.post('/GenerateReceipt', function(req, res){
-  
-  let Patients_Name= req.body.Name
-  let Patient_ID = req.body.UserName
-  let Hospital = req.user.Hospital
-  let Billing_One= Number(req.body.Billing_One)
-  let Purpose_One= req.body.Billing_One_Purpose
-  let Billing_Two= Number(req.body.Billing_Two)
-  let Purpose_Two= req.body.Billing_Two_Purpose
-  let Billing_Three = Number(req.body.Billing_Three)
-  let Purpose_Three = req.body.Billing_Three_Purpose
-  let Message = 'Type your Name Here'
-
-  const Bill = [{Amount:Billing_One, Purpose: Purpose_One}, {Amount: Billing_Two, Purpose: Purpose_Two}, {Amount: Billing_Three, Purpose:Purpose_Three}]
-
-  res.render('receipt', {Bill : Bill, Hospital: Hospital, User:Patients_Name , PatientID:Patient_ID, Message:Message})
+router.get('/GenerateReceipt:infostring', function(req, res){
+  const Info = []
+   let data = req.params.infostring
+   let dataObject = JSON.parse(data)
+   Info.push(dataObject)
+   console.log(Info)
+  res.render('receipt', {Info : Info, Hospital:req.user.Hospital, Name:dataObject.PatientName})
 })
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority '
 
 router.get('/GetBills', function(req, res, next){
    
@@ -167,7 +158,7 @@ router.get('/DocLabList', function(req, res, next){
    
     const DocLabArray = []
 
-    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+    Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true,useNewUrlParser: true}, function(err, client){
         assert.equal(null, err);
         console.log('sucessesfully connected');
         var db = client.db('scarhealth');
@@ -196,7 +187,7 @@ router.get('/DocLabList', function(req, res, next){
           let item = req.params.ID
           let searchId = new ObjectId(item)
         console.log(searchId)
-          Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+          Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true,useNewUrlParser: true}, function(err, client){
           assert.equal(null, err);
           console.log('sucessesfully connected');
           let db = client.db('scarhealth')
@@ -219,4 +210,32 @@ router.get('/DocLabList', function(req, res, next){
         } );
         
 
+        router.get('/DetailReceipt:detailstring', function(req, res){
+              let data = req.params.detailstring
+              let dataObject = JSON.parse(data)
+              let patientID =dataObject.PatientId
+
+              var Today = new Date().toLocaleDateString().split(",")[0]
+              const PatientArray = []
+          
+              Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+                  assert.equal(null, err);
+                  console.log('sucessesfully connected');
+                  var db = client.db('scarhealth');
+                  var query = {Hospital_UserName: req.user.UserName, String_Date: Today, Status:'No' ,Patient_ID: patientID };
+                  db.collection('bills').find(query).toArray(function(err,docs){
+                      docs.forEach(function(doc){
+                          if (req.user.UserName = doc.Hospital_UserName){
+                              PatientArray.push(doc);      
+                       }              
+                         },function(){
+                          client.close
+                         })
+                         console.log(PatientArray);
+                       console.log(PatientArray.length)
+                         res.render('receipttwo', { Getbill: PatientArray, PatientId:patientID, Name:dataObject.PatientName, Hospital:req.user.Hospital});
+              });
+              });      
+             
+        })
 module.exports = router;

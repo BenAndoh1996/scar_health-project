@@ -75,6 +75,11 @@ Amount_Five: {
     require: true
 },
 
+Patient_ID: {
+    type: String,
+    require: true
+},
+
 Total: {
     type: Number,
     require: true

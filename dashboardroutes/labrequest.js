@@ -12,8 +12,13 @@ const request=require('../models/RequestSchema')
 
 
 //Medical report Form Handle
-router.get('/LabRequest', function(req, res){
-    res.render('labrequest') 
+router.get('/LabRequest:Infostring', function(req, res){
+  const Total = []
+    let Info = req.params.Infostring
+    let Infodata = JSON.parse(Info)
+    Total.push(Infodata)
+    console.log(Total)
+  res.render('labrequest',{Total:Total, Doctor:req.user.Name, UserName:req.user.inputEmail, Hospital:req.user.Hospital}) 
 } );
 
 router.post('/LabRequest', function(req, res){
@@ -26,7 +31,8 @@ router.post('/LabRequest', function(req, res){
     let Lab_Type = req.body.Lab_Type
     let Description= req.body.Description
     let Hospital_UserName = req.user.UserName
-    let Patient_ID = req.body.Patient_ID
+    let Patient_ID = (req.body.Patient_ID).replace(/\s/g,'')
+    let Status = 'In Progress'
     let String_Date = new Date().toLocaleDateString().split(",")[0]
    
       const newUser = new request({
@@ -38,6 +44,7 @@ router.post('/LabRequest', function(req, res){
            date,
            Sample_ID ,
            Lab_Type,
+           Status,
            Description,
            String_Date,
            
@@ -47,14 +54,15 @@ router.post('/LabRequest', function(req, res){
         newUser.save()
       .then(function(){
         req.flash('success_msg', 'The lab requested is being sent to laboratory')  
-       res.redirect('/dashboard/LabRequest');
+        let data = req.body 
+        res.json(data)
         console.log(req.body);
         })
       .catch(err => console.log(err));  
                     
 });
-// var url = 'mongodb://localhost:27017/scarhealth';
- var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
+ var url = 'mongodb://localhost:27017/scarhealth';
+ //var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/test?retryWrites=true&w=majority '
 //Doctors Appointment form delete
 router.delete('/Labdelete/:ID', function(req, res){
   var ObjectId = require('mongodb').ObjectId
@@ -80,6 +88,33 @@ router.delete('/Labdelete/:ID', function(req, res){
  });
    
  } );
+
+
+ // Doctor request list
+ router.get('/DocRequestList', function(req, res, next){
+  const ViewArray = []
+
+  Mongoclient.connect(process.env.MONGODB_URI || url, {useUnifiedTopology: true}, function(err, client){
+      assert.equal(null, err);
+      console.log('sucessesfully connected');
+      var db = client.db('scarhealth');
+      var query = {Hospital_UserName: req.user.UserName, Doctor_UserName:req.user.inputEmail };
+      db.collection('requests').find(query).toArray(function(err,docs){
+          docs.forEach(function(doc){
+              if (req.user.inputEmail = doc.Doctor_UserName){
+                  ViewArray.push(doc);      
+           }              
+             },function(){
+              client.close
+             })
+             console.log(ViewArray);
+           console.log(ViewArray.length)
+             res.render('docrequest', { ViewArray: ViewArray});
+   });
+});
+
+} );
+
 
 
 module.exports = router;

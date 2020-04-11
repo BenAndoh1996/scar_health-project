@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient/folder</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../Assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <div class="signup-content">
+               
+               
+                </div>
+                <div class="signup-form"> 
+                    <form action="" method="" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <h2>Hospital Billing Form</h2>
+                        <%if(Total.length > 0){ %>
+                          <% Total.forEach(function(row){%>  
+                          <div class="form-row">
+                            <div class="form-group">
+                                 <label for="Patients_Name">Patients Full Name</label>
+                                   <input type="text" value="<%= row.Name %>" name="Patients_Name" id="Patients_Name" required/>
+                            </div>
+                                  
+                                  <div class="form-group">
+                                   <label for="Patient_ID">Patient (ID)</label>
+                                   <input type="text" value=" <%= row.patientID %>" name="Patient_ID" id="Patient_ID" required/>
+                              </div>
+                          </div>
+        
+                           <div class="form-row">
+                                <div class="form-group">
+                                <label for="Month">Current Month</label>
+                                    <input type="month" name="Month" id="Month" required/>
+                             </div>
+                        
+                              <div class="form-group">
+                                <label for="Blood Level(BP)">Current Date(Day)</label>
+                                <input type="date" name="Current_Date" id="Current_Date" required/>
+                              </div>
+                          </div>
+          
+                               <div class="form-group">
+                                 <label for="Department">Department</label>
+                                 <input type="text" value="<%= Department %>" name="Department" id="Department" required/>
+                               </div>
+          
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Billing_One">Billing One</label>
+                                    <input type="number" name="Billing_One" id="Billing_One" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Purpose_One">Billing One Purpose</label>
+                                <input type="text" name="Purpose_One" id="Purpose_One" />
+                              </div>
+                             </div>  
+                              <div class="form-row">
+                                <div class="form-group">
+                                <label for="Billing_Two">Billing Two</label>
+                                    <input type="number" name="Billing_Two" id="Billing_Two" />
+                                </div>
+                        
+                              <div class="form-group">
+                                <label for="Purpose_Two">Billing Two Purpose</label>
+                                <input type="text" name="Purpose_Two" id="Purpose_Two" />
+                              </div>
+                            </div>          
+                              <button type="submit" id="submit" class="btn btn-primary btn-block" >Add Bill</button>  
+                               <%});%>
+                              <%} %>
+
+                            </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+    <script>
+      var submit = document.getElementById('submit')
+       submit.addEventListener("click", (e)=>{  
+           e.preventDefault();          
+            let Patients_Name =document.getElementById('Patients_Name').value
+            let Patient_ID =document.getElementById('Patient_ID').value
+            let Month =document.getElementById('Month').value
+            let Current_Date =document.getElementById('Current_Date').value
+            let Department =document.getElementById('Department').value
+            let Billing_One =document.getElementById('Billing_One').value
+            let Purpose_One=document.getElementById('Purpose_One').value
+            let Billing_Two =document.getElementById('Billing_Two').value
+            let Purpose_Two=document.getElementById('Purpose_Two').value
+ 
+            let Data = { Patients_Name:Patients_Name, Patient_ID:Patient_ID, Month:Month, Current_Date:Current_Date,Department:Department, Billing_One:Billing_One, Purpose_One:Purpose_One, Billing_Two:Billing_Two,Purpose_Two:Purpose_Two }
+            console.log(Data)
+          $.ajax({
+                type: 'POST',
+                url: '/dashboard/Billing',
+                ContentType: 'application/json',
+                data: Data,             
+                success:  function(data){
+                 window.location.reload();
+           
+                }
+              }); 
+        })           
+        
+    </script>
+    <!-- JS -->
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

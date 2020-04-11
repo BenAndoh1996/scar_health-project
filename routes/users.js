@@ -16,7 +16,7 @@ router.get('/login', function(req, res){
 })
 
 router.get('/UserRegister', function(req, res){
-    res.render('docregister')
+    res.render('docregister', {Hospital :req.user.Hospital})
 })
 
 //register page
@@ -39,6 +39,7 @@ router.post('/register', function(req, res){
     let confirmPassword = req.body.confirmPassword
     let Department = req.body.Department
     let Name = req.body.Name
+    let UserDepartment = req.body.UserDepartment
     let String_Date = new Date().toLocaleDateString().split(",")[0]
     
    
@@ -53,21 +54,25 @@ router.post('/register', function(req, res){
         errors.push({msg: 'Password do not match'})
         console.log(errors)
       }
-       if(errors.length > 0){
+       if(errors.length > 0 && Department === 'Administrator'){
           res.render('register',  {
              errors
            })
+      } else if(errors.length > 0 ){
+                res.render('docregister',  {
+                    errors, Hospital:req.user.Hospital
+                })
       }
       else{ 
           if (Department === 'Administrator'){
               UserName = req.body.UserName
              //validation passed
-            User.findOne({UserName:UserName })
+            User.findOne({$or: [{UserName:UserName},{inputEmail:inputEmail}]})
             .then(user => {
               if(user){
                   //user exist
-                  errors.push({msg: 'UserName allready exist'})
-                  res.render('docregister', {
+                  errors.push({msg: 'UserName allready exist Or Email already Exist'})
+                  res.render('register', {
                       errors
                   })
         
@@ -110,13 +115,14 @@ router.post('/register', function(req, res){
               if(user){
                   //user exist
                   errors.push({msg: 'UserName allready exist'})
-                  res.render('register', {
+                  res.render('docregister', {
                       errors
                   })
               }else{
                   const newUser = new User({
                       Hospital:Hospital,
                       UserName:UserName,
+                      UserDepartment,
                       inputEmail,
                       password,
                       Department,

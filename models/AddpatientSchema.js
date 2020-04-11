@@ -17,6 +17,11 @@ const PatientSchema =mongoose.Schema({
         require: true
     },
 
+    Address: {
+        type: String,
+        require: true
+    },
+
     Age: {
         type: Number,
         require: true

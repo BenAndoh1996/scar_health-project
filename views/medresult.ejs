@@ -26,7 +26,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">SCAR-HEALTH</a>
+    <a class="navbar-brand mr-1" href="">SCAR-HEALTH</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -78,13 +78,13 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-home"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
           <span>LogOut</span></a>
       </li>
@@ -203,7 +203,7 @@
 
   <script>
       
-    /*var index, table = document.getElementById('dataTable');
+    var index, table = document.getElementById('dataTable');
     var hidform = document.getElementById('hid_form')
      for(var i = 1; i < table.rows.length; i++){
 
@@ -213,23 +213,16 @@
                 index = this.parentElement.rowIndex;
              
              var PatientId = this.cells[1].innerHTML;
-              var ID = this.cells[2].innerHTML;
-              console.log(ID);
+              var reportID = this.cells[2].innerHTML;
+              console.log(reportID);
               console.log (PatientId);
-             
 
-              $.ajax({
-                type: 'GET',
-                url: '/dashboard/MedResult/'+ ID,
-                success:  function(data){
-                 window.location = /dashboard/Medresult
-                  
-                }
-              })
+              window.document.location = '/dashboard/PatientReport'+ reportID
+        
             }
             
    };
-}*/
+}
 
 </script>
 

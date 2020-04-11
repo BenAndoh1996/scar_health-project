@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <meta http-equiv="refresh" content="30" >
   <title>Admin/Scar-Health</title>
 
   <!-- Custom fonts for this template-->
@@ -135,6 +135,7 @@
             <a class="dropdown-item" href="/dashboard/UserSales"><b>User</b></a>
             <a class="dropdown-item" href="/dashboard/PharmSales">Pharmacy</a>
             <a class="dropdown-item" href="/dashboard/StaffSales">Staff Sales</a>
+
           </div>
         </div>
        </div>  
@@ -158,6 +159,7 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
+            <th>Take Action</th> 
             <th> Patient Name</th>
             <th>Patient ID</th>
             <th>Doctor's Name</th>
@@ -173,12 +175,16 @@
             <th>Drug Five</th> 
             <th>Dosage</th> 
             <th>UNique Id</th> 
+           
           </tr>
            </thead>        
          <tbody>
           <%if(Drug.length > 0){ %>
             <% Drug.forEach(function(row){%>
               <tr>
+                <td class="float-right">
+                  <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal"><b>Action</b></button>
+              </td>
                 <td><%= row.Patients_Name %></td>
                 <td><%= row.Patient_ID%></td>
                 <td><%= row.Doctor_Name %></td>
@@ -194,6 +200,7 @@
                 <td><%= row.Drug_Five %></td> 
                 <td><%= row.Dosage_Five %></td> 
                 <td><%= row._id %></td> 
+                
               </tr>
             <%});%>
           <%}else{%>
@@ -205,7 +212,29 @@
        </table>
     </div>
    </div>
-        
+          
+         
+   <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+              
+                <div class="modal-body">
+                   
+                    <h4>Receipt Generation Form</h4> <br>
+                      
+                      <div id="receiptlink"> <p><b> DO YOU WANT INITIATE SALES  </b></p></div>
+                      <div id="receipt"> <p><b><a id="deletelink" href="">DO YOU WANT TO DELETE THIS ROW</a></b></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
@@ -249,20 +278,32 @@
   <script>
       
     var index, table = document.getElementById('dataTable');
-    var hidform = document.getElementById('hid_form')
+    var receiptlink = document.getElementById('receiptlink')
+    var deletelink = document.getElementById('deletelink')
      for(var i = 1; i < table.rows.length; i++){
 
         table.rows[i].onclick= function(){
-            var c = confirm('Do You Want Delete This Row?');
-            if(c === true){
-                index = this.parentElement.rowIndex;
+          index = this.parentElement.rowIndex;
              
-             var PatientId = this.cells[1].innerHTML;
-              var ID = this.cells[24].innerHTML;
+             var PatientName= (this.cells[1].innerHTML).replace(/\s/g, '')
+             var PatientId = (this.cells[2].innerHTML).replace(/\s/g, '')
+             var drugone = (this.cells[5].innerHTML).replace(/\s/g, '')
+             var drugtwo = (this.cells[7].innerHTML).replace(/\s/g, '')
+             var drugthree = (this.cells[9].innerHTML).replace(/\s/g, '')
+             var drugfour= (this.cells[11].innerHTML).replace(/\s/g, '')
+             var drugfive= (this.cells[13].innerHTML).replace(/\s/g, '')
+
+              var ID = this.cells[15].innerHTML;
+
+              const Object = {PatientName:PatientName, PatientId:PatientId, drugone:drugone, drugtwo:drugtwo,drugthree:drugthree,drugfour:drugfour,drugfive:drugfive}
               console.log(ID);
               console.log (PatientId);
-             
 
+
+          deletelink.onclick = function(){
+            var c = confirm('Do You Want Delete This Row?')
+            if(c === true){
+                
               $.ajax({
                 type: 'DELETE',
                 url: '/dashboard/Pharmdelete/'+ ID,
@@ -270,9 +311,20 @@
                   location.reload();
                   
                 }
-              })
+              });
             }
             
+          };
+          receiptlink.onclick = function(){
+            var c = confirm('Do you want initiate payment for this patient?');
+            if(c === true){
+              let infostring = JSON.stringify(Object)
+              window.location.href = '/dashboard/PharmBill'+ infostring;
+            }
+            
+          }
+          
+         
    };
 }
 

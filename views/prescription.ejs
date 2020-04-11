@@ -14,6 +14,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
 </head>
 <body>
 
@@ -23,84 +24,130 @@
                
                 <div class="signup-form"> 
                 
-                    <form action="/dashboard/GetDrugs" method="POST" class="register-form" id="register-form">     
+                    <form action="" method="" class="register-form" id="register-form">     
                         <h3>Drug Prescription </h3>
                         <% include ./partials/messages %>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                                <label for="Patients_Name">Patients Full Name</label>
+                                <input type="text" value="<%= Name %>" name="Patients_Name" id="Patients_Name" required/>
                             </div>
                             
                             <div class="form-group">
                                 <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                    <input type="text" value="<%= patientID %>" name="Patient_ID" id="Patient_ID" required/>
                                 </div>
 
                         </div>
                         
                       <div class="form-group">
-                        <label for="Blood Level(BP)">Current Date(DD /MM/ YYYY)</label>
-                        <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
+                        <label for="Current_Date">Current Date(DD /MM/ YYYY)</label>
+                        <input type="date" name="Current_Date" id="Current_Date" required/>
                       </div>
-
+                      <%if(StockArray.length > 0){ %>
                       <div class="form-row">
                         <div class="form-group">
-                        <label for="Temperature Level(TL)">Drug One(Type & Name)</label>
-                            <input type="text" name="Drug_One" id="Temperature Level(TL)" required/>
-                        </div>
+                          <label for="Drug_One">Drug One (Name & Type) </label>
+                          <div class="form-select">
+                              <select name="Drug_One" id="Drug_One"required="required" >
+                                  <option value=""></option>
+                                  <% StockArray.forEach(function(row){%>
+                                  <option value="<%= row.Drug_Name %> "><%= row.Drug_Name %> : <%= row.Drug_Type %> </option>
+                                  <%});%>
+                                  
+                              </select>
+                              <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                          </div>
+                      </div>
                 
                       <div class="form-group">
-                        <label for="Blood Level(BP)">Drug One Dosage</label>
-                        <input type="text" name="Dosage_One" id="Blood Level(BP)" required/>
+                        <label for="Dosage_One">Drug One Dosage</label>
+                        <input type="text" name="Dosage_One" id="Dosage_One" required/>
                       </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group">
-                    <label for="Temperature Level(TL)">Drug Two(Type & Name)</label>
-                        <input type="text" name="Drug_Two" id="Temperature Level(TL)" />
-                    </div>
+                      <label for="Drug_Two">Drug Two (Name & Type)</label>
+                      <div class="form-select">
+                          <select name="Drug_Two" id="Drug_Two" >
+                              <option value=""></option>
+                              <% StockArray.forEach(function(row){%>
+                              <option value="<%= row.Drug_Name %> "><%= row.Drug_Name %> : <%= row.Drug_Type %> </option>
+                              <%});%>
+                              
+                          </select>
+                          <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                      </div>
+                  </div>
             
                   <div class="form-group">
-                    <label for="Blood Level(BP)">Drug Two Dosage</label>
-                    <input type="text" name="Dosage_Two" id="Blood Level(BP)" />
+                    <label for="Dosage_Two">Drug Two Dosage</label>
+                    <input type="text" name="Dosage_Two" id="Dosage_Two" />
                   </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Three(Type & Name)</label>
-                    <input type="text" name="Drug_Three" id="Temperature Level(TL)"/>
-                </div>
+                  <label for="Drug_Three">Drug Three (Name & Type)</label>
+                  <div class="form-select">
+                      <select name="Drug_Three" id="Drug_Three">
+                          <option value=""></option>
+                          <% StockArray.forEach(function(row){%>
+                          <option value="<%= row.Drug_Name %> "><%= row.Drug_Name %> : <%= row.Drug_Type %> </option>
+                          <%});%>
+                        
+                      </select>
+                      <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                  </div>
+              </div>
         
               <div class="form-group">
-                <label for="Blood Level(BP)">Drug Three Dosage</label>
-                <input type="text" name="Dosage_Three" id="Blood Level(BP)" />
+                <label for="Dosage_Three">Drug Three Dosage</label>
+                <input type="text" name="Dosage_Three" id="Dosage_Three" />
+              </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="Drug_Four">Drug Four (Name & Type)</label>
+                  <div class="form-select">
+                      <select name="Drug_Four" id="Drug_Four" >
+                          <option value=""></option>
+                          <% StockArray.forEach(function(row){%>
+                          <option value="<%= row.Drug_Name %>"><%= row.Drug_Name %> : <%= row.Drug_Type %> </option>
+                          <%});%>
+                      </select>
+                      <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                  </div>
+              </div>
+        
+              <div class="form-group">
+                <label for="Dosage_Four">Drug Four Dosage</label>
+                <input type="text" name="Dosage_Four" id="Dosage_Four" />
+              </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Four(Type & Name)</label>
-                    <input type="text" name="Drug_Four" id="Temperature Level(TL)" />
-                </div>
+                  <label for="Drug_Five">Drug Five (Name & Type)</label>
+                  <div class="form-select">
+                      <select name="Drug_Five" id="Drug_Five" >
+                          <option value=""></option>
+                          <% StockArray.forEach(function(row){%>
+                          <option value="<%= row.Drug_Name %>"><%= row.Drug_Name %> : <%= row.Drug_Type %> </option>
+                          <%});%>
+                      </select>
+                      <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                  </div>
+              </div>
         
               <div class="form-group">
-                <label for="Blood Level(BP)">Drug Four Dosage</label>
-                <input type="text" name="Dosage_Four" id="Blood Level(BP)" />
-              </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                <label for="Temperature Level(TL)">Drug Five(Type & Name)</label>
-                    <input type="text" name="Drug_Five" id="Temperature Level(TL)" />
-                </div>
-        
-              <div class="form-group">
-                <label for="Blood Level(BP)">Drug Five Dosage</label>
-                <input type="text" name="Dosage_Five" id="Blood Level(BP)" />
+                <label for="Dosage_Five">Drug Five Dosage</label>
+                <input type="text" name="Dosage_Five" id="Dosage_Five" />
               </div>
           </div>
-                      
-          <button type="submit" class="btn btn-primary btn-block" >Add Treatment</button>
+          <%}else{%>   
+            THERE IS NO AVAILABLE DRUGS AT PHARMACY FOR NOW   
+            <% } %>
+          <button type="submit" class="btn btn-primary btn-block" id="submit" >Add Treatment</button>
          </form>
     </div>
    </div> 
@@ -111,9 +158,44 @@
       </div>
 
     </div>
+      
+    <script>
+  
+     var submit = document.getElementById('submit')
+      submit.addEventListener("click", (e)=>{
+          e.preventDefault();          
+           let Patients_Name =document.getElementById('Patients_Name').value
+           let Patient_ID =document.getElementById('Patient_ID').value
+           let Current_Date =document.getElementById('Current_Date').value
+           let Drug_One =document.getElementById('Drug_One').value
+           let Dosage_One =document.getElementById('Dosage_One').value
+           let Drug_Two =document.getElementById('Drug_Two').value
+           let Dosage_Two =document.getElementById('Dosage_Two').value
+           let Drug_Three =document.getElementById('Drug_Three').value
+           let Dosage_Three =document.getElementById('Dosage_Three').value
+           let Drug_Four =document.getElementById('Drug_Four').value
+           let Dosage_Four =document.getElementById('Dosage_Four').value
+           let Drug_Five = document.getElementById('Drug_Five').value
+           let Dosage_Five = document.getElementById('Dosage_Five').value
 
+           let Data = { Patients_Name:Patients_Name, Patient_ID:Patient_ID, Current_Date:Current_Date, Drug_One:Drug_One,Dosage_One:Dosage_One, Drug_Two:Drug_Two, Dosage_Two:Dosage_Two, Drug_Three:Drug_Three, Dosage_Three:Dosage_Three, Drug_Four:Drug_Four, Dosage_Four:Dosage_Four, Drug_Five:Drug_Five,Dosage_Five:Dosage_Five }
+           console.log(Data)
+         $.ajax({
+               type: 'POST',
+               url: '/dashboard/GetDrugs',
+               ContentType: 'application/json',
+               data: Data,             
+               success:  function(data){
+                window.location.reload();
+               }
+             }); 
+       })       
+       
+   </script>
     <!-- JS -->
+   
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
     <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

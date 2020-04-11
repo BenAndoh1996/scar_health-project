@@ -23,6 +23,7 @@
                 <span>01</span>Adult</div>
             </div>
           </div>
+          <div id="info"><%= MedReport %> </div>
           <%if(MedReport.length > 0){ %>
             <% MedReport.forEach(function(row){%>
           <div class="advance-search">
@@ -67,7 +68,7 @@
           <div class="form-row">
               <div class="form-group">
               <label for="father_name">Refering Physcian</label>
-                  <input type="text" name="Reffered" value="<%= row.Reffered %>" id="Patient  ID Number" required/>
+                  <input type="text" name="Reffered" value="<%= row.Doctor_Name %>" id="Patient  ID Number" required/>
               </div>
               </div>
             </div>
@@ -275,21 +276,21 @@
         <br>
         <div class="One_row">
           <div class="">
-            <h4>Any surgical treatment (if yes, Provide brief description)</h4>
+            <h5>Any surgical treatment (if yes, Provide brief description)</h5>
             <p><%= row.surgical %> </p>
           </div>
         </div>
         <br>
         <div class="One_row">
           <div class="">
-            <h4>Drugs Prescription</h4>
+            <h5>Drugs Prescription</h5>
             <p><%= row.Drugs %> </p>
           </div>
         </div>
         <br>
         <div class="One_row">
           <div class="">
-            <h4>Any other statement / Remarks</h4>
+            <h5>Any other statement / Remarks</h5>
             <p><%= row.Remarks %> </p>
           </div>
         </div>
@@ -304,43 +305,6 @@
     </div>
 
     <script src="../Assets/js/choices.js"></script>
-    <script>
-      const customSelects = document.querySelectorAll("select");
-      const deleteBtn = document.getElementById('delete')
-      const choices = new Choices('select',
-      {
-        searchEnabled: false,
-        removeItemButton: true,
-        itemSelectText: '',
-      });
-      for (let i = 0; i < customSelects.length; i++)
-      {
-        customSelects[i].addEventListener('addItem', function(event)
-        {
-          if (event.detail.value)
-          {
-            let parent = this.parentNode.parentNode
-            parent.classList.add('valid')
-            parent.classList.remove('invalid')
-          }
-          else
-          {
-            let parent = this.parentNode.parentNode
-            parent.classList.add('invalid')
-            parent.classList.remove('valid')
-          }
-        }, false);
-      }
-      deleteBtn.addEventListener("click", function(e)
-      {
-        e.preventDefault()
-        const deleteAll = document.querySelectorAll('.choices__button')
-        for (let i = 0; i < deleteAll.length; i++)
-        {
-          deleteAll[i].click();
-        }
-      });
-
-    </script>
+    
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

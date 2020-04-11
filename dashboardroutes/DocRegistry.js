@@ -11,24 +11,18 @@ const assert = require('assert');
 const doctor =require('../models/DocSchema')
 
 
-//Doctors login Handle
-router.get('/Vitals', function(req, res){
-    res.render('vitaltwo') 
-} );
+
+
 
 //Doctors Registration Handle
-router.get('/DocRegister', function(req, res){
-   res.render('docregister') 
-} );
-
 
 //register handle
 router.post('/DocRegister', function(req, res){
     
     let Hospital = req.user.Hospital
-    let UserName = req.user.UserName
+    let UserName = (req.user.UserName).replace(/\s/g,'')
     let Name = req.body.Name
-    let inputEmail = req.body.inputEmail
+    let inputEmail = (req.body.inputEmail).replace(/\s/g,'')
     let password = req.body.password;
     let confirmPassword = req.body.confirmPassword
     let String_Date = new Date().toLocaleDateString().split(",")[0]
@@ -142,8 +136,8 @@ router.post('/DocLogin', (req, res, next) => {
     })(req, res, next);
 });
 
-//var url = 'mongodb://localhost:27017/scarhealth';
-var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
+var url = 'mongodb://localhost:27017/scarhealth';
+//var url = 'mongodb+srv://ben:ben@cluster0-0vfl6.mongodb.net/scarhealth?retryWrites=true&w=majority'
 
 router.get('/RegisteredPatient', function(req, res, next){
     const Registered = []
@@ -166,6 +160,16 @@ router.get('/RegisteredPatient', function(req, res, next){
     });
     });
 });
+
+
+router.get('/Vitals:INFOSTRING', function(req, res){
+    const Total = []
+    let Info = req.params.INFOSTRING
+    let InFoJSON = JSON.parse(Info)
+    Total.push(InFoJSON)
+     console.log(Total)
+    res.render('vitaltwo',{Total:Total})
+})
 
 router.post('/PatientSearchPost', function(req, res,next){
 

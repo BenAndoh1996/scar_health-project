@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta http-equiv="refresh" content="30" >
+  
 
   <title>Doctors Dashboard</title>
 
@@ -116,46 +118,32 @@
         <!-- Area Chart Example-->
         <div class="card mb-3">
           <div class="card-header" >
-            <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <b>PATIENT'S FOLDER</b> 
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <a class="dropdown-item" href="/dashboard/MedicalForm"><b>Create New Medical Report</b></a>
-                <a class="dropdown-item" href="/dashboard/MedicalReport"><b>View Patient's Medical Report</b></a>      
-                <a class="dropdown-item" href="/dashboard/DocSearchLab"><b>View Previous Lab Report</b></a>  
-                <a class="dropdown-item" href="/dashboard/Prescriptions"><b>Add Medications</b></a>  
-              </div>
-            </div>
+            
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <b>LABORATORY</b> 
                   </button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="/dashboard/LabRequest"><b>Request New Lab</b>   </a>
-                    <a class="dropdown-item" href="/dashboard/DocLabList"><b>View Requested Lab</b></a>
+                    <a class="dropdown-item" href="/dashboard/DocRequestList"><b>View all Requested Lab</b>   </a>
+                    <a class="dropdown-item" href="/dashboard/DocLabList"><b>View Done/Completed Request</b></a>
                   </div>
                 </div>
-            <a href="/dashboard/PatientList" class="btn btn-info btn-sm active" role="button" aria-pressed="true">  <b>VIEW PATIENTS LIST</b> </a>
+            <a href="/dashboard/PatientList" class="btn btn-info btn-sm active" role="button" aria-pressed="true">  <b>PATIENT FOLDER</b> </a>
               <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <b>APPOINMENTS</b>   
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                   <a class="dropdown-item" href="/dashboard/Appointment"><b>Make A New Apointment</b></a>
-                  <a class="dropdown-item" href="/dashboard/AppointList"><b>View Appoint List</b></a>
+                  <a class="dropdown-item" href="/dashboard/AppointList"><b>View Appointment List</b></a>
                   
                 </div>
               </div>
+              <a href="/dashboard/MedicalUpdate" class="btn btn-info btn lg" role="button" aria-pressed="true"><b>MEDFORM UPDATE</b></a>
               <a href="/dashboard/Billing" class="btn btn-danger btn-sm active" role="button" aria-pressed="true"><b>HOSPITAL BILLINGS</b></a>
+              <a href="/dashboard/RegisteredPatient" class="btn btn-info btn-sm active" role="button" aria-pressed="true">  <b>PATIENT LIST</b> </a>
            </div>     
            </div>
-    
-
-            
-            
- 
-            
         
  <div class="card mb-3">
           <div class="card-header">
@@ -171,17 +159,36 @@
                     <th> Age</th>  
                     <th> Height</th>
                     <th> Temperature</th>
-                    <th>Blood Level</th>
-                    <th>Body Weight</th>
-                    <th>Sugar Level</th>
-                    <th>Pulse Rate</th>        
-                    
+                    <th>Blood_Level</th>
+                    <th>Body_Weight</th>
+                    <th>Sugar_Level</th>
+                    <th>Pulse_Rate</th>        
+                    <th>Report ID</th>  
                   </tr>
                 </thead>
                 
               
                   <tbody>
-                    <% include ./partials/vital %>
+                    <%if(Vitals.length > 0){ %>
+                      <% Vitals.forEach(function(row){%>
+                        <tr>
+                            <td><%= row.Patients_Name %></td>
+                            <td><%= row.Patient_ID %></td>
+                            <td><%= row.Age %></td>
+                            <td><%= row.Height %></td>
+                            <td><%= row.Temperature %></td>
+                            <td><%= row.Blood_Level%></td>
+                            <td><%= row.Body_Weight%></td>
+                            <td><%= row.Sugar_Level %></td>
+                            <td><%= row.Pulse_Rate %></td>
+                            <td><%= row._id %></td>
+                      </tr>
+                      <%});%>
+                    <%}else{%>
+                          <tr>
+                              <td colspan="6"> No Record Found </td>
+                          </tr>
+                      <% } %>
                   </tbody>
               </table>
             </div>
@@ -242,17 +249,12 @@
             var c = confirm('Do You Want Delete This Row?');
             if(c === true){
                 index = this.parentElement.rowIndex;
-             
-             var Name = this.cells[0].innerHTML;
-              var ID = this.cells[1].innerHTML;
+              var ID = (this.cells[9].innerHTML).replace(/\s/g,'');
               console.log(ID);
-              console.log (Name);
-             
-
+            
               $.ajax({
                 type: 'DELETE',
                 url: '/dashboard/delete/'+ ID,
-                Name,
                 success:  function(data){
                   location.reload();
                   

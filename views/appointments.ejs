@@ -11,6 +11,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
 </head>
 <body>
 
@@ -21,44 +22,48 @@
                
                 </div>
                 <div class="signup-form"> 
-                    <form action="/dashboard/Appointment" method="POST" class="register-form" id="register-form">
+                    <form action="" method="" class="register-form" id="register-form">
                       
                         <h2> Doctor - Patient Appointment Form</h2>
                         <% include ./partials/messages %>
+                        <%if(Info.length > 0){ %>
+                            <% Info.forEach(function(row){%>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="Patients Full Name">DOctor's UserName</label>
-                                <input type="text" name="Doctor_UserName" placeholder="Doctor's Name" id="Patients Full Name" required/>
+                                <label for="Doctor_UserName">DOctor's UserName</label>
+                                <input type="text" value="<%= userName%>" name="Doctor_UserName" placeholder="Doctor's Name" id="Doctor_UserName" required/>
                             </div>
                             
                             <div class="form-group">
-                                <label for="Folder(ID)">Patient Name</label>
-                                    <input type="text" name="patient_name" id="Folder(ID)" required/>
+                                <label for="patient_name">Patient Name</label>
+                                    <input type="text" value="<%= row.Name %>" name="patient_name" id="patient_name" required/>
                              </div>
                       </div>
                        <div class="form-row">
                             <div class="form-group">
-                            <label for="Temperature Level(TL)">Patient ID..... </label>
-                                <input type="text" name="patient_ID" id="Temperature Level(TL)" required/>
+                            <label for="patient_ID">LPatient ID..... </label>
+                                <input type="text" value="<%= row.patientID %>" name="patient_ID" id="patient_ID" required/>
                             </div>
                     
                         <div class="form-group">
-                            <label for="Blood Level(BP)"> Appointment Date </label>
-                            <input type="date" name="Appointment_Date" id="Blood Level(BP)" required/>
+                            <label for="Appointment_Date"> Appointment Date </label>
+                            <input type="date" name="Appointment_Date" id="Appointment_Date" required/>
                         </div>
                     </div>
                         
                          <div class="form-group">
-                            <label for="Body Weight(BM)">Purpose Of The Appointment</label>
-                            <input type="text" name="Purpose" id="Body Weight(BM)" required/>
+                            <label for="Purpose">Purpose Of The Appointment</label>
+                            <input type="text" name="Purpose" id="Purpose" required/>
                         </div>
                          
                         <div class="form-group">
-                            <label for="Body Weight(BM)">Contact Of Patient</label>
-                            <input type="text" name="Contact" id="Body Weight(BM)" required/>
+                            <label for="Contact">Contact Of Patient</label>
+                            <input type="text" value="<%= row.Telephone %>" name="Contact" id="Contact" required/>
                         </div>
-                        
-                        
+                        <%});%>
+                        <%}else{%>\
+                            NO PATIENT HAVE BEEN SELECTED
+                            <% } %>
                     
                         
                         <div class="form-submit">
@@ -71,8 +76,41 @@
         </div>
 
     </div>
+
+    <script>
+  
+        $('#Hide').hide()
+       var submit = document.getElementById('submit')
+        submit.addEventListener("click", (e)=>{
+            e.preventDefault();          
+             let patient_name =document.getElementById('patient_name').value
+             let patient_ID =document.getElementById('patient_ID').value
+             let Appointment_Date =document.getElementById('Appointment_Date').value
+             let Purpose =document.getElementById('Purpose').value
+             let Contact =document.getElementById('Contact').value
+             let Doctor_UserName =document.getElementById('Doctor_UserName').value
+          
+             let Data = { patient_name:patient_name, patient_ID:patient_ID, Appointment_Date:Appointment_Date, Purpose:Purpose,Contact:Contact, Doctor_UserName:Doctor_UserName}
+             console.log(Data)
+           $.ajax({
+                 type: 'POST',
+                 url: '/dashboard/Appointment',
+                 ContentType: 'application/json',
+                 data: Data,             
+                 success:  function(data){
+                  window.location.reload();
+            
+                 }
+               }); 
+         })
+     
+             
+         
+     </script>
     <!-- JS -->
+   
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
     <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

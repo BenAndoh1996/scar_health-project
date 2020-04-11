@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Scar-Health/Patient list</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="index.html">SCAR-HEALTH</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for ID..." aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell fa-fw"></i>
+          <span class="badge badge-danger"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+        </div>
+      </li>
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-envelope fa-fw"></i>
+          <span class="badge badge-danger"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+        </div>
+      </li>
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-circle fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard">
+          <i class="fas fa-fw fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+     
+      <li class="nav-item active">
+        <a class="nav-link" href="/users/logout">
+          <i class="fas fa-fw fa-bell"></i>
+          <span>LogOut</span></a>
+      </li>
+    </ul>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active"> Patients Database list</li>
+          
+        </ol>
+
+        <!-- DataTables  Content -->
+        <div class="card mb-3">
+
+          <div class="card-header">
+            <i class="fas fa-user"></i>
+            Patients Database List  
+            <a href="/dashboard/LabRequest" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Request New Lab</a>
+           </div>      
+           </div>
+
+
+
+           <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover"  id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Doctor's Name</th>
+                    <th>Doctor UserName </th>
+                    <th>Requested for</th>
+                    <th> Requested for(ID)</th>
+                    <th>Date</th>
+                    <th>Sample No</th>
+                    <th>Type  Of  Lab</th>        
+                    <th>Unique Activity Id</th>
+                    <th>Action Tab</th>
+                  </tr>
+                 
+                </thead>
+              
+                <tbody>
+                    <%if(ViewArray.length > 0){ %>
+                        <% ViewArray.forEach(function(row){%>
+                          <tr>
+                            <td><%= row.Doctor_Name %></td>
+                            <td><%= row.Doctor_UserName %></td>
+                            <td><%= row.patient_name %></td>
+                            <td><%= row.Patient_ID %></td>
+                            <td><%= row.String_Date %></td>
+                            <td><%= row.Sample_ID %></td>
+                            <td><%= row.Lab_Type %></td> 
+                            <td><%= row._id %></td>
+                            <td >
+                              <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal"><b>Add </b></button>
+                          </td>
+                         </tr>
+                        <%});%>
+                      <%}else{%>
+                            <tr>
+                                <td colspan="6"> No Record Found </td>
+                            </tr>
+                        <% } %>
+                </tbody>
+
+                </table>
+            </div>
+          </div>
+
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                      
+                        <div class="modal-body">
+                           
+                               <div class="signup-form"> 
+                    <form action="/dashboard/LabBrief" method="POST" class="register-form" id="register-form">
+                        <% include ./partials/messages %>
+                        <p> <strong>The Uploaded File Id Is : <%= LabID%> </strong> </p>
+                        
+                        <h2>UPLOAD NEW LAB FORM</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Patients Full Name">Patients Full Name</label>
+                                <input type="text" name="Patients_Name" id="Patients_Name" required/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Folder">Patient (ID)</label>
+                                    <input type="text" name="Patient_ID" id="Patient_ID" required/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group">
+                            <label for="Temperature Level(TL)">Hospital UserName</label>
+                                <input type="text" value=" <%= UserName%> " name="Hospital_username" id="Hospital_username" required/>
+                            </div>
+                    
+                        <div class="form-group">
+                            <label for="Blood Level(BP)">The Laboratory Name</label>
+                            <input type="text" value=" <%= Hospital%> "  name="Lab_name" id="Lab_name" required/>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                         <div class="form-group">
+                            <label for="Doctor_UserName">The Doctor Username</label>
+                            <input type="text" size="30" name="Doctor_UserName" id="Doctor_UserName" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Lab_ID">Lab ID</label>
+                            <input type="text" size="40" value="<%= LabID%>" name="Lab_ID" id="Lab_ID" required/>
+                        </div>
+                    </div>
+                        
+                          <div class="form-group">
+                           <label for="Lab_Type">Lab Type</label>
+                          <input type="text" name="Lab_Type" id="Lab_Type" required/>
+                       </div>
+
+                       <div class="form-group">
+                        <label for="Unique">ActivityID</label>
+                       <input type="text" size="30" name="Unique" id="Unique" required/>
+                      </div>
+
+
+                       <div class="form-group">
+                        <label for="comment">Lab Description(If Needed)</label>
+                        <textarea class="form-control" rows="2" cols="60" name="Description" id="comment" > </textarea>
+                      </div>
+
+                     
+                        
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Add File To Database" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+
+        <p class="small text-center text-muted my-5">
+          <em>More table examples coming soon...</em>
+        </p>
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © SCAR-HEALTH 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+     
+      
+    var index, table = document.getElementById('dataTable');
+    var Patients_Name = document.getElementById('Patients_Name')
+    var Patient_ID = document.getElementById('Patient_ID')
+    var Doctor_UserName = document.getElementById('Doctor_UserName')
+    var Lab_Type = document.getElementById('Lab_Type')
+    var Unique = document.getElementById('Unique')
+ 
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].onclick= function(){
+            index = this.parentElement.rowIndex;
+             var doctor =  (this.cells[0].innerHTML);
+            var UserName = (this.cells[1].innerHTML).replace(/\s/g, '');
+            var Name = (this.cells[2].innerHTML);
+             var PatientId = (this.cells[3].innerHTML).replace(/\s/g, '');
+           var  labtype = (this.cells[6].innerHTML);
+             var ID = (this.cells[7].innerHTML).replace(/\s/g, '');
+                
+            Patients_Name.value = Name;
+            Patient_ID.value = PatientId;
+            Doctor_UserName.value = UserName;
+            Lab_Type.value =labtype;
+            Unique.value = ID;
+   };
+}
+
+</script>
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../Assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../Assets/js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="../Assets/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

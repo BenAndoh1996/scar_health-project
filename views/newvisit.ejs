@@ -176,7 +176,30 @@
       </div>
     </div>
   </div>
+   
 
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var receiptlink = document.getElementById('receiptlink')
+    var deletelink = document.getElementById('deletelink')
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].onclick= function(){
+          index = this.parentElement.rowIndex; 
+             var Identity= (this.cells[1].innerHTML).replace(/\s/g,'');
+             var Name= this.cells[0].innerHTML
+             var obj= {ID:Identity, Name:Name }
+             var ID = JSON.stringify(obj)
+            var c = confirm('Do YOU WANT TO VIEW THIS?')
+            if(c === true){  
+              console.log(ID)
+            window.document.location = '/dashboard/VisitDetails'+ ID    
+   };
+  }
+}
+
+</script>
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

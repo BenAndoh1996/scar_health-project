@@ -1,6 +1,7 @@
 <%if(ViewArray.length > 0){ %>
     <% ViewArray.forEach(function(row){%>
       <tr>
+        <td><%= row.Status %></td>
         <td><%= row.Doctor_Name %></td>
         <td><%= row.Doctor_UserName %></td>
         <td><%= row.patient_name %></td>
@@ -8,11 +9,9 @@
         <td><%= row.String_Date %></td>
         <td><%= row.Sample_ID %></td>
         <td><%= row.Lab_Type %></td> 
-        <td><%= row.Description %></td>
+        <td><%= row.Description %></td>  
         <td><%= row._id %></td>
-
-
-      </tr>
+     </tr>
     <%});%>
   <%}else{%>
         <tr>

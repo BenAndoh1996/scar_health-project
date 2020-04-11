@@ -32,14 +32,14 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="Hospital Name" required="required" name="Hospital" autofocus="autofocus" >
+                  <input type="text" id="firstName" value="<%= Hospital%> " class="form-control" placeholder="Hospital Name" required="required" name="Hospital" autofocus="autofocus" >
                   <label for="firstName">Hospital Name</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Hospital UserName" name="UserName" >
-                  <label for="lastName">Hospital Username</label>
+                  <input type="text" id="lastName" class="form-control" placeholder="Hospital UserName" name="UserDepartment" >
+                  <label for="lastName">Department Of User</label>
                 </div>
               </div>
             </div>
@@ -90,13 +90,29 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" >Register</button>
+          <button type="submit" id="Submit" class="btn btn-primary btn-block" >Register</button>
         </form>
         <div class="text-center">    
         </div>
       </div>
     </div>
-  </div>
+  </div> 
+
+  <script>
+        var submit = document.getElementById('Submit')
+        submit.onclick = function(){
+          $.ajax({
+                type: 'POST',
+                url: '/user/register/',
+                success:  function(){
+                window.location.reload();
+                  
+                }
+              });
+        }
+
+        
+  </script>
       <!--personal javascript-->
       <script src="../Assets/js/my-validation.js"></script>
   <!-- Bootstrap core JavaScript-->

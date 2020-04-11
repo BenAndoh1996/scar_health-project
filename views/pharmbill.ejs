@@ -28,18 +28,25 @@
                         <div class="form-row">
                             <div class="form-group">
                             <label for="Temperature Level(TL)">Month Of The Year</label>
-                                <input type="month" name="Month" id="Temperature Level(TL)" required/>
+                                <input type="month" size="10" name="Month" id="Temperature Level(TL)" required/>
                             </div>
                     
                           <div class="form-group">
                             <label for="Blood Level(BP)">Current Date</label>
-                            <input type="date" name="Current_Date" id="Blood Level(BP)" required/>
-                          </div>
+                            <input type="date" size="10" name="Current_Date" id="Blood Level(BP)" required/>
+                          </div>                       
                          </div> 
-                         
+                         <%if(Info.length > 0){ %>
+                          <% Info.forEach(function(row){%>
+
+                            <div class="form-group">
+                              <label for="Temperature Level(TL)">Patient ID</label>
+                                  <input type="text" value="<%= row.PatientId%>"  name="Patient_ID" id="Temperature Level(TL)" />
+                              </div>
+
                         <div class="form-group">
                             <label for="Current Date">Drug Name</label>
-                            <input type="text" name="Drug_One" id="Current" required/>
+                            <input type="text" value="<%= row.drugone%>" name="Drug_One" id="Current" required/>
                           </div>
 
                           <div class="form-row">
@@ -53,10 +60,10 @@
                                    <input type="number" name="Amount_One" id="Folder(ID)" required/>
                               </div>
                           </div>
-                        
+                         
                           <div class="form-group">
                             <label for="Current Date">Drug Name</label>
-                            <input type="text" name="Drug_Two" id="Current" />
+                            <input type="text" value="<%= row.drugtwo%>" name="Drug_Two" id="Current" />
                           </div>
 
                            <div class="form-row">
@@ -73,23 +80,23 @@
           
                                <div class="form-group">
                                  <label for="Current Date">Drug Name</label>
-                                 <input type="text" name="Drug_Three" id="Current"/>
+                                 <input type="text" value="<%= row.drugthree%>" name="Drug_Three" id="Current"/>
                                </div>
           
                               <div class="form-row">
                                 <div class="form-group">
                                 <label for="Temperature Level(TL)">Quantity</label>
-                                    <input type="number" name="Quantity_Three" id="Temperature Level(TL)" />
+                                    <input type="number"  name="Quantity_Three" id="Temperature Level(TL)" />
                                 </div>
                         
                               <div class="form-group">
                                 <label for="Blood Level(BP)">Amount</label>
-                                <input type="number" name="Amount_Three" id="Blood Level(BP)" />
+                                <input type="number"  name="Amount_Three" id="Blood Level(BP)" />
                               </div>
                              </div>  
                              <div class="form-group">
                                 <label for="Current Date">Drug Name</label>
-                                <input type="text" name="Drug_Four" id="Current" />
+                                <input type="text" value="<%= row.drugfour%>" name="Drug_Four" id="Current" />
                               </div>
 
                               <div class="form-row">
@@ -105,7 +112,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="Current Date">Drug Name</label>
-                                <input type="text" name="Drug_Five" id="Current" />
+                                <input type="text" value="<%= row.drugfive %>" name="Drug_Five" id="Current" />
                               </div>
 
                               <div class="form-row">
@@ -119,6 +126,10 @@
                                 <input type="number" name="Amount_Five" id="Blood Level(BP)" />
                               </div>
                               </div>
+                              <%});%>
+                              <%}else{%>  
+                                YOU HAVE NOT SELECTED OF DRUGS TO INITIATE SALES   
+                                <% } %>
                               <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
                             </form>
                 </div>

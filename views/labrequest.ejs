@@ -11,6 +11,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
 </head>
 <body>
 
@@ -21,54 +22,59 @@
                
                 </div>
                 <div class="signup-form"> 
-                    <form action="/dashboard/LabRequest" method="POST" class="register-form" id="register-form">
+                    <form action="" method="" class="register-form" id="register-form">
                       
                         <h2> Lab Request Form</h2>
                         <% include ./partials/messages %>
+                        <%if(Total.length > 0){ %>
+                            <% Total.forEach(function(row){%>
                         <div class="form-group">
                             <label for="Patients Full Name">Hospital UserName</label>
-                            <input type="text" name="Hospital_UserName" placeholder="" id="Patients Full Name" required/>
+                            <input type="text" value="<%= Hospital %>" name="Hospital_UserName" placeholder="" id="Hospital_UserName" required/>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="Patients Full Name">Doctor's Name</label>
-                                <input type="text" name="Doctor_Name" placeholder="Doctor's Name" id="Patients Full Name" required/>
+                                <input type="text" value="<%= Doctor %>" name="Doctor_Name" placeholder="Doctor's Name" id="Doctor_Name" required/>
                             </div>
                             
                             <div class="form-group">
                                 <label for="Folder(ID)">Doctor UserName </label>
-                                    <input type="text" name="Doctor_UserName" id="Folder(ID)" required/>
+                                    <input type="text" value="<%= UserName %>" name="Doctor_UserName" id="Doctor_UserName" required/>
                              </div>
                             </div>
                             <div class="form-row">
                             <div class="form-group">
                             <label for="Temperature Level(TL)">Requested for..... </label>
-                                <input type="text" name="patient_name" id="patient_name" required/>
+                                <input type="text" value="<%= row.Name %>" name="patient_name" id="patient_name" required/>
                             </div>
                     
                         <div class="form-group">
-                            <label for="Blood Level(BP)"> Patient (ID).....</label>
-                            <input type="text" name="Patient_ID" id="Blood Level(BP)" required/>
+                            <label for="Patient_ID"> Patient (ID).....</label>
+                            <input type="text" value="<%= row.patientID %>" name="Patient_ID" id="Patient_ID" required/>
                         </div>
                     </div>
                         
                     <div class="form-row">
                         <div class="form-group">
                             <label for="Blood Level(BP)"> Sample No.....</label>
-                            <input type="text" name="Sample_ID" id="Blood Level(BP)" required/>
+                            <input type="text" name="Sample_ID" id="Sample_ID" required/>
                         </div>
                         <div class="form-group">
                             <label for="Body Weight(BM)">Type  Of  Lab</label>
-                            <input type="text" name="Lab_Type" id="Body Weight(BM)" required/>
+                            <input type="text" name="Lab_Type" id="Lab_Type" required/>
                         </div>
                     </div>
                         <div class="form-group">
                             <label for="Sugar Level(SL)">Lab Description</label>
-                            <input type="text" name="Description" id="Sugar Level(SL)" required/>
+                            <input type="text" name="Description" id="Description" required/>
                         </div>
                     
-                        
+                        <%});%>
+                        <%}else{%>
+                          <p>WE HAVE NOT SELECTED ANY PATIENT TO REQUEST LAB FOR</p>
+                          <% } %>
                         <div class="form-submit">
                             <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
                             <input type="submit" value="Create Folder" class="submit" name="submit" id="submit" />
@@ -79,9 +85,43 @@
         </div>
 
     </div>
-
+    <script>
+  
+        $('#Hide').hide()
+       var submit = document.getElementById('submit')
+        submit.addEventListener("click", (e)=>{
+            e.preventDefault();          
+             let patient_name =document.getElementById('patient_name').value
+             let Patient_ID =document.getElementById('Patient_ID').value
+             let Sample_ID =document.getElementById('Sample_ID').value
+             let Lab_Type =document.getElementById('Lab_Type').value
+             let Description =document.getElementById('Description').value
+             let Doctor_UserName =document.getElementById('Doctor_UserName').value
+             let Doctor_Name =document.getElementById('Doctor_Name').value
+           
+ 
+             let Data = { patient_name:patient_name, Patient_ID:Patient_ID, Sample_ID:Sample_ID, Lab_Type:Lab_Type,Description:Description, Doctor_UserName:Doctor_UserName, Doctor_Name:Doctor_Name }
+             console.log(Data)
+           $.ajax({
+                 type: 'POST',
+                 url: '/dashboard/LabRequest',
+                 ContentType: 'application/json',
+                 data: Data,             
+                 success:  function(data){
+                  window.location.reload();
+                 $('#Hide').show()
+                 $("#message").append("You Have Successfully submited the form and has been sent to the consulting doctor")
+     
+                 }
+               }); 
+         })
+     
+             
+         
+     </script>
     <!-- JS -->
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
     <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

@@ -8,57 +8,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+   
   <title>Scar-Health/Patient list</title>
 
   <!-- Custom fonts for this template-->
- <!-- Custom fonts for this template-->
- <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
- <!-- Page level plugin CSS-->
- <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Page level plugin CSS-->
+  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
- <!-- Custom styles for this template-->
- <link href="../Assets/css/sb-admin.css" rel="stylesheet">
-
+  <!-- Custom styles for this template-->
+  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="../Assets/css/andoh.css">
 </head>
 
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">SCAR-HEALTH</a>
+    <a class="navbar-brand mr-1" href="">SCAR-HEALTH</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Monthregister">
-      <div class="input-group">
-        <input type="month" class="form-control" placeholder="Search for ID..." name="search" aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-       
-    
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Dayregister">
-      <div class="input-group">
-        <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Navbar -->
   </nav>
 
   <div id="wrapper">
@@ -71,7 +43,6 @@
           <span>Dashboard</span>
         </a>
       </li>
-    
       <li class="nav-item active">
         <a class="nav-link" href="/users/logout">
           <i class="fas fa-fw fa-bell"></i>
@@ -85,73 +56,111 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active"> Patients Database list</li>
-          
+        
+          <div class="mySearch-group">
+            <div class="my-searchOne">
+              Monthly Check Search
+               <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Monthregister">
+                <div class="input-group">
+                  <input type="month" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+              </form>
+             </div>
+            <!-- Navbar Search -->
+             <div class="my-search">
+               Daily Check Search 
+                <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" method="POST" action="/dashboard/Dayregister">
+                    <div class="input-group">
+                      <input type="date" class="form-control" placeholder="Search for ID..." name="search"  aria-label="search" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
         </ol>
 
         <!-- DataTables  Content -->
-        <div class="card mb-3">
+        <div class="">   
+          
 
-          <div class="card-header">
-            <i class="fas fa-user"></i>
-            Patients Database List  
-            <a href="/dashboard/Patientregister" class="btn btn-success btn-sm active"  role="button" aria-pressed="true">Add New Patient</a>
-           </div>      
-           </div>
-           <h5>The List Of Patient Registered By The Hospital And Are still Customers Of The Hospital</h5>
+           <h4 style="text-align: center;"> <b>List of registered patients of the hospital and are still users of the facility</b> </h4>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-hover " id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Full Name</th>
-                    <th>Date Of Registration</th>
                     <th> Patient ID Number</th>
-                    <th> Patient Insurance ID</th>
+                    <th> Patient's Address</th>
                     <th>Telephone</th>
                     <th>Age</th>
-                    <th>Gender</th>
-                    <th>Marital Status</th>
-                    <th>Religion</th>
-                    <th>Date of Birth</th>
-                    <th>Occupation</th>
-                    <th>Next of King/Name</th>
-                    <th>Next of King/Number</th>
+                    <th>Date Of Birth</th>
+                    <th>Take Action</th>
+                     
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Full Name</th>
-                    <th>Date Of Registration</th>
-                    <th> Patient ID Number</th>
-                    <th> Patient Insurance ID</th>
-                    <th>Telephone</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Marital Status</th>
-                    <th>Religion</th>
-                    <th>Date of Birth</th>
-                    <th>Occupation</th>
-                    <th>Next of King/Name</th>
-                    <th>Next of King/Number</th>
-                  </tr>
-                </tfoot>
+                
                 <tbody>
-                  <% include ./partials/patient %>
+                    <%if(Patients.length > 0){ %>
+                        <% Patients.forEach(function(row){%>
+                          <tr>
+                            <td><%= row.Full_Name %></td>
+                            <td><%= row.Patient_ID_Number %></td>
+                            <td><%= row.Address  %></td>
+                            <td><%= row.Telephone %></td>
+                            <td><%= row.Age %></td>
+                            <td><%= row.birth_date %></td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal">Action</button>
+                            </td>
+                            
+                        <%});%>
+                      <%}else{%>
+                            <tr>
+                                <td colspan="6"> No Record Found </td>
+                            </tr>
+                        <% } %>
                 </tbody>
               </table>
             </div>
           </div>
-          
+        </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 
-    
-
-      </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                      
+                        <div class="modal-body">
+                          <h4 style="color: darkred;"><b>WHAT DO YOU WANT TO DO ?</b></h4> <br>
+                      
+                          <div id="createlink"> <p><b> 1. CREATE NEW MEDICAL RECORDS FOR PATIENT</b></p></div>
+                          <div id="requestlink"> <p><b>2. REQUEST NEW LAB FOR PATIENT</a></b></div>
+                            <div id="medlink"> <p><b>3. VIEW PREVIOUS MEDICAL RECORDS OF PATIENT</a></b></div>
+                              <div id="lablink"> <p><b>4. VIEW PREVIOUS LAB RECORDS OF PATIENT</a></b></div>
+                               <div id="appiontmentlink"> <p><b>5. SCHEDULE AND APPOINTMENT </a></b></div>
+                               <div id="billlink"> <p><b>6. TAKE BILLS FOR THIS PATIENT</b></div> 
+                                <div id="druglink"> <p><b>6. PRESCRIBE MEDICATION FOR THIS PATIENT</b></div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
       <!-- /.container-fluid -->
 
       <!-- Sticky Footer -->
@@ -192,7 +201,119 @@
       </div>
     </div>
   </div>
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var tablelike = document.getElementById('tablelike')
 
+    var createlink = document.getElementById('createlink');
+    var requestlink = document.getElementById('requestlink')
+    var medlink = document.getElementById('medlink');
+    var lablink = document.getElementById('lablink')
+    var appiontmentlink = document.getElementById('appiontmentlink');
+    var billlink = document.getElementById('billlink')
+    var druglink = document.getElementById('druglink')
+    
+     for(var i = 1; i < table.rows.length; i++){
+        var patientName, patientID
+        table.rows[i].onclick= function(){
+            index = this.parentElement.rowIndex;
+             
+              patientName = this.cells[0].innerHTML;
+              patientID = this.cells[1].innerHTML; 
+            };
+
+        table.rows[i].onclick =function(){
+
+          index = this.parentElement.rowIndex;
+              var  Name = this.cells[0].innerHTML;
+              var  PatientId= this.cells[1].innerHTML; 
+              var  Address = this.cells[2].innerHTML;
+              var   birthdate= this.cells[5].innerHTML; 
+              var  Telephone = this.cells[3].innerHTML;
+              var   PatientAge= this.cells[4].innerHTML; 
+              var date = birthdate.replace(/\//g, "-")
+              console.log(date)
+              
+              createlink.onclick =function(){
+                var c = confirm('Do you want create new medical for this patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/MedicalForm'+ Infostring
+                 }
+              };
+             
+              requestlink.onclick =function(){
+                var c = confirm('Do you want create new request new lab for this patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/LabRequest'+ Infostring
+                 }
+              }
+              
+              requestlink.onclick =function(){
+                var c = confirm('Do you want create new request new lab for this patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/LabRequest'+ Infostring
+                 }
+              }
+
+              medlink.onclick =function(){
+                var c = confirm('Do you want create View Medical Records Of this patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/MedicalReport'+ Infostring
+                 }
+              }
+
+              lablink.onclick =function(){
+                var c = confirm('Do you want create View Laboratory Records Of this patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/LabRecord'+ Infostring
+                 }
+              }
+
+              appiontmentlink.onclick =function(){
+                var c = confirm('Do you want Schedule Appointment with this Patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/Appointment'+ Infostring
+                 }
+              }
+
+              billlink.onclick =function(){
+                var c = confirm('Do you want Enter Bills for this Patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/DocBilling'+ Infostring
+                 }
+              }
+
+              druglink.onclick =function(){
+                var c = confirm('Do you want Prescribe Medication for this Patient?');
+                if(c === true){
+                  var INFO = {Name:Name, patientID:PatientId,Address:Address,PatientAge:PatientAge, Telephone:Telephone,birthdate:date}
+                   Infostring = JSON.stringify(INFO)
+                  window.document.location = '/dashboard/Prescriptions'+ Infostring
+                 }
+              }
+
+        }
+}  
+</script>
+
+
+  <!-- Bootstrap core JavaScript-->
+  
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -209,6 +330,9 @@
 
   <!-- Demo scripts for this page-->
   <script src="../Assets/js/demo/datatables-demo.js"></script>
+
+</body>
+  
 
 </body>
 

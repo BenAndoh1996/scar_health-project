@@ -200,7 +200,31 @@
       </div>
     </div>
   </div>
+   
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var hidform = document.getElementById('hid_form')
+     for(var i = 1; i < table.rows.length; i++){
 
+        table.rows[i].onclick= function(){
+            var c = confirm('Do You Want View This Laboratory Record?');
+            if(c === true){
+                index = this.parentElement.rowIndex;
+             
+             var PatientId = this.cells[1].innerHTML;
+              var reportID = this.cells[3].innerHTML;
+              console.log(reportID);
+              console.log (PatientId);
+
+              window.document.location = '/dashboard/SearchLab'+ reportID
+        
+            }
+            
+   };
+}
+
+</script>
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>
   <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -24,16 +24,17 @@
                     <form action="/dashboard/LabBillPost" method="POST" class="register-form" id="register-form">
                         <% include ./partials/messages %>
                         <h2>Hospital Billing Form</h2>
-
+                        <%if(Info.length > 0){ %>
+                          <% Info.forEach(function(row){%>  
                           <div class="form-row">
                             <div class="form-group">
                                  <label for="Patients Full Name">Patients Full Name</label>
-                                   <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                                   <input type="text" value="<%= row.Name %>" name="Patients_Name" id="Patients Full Name" required/>
                             </div>
                                   
                                   <div class="form-group">
                                    <label for="Folder(ID)">Patient (ID)</label>
-                                   <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                   <input type="text" value="<%= row.patientID %>" name="Patient_ID" id="Folder(ID)" required/>
                               </div>
                           </div>
         
@@ -72,7 +73,8 @@
                                 <input type="text" name="Purpose_Two" id="Blood Level(BP)" />
                               </div>
                               </div>
-
+                              <%});%>
+                              <%} %>
                              
                               <button type="submit" class="btn btn-primary btn-block" >Add Bill</button>
                             </form>

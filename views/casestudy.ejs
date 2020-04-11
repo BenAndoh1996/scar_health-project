@@ -1,300 +1,308 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Scar-Health/Patient list</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="../Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Page level plugin CSS-->
-  <link href="../Assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="../Assets/css/sb-admin.css" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="index.html">SCAR-HEALTH</a>
-
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for ID..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        </div>
-      </li>
-    </ul>
-
-  </nav>
-
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-home"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Patients</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-stethoscope"></i>
-          <span>Doctors</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-tools"></i>
-          <span>Laboratory</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-heartbeat"></i>
-          <span>Pharmary</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Administrator</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-bell"></i>
-          <span>LogOut</span></a>
-      </li>
-    </ul>
-
-    <div id="content-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active"> Patients Database list</li>
-          
-        </ol>
-
-        <!-- DataTables  Content -->
-        <div class="card mb-3">
-
-          <div class="card-header">
-            <i class="fas fa-user"></i>
-            Patients Database List  
-           <button type="button" class="btn-sm active btn-primary">Add new Patient</button>
-            <button type="button" class="btn-sm active btn-danger">Delete Patient</button>
-            <button type="button" class="btn-sm active btn-dark">Request Doctors Appointment</button>
-            
-           </div>      
-           </div>
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <% include ./partials/cases %>
-            </table>
-            </div>
-            <div class="container">
-                <div class="card card-register mx-auto mt-5">
-                  <div class="card-header">PATIENT CASE PERFORMANCE FORM (ADMITTED PATIENT ONLY)</div>
-                  
-                  <div class="card-body">
-                    <% include ./partials/messages %>
-                    <form  id="myForms" method="post" action="/dashboard/IPDForm" >
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="firstName" class="form-control" placeholder="Patient Name" required="required" name="Patients_Name" autofocus="autofocus" >
-                              <label for="firstName">Patients Full Name</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="lastName" class="form-control" placeholder="Patient ID" name="Patient_ID" required="required" >
-                              <label for="lastName">Patient (ID)</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                        <div class="form-label-group">
-                          <input type="text" id="inputEmail" class="form-control" placeholder="Temperature" name="Temperature" >
-                          <label for="inputEmail">Temperature Level(TL)</label>
-                        </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="password" class="form-control" placeholder=" Sugar_Level  " name="Blood_Level"  >
-                              <label for="password">Blood Level(BP)</label>
-                            </div>
-                          </div>
-                      </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="inputPassword" class="form-control" placeholder=" Sugar_Level  " name="Sugar_Level"  >
-                              <label for="inputPassword">Sugar Level(SL)</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-label-group">
-                              <input type="text" id="confirmPassword" class="form-control" placeholder="Pulse_Rate" name="Pulse_Rate"  >
-                              <label for="confirmPassword">Pulse Rate(BP/mm)</label>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="form-group">
-                        <label for="comment">Patient Current State</label>
-                        <textarea class="form-control" rows="4" cols="40" name="Current_State" id="comment" > </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Observations And Treatment Response</label>
-                        <textarea class="form-control" rows="4" cols="40" name="Observations" id="comment" > </textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="comment">Any Additional Information</label>
-                        <textarea class="form-control" rows="4" cols="30" name="Adittional_Info" id="comment" > </textarea>
-                      </div>
-
-
-                      <button type="submit" class="btn btn-primary btn-block" >Add To Database</button>
-                    </form>
-                  </div>
-                </div>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+    <link href="../Assets/css/medreport.css" rel="stylesheet" />
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
+  </head>
+  <body>
+    <div class="s007">
+      <form action="/dashboard/MedicalForm"  method="POST">
+        <div class="inner-form">
+          <div class="basic-search">
+            <div class="input-field">
+              <div class="icon-wrap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+                </svg>
+              </div>
+              <input id="search" type="text" placeholder="MEDICAL HISTORY- REPORT FORM" />
+              <div class="result-count">
+                <button type="button" class="btn btn-info btn lg" data-toggle="modal" data-target="#myModal">ADD NEW </button>
               </div>
             </div>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
+         
+          <div class="advance-search">
+            <span class="desc"><h3><b>PERSONAL INFORMATION</b></h3></span>
+            <% include ./partials/messages %>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="Full_Name" value="<%= Name %>" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Patient ID</label>
+                  <input type="text" name="Patient_ID" value="<%= ID %>" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Treating Doctor</label>
+                  <input type="text" name="Birth_Date" value="<%= Doctor %>" id="Patient  ID Number" required/>
+              </div>
+              </div>
 
-        
+            </div>
 
-      </div>
-      <!-- /.container-fluid -->
+            <%if(CaseStudy.length > 0){ %>
+              <% CaseStudy.forEach(function(row){%>
+           
+            <br>
+           
+            <span class="desc"><h4><b><%= row.date %></b></h4></span>
 
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © SCAR-HEALTH 2019</span>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <input type="text" name="Address" value="<%= row.Temperature %>" id="Patient Full Name" required/>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="name">Telephone</label>
+                  <input type="text" name="Telephone" value="<%= row.Blood_Level%>" id="Patient Full Name" required/>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">Refering Physcian</label>
+                  <input type="text" name="Reffered" value="<%= row.Sugar_Level %>" id="Patient  ID Number" required/>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              
+              <div class="form-row">
+                <div class="form-group">
+                    <label for="site">Temp</label>
+                    <input type="text" size="15" value="<%= row.Temperature %>" name="Site" id="Patient Full Name" />
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                  <label for="onset">B.L</label>
+                  <input type="text" size="15" value="<%= row.Blood_Level%>" name="Onset" id="Patient Full Name" />
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">S.L</label>
+                  <input type="text" size="15" value="<%= row.Sugar_Level %>" name="Time_Course" id="Patient  ID Number" />
+              </div>
+              </div>
+               <div class="form-row">
+              <div class="form-group">
+              <label for="father_name">P.R</label>
+                  <input type="text" size="15" name="Severity" value="<%= row.Pulse_Rate %>" id="Patienit  ID Number" />
+              </div>
+            </div>
+            </div>
+
+            <div class="main_row">
+              <div class="group-Sub">
+                <h5 >CURRENT CONDITION</h5>
+             <p><%=  row.Current_State %> </p>
+              </div>
+
+                  <div class="group-Sub">
+                    <h5>TREATMENT & RESPONSE</h5>
+                    <p><%= row.Observations %> </p>
+                  </div>
+
+                  <div class="group-Sub">
+                    <h5>ADDITIONAL INFO</h5>
+                    <p><%= row.Adittional_Info %> </p>
+                  </div>
+            </div>    
+            <br>
+    <%});%>
+    <%}else{%> 
+      <p>Case Study for the Patient Has not started yet, You can start by clicking on the ADD NEW button at corner right handside of the page</p>
+      <% } %>
+
           </div>
         </div>
-      </footer>
-
+      </form>
     </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
+  
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header text-center">
+                  
+                  <button type="button" class="close" data-dismiss="modal" aria-label="close" >
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                
+                  <div class="modal-body">
+                     
+                   
+                      <div class="card card-register mx-auto mt-5">
+                        <div class="card-header">PATIENT CASE PERFORMANCE FORM (ADMITTED PATIENT ONLY)</div>
+                        <br>
+                        
+                        <div class="">
+                          <% include ./partials/messages %>
+                          <form  id="myForms" method="" action="" >
+                            <div class="form-group">
+                              <div class="form-row">
+                                <div class="col-md-6">
+                                  <div class="form-label-group">
+                                    <input type="text" id="Patients_Name" value="<%= Name %>" class="form-control" placeholder="Patients_Name" required="required" name="Patients_Name" autofocus="autofocus" >
+                                    <label for="firstName">Patients Full Name</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-label-group">
+                                    <input type="text" id="Patient_ID" value="<%= ID %>" class="form-control" placeholder="Patient ID" name="Patient_ID" required="required" >
+                                    <label for="lastName">Patient (ID)</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="form-row">
+                                  <div class="col-md-6">
+                              <div class="form-label-group">
+                                <input type="text" id="Temperature" class="form-control" placeholder="Temperature" name="Temperature" >
+                                <label for="Temperature">Temperature Level(TL)</label>
+                              </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-label-group">
+                                    <input type="text" id="Blood_Level" class="form-control" placeholder=" Blood_Level  " name="Blood_Level"  >
+                                    <label for="Blood_Level">Blood Level(BP)</label>
+                                  </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="form-row">
+                                <div class="col-md-6">
+                                  <div class="form-label-group">
+                                    <input type="text" id="Sugar_Level" class="form-control" placeholder=" Sugar_Level  " name="Sugar_Level"  >
+                                    <label for="Sugar_Level">Sugar Level(SL)</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-label-group">
+                                    <input type="text" id="Pulse_Rate" class="form-control" placeholder="Pulse_Rate" name="Pulse_Rate"  >
+                                    <label for="Pulse_Rate">Pulse Rate(BP/mm)</label>
+                                  </div>
+                                </div>
+                              </div>
+                
+                            </div>
+                            <div class="form-group">
+                              <label for="comment">Patient Current State</label>
+                              <textarea class="form-control" rows="2" cols="40" name="Current_State" id="Current_State" > </textarea>
+                            </div>
+                
+                            <div class="form-group">
+                              <label for="comment">Observations And Treatment Response</label>
+                              <textarea class="form-control" rows="3" cols="40" name="Observations" id="Observations" > </textarea>
+                            </div>
+                
+                            <div class="form-group">
+                              <label for="comment">Any Additional Information</label>
+                              <textarea class="form-control" rows="2" cols="30" name="Adittional_Info" id="Adittional_Info" > </textarea>
+                            </div>
+                
+                
+                            <button type="submit" id="submit" class="btn btn-primary btn-block" >Add To Database</button>
+                          </form>
+                        </div>
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
       </div>
     </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="../Assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../Assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="../Assets/js/sb-admin.min.js"></script>
-
-  <!-- Demo scripts for this page-->
-  <script src="../Assets/js/demo/datatables-demo.js"></script>
-
-</body>
-
+    
+    <script src="../Assets/js/choices.js"></script>
+    <script>
+      const customSelects = document.querySelectorAll("select");
+      const deleteBtn = document.getElementById('delete')
+      const choices = new Choices('select',
+      {
+        searchEnabled: false,
+        removeItemButton: true,
+        itemSelectText: '',
+      });
+      for (let i = 0; i < customSelects.length; i++)
+      {
+        customSelects[i].addEventListener('addItem', function(event)
+        {
+          if (event.detail.value)
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('valid')
+            parent.classList.remove('invalid')
+          }
+          else
+          {
+            let parent = this.parentNode.parentNode
+            parent.classList.add('invalid')
+            parent.classList.remove('valid')
+          }
+        }, false);
+      }
+      
+        
+      // personal event added by ben
+      var submit = document.getElementById('submit')
+         submit.addEventListener("click", (e)=>{  
+             e.preventDefault();          
+              let Patients_Name =document.getElementById('Patients_Name').value
+              let Patient_ID =document.getElementById('Patient_ID').value
+              let Temperature=document.getElementById('Temperature').value
+              let Blood_Level =document.getElementById('Blood_Level').value
+              let Sugar_Level =document.getElementById('Sugar_Level').value
+              let Current_State =document.getElementById('Current_State').value
+              let Pulse_Rate = document.getElementById('Pulse_Rate').value
+              let Observations =document.getElementById('Observations').value
+              let Adittional_Info= document.getElementById('Adittional_Info').value
+   
+              let Data = { Patients_Name:Patients_Name, Patient_ID:Patient_ID, Temperature:Temperature, Blood_Level:Blood_Level,Sugar_Level:Sugar_Level, Pulse_Rate:Pulse_Rate, Observations:Observations, Adittional_Info:Adittional_Info, Current_State:Current_State}
+              console.log(Data)
+            $.ajax({
+                  type: 'POST',
+                  url: '/dashboard/IPDForm',
+                  ContentType: 'application/json',
+                  data: Data,             
+                  success:  function(data){
+                   window.location.reload();
+             
+                  }
+                }); 
+          })           
+    </script>
+    <script src="../Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Core plugin JavaScript-->
+    <script src="../Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  
+    <!-- Page level plugin JavaScript-->
+    <script src="../Assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="../Assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+  
+    <!-- Custom scripts for all pages-->
+    <script src="../Assets/js/sb-admin.min.js"></script>
+  
+    <!-- Demo scripts for this page-->
+    <script src="../Assets/js/demo/datatables-demo.js"></script>
+  
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

@@ -11,6 +11,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="../Assets/css/form.css">
+    <script src="../Assets/js/jquery-1.3.2.min.js"></script>
 </head>
 <body>
 
@@ -21,85 +22,142 @@
                
                 </div>
                 <div class="signup-form"> 
-                    <form action="/dashboard/PatientVital" method="POST" class="register-form" id="register-form">
+                    <form  action="" method="" class="register-form" id="register-form">
                         <h2>PATIENT VITALS-FORM</h2>
                         <% include ./partials/messages %>
+                        <%if(Total.length > 0){ %>
+                            <% Total.forEach(function(row){%>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="Month">Month Of The Year</label>
+                                        <input type="month" name="Month" id="Month" required/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="Date">Current Date</label>
+                                            <input type="date" name="Current_Date" id="Date" required/>
+                                        </div>
+                             </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="Patients Full Name">Patients Full Name</label>
-                                <input type="text" name="Patients_Name" id="Patients Full Name" required/>
+                                <label for="Name">Patients Full Name</label>
+                                <input type="text" value="<%= row.Name %>" name="Patients_Name" id="Name" required/>
                             </div>
                             
                             <div class="form-group">
-                                <label for="Folder(ID)">Patient (ID)</label>
-                                    <input type="text" name="Patient_ID" id="Folder(ID)" required/>
+                                <label for="Identity">Patient (ID)</label>
+                                    <input type="text" value=" <%= row.patientID %>" name="Patient_ID" id="Identity" required/>
                                 </div>
                             </div>
                             <div class="form-row">
                             <div class="form-group">
-                            <label for="Temperature Level(TL)">Temperature Level(TL)</label>
-                                <input type="text" name="Temperature" id="Temperature Level(TL)" required/>
+                            <label for="Temperature">Temperature Level(TL)</label>
+                                <input type="text" name="Temperature" id="Temperature" >
                             </div>
                     
                         <div class="form-group">
-                            <label for="Blood Level(BP)">Blood Level(BP)</label>
-                            <input type="text" name="Blood_Level" id="Blood Level(BP)" required/>
+                            <label for="Blood">Blood Level(BP)</label>
+                            <input type="text" name="Blood_Level" id="Blood" >
                         </div>
                     </div>
                         <div class="form-row">
                          <div class="form-group">
-                            <label for="Body Weight(BM)">Body Weight(BM)</label>
-                            <input type="text" name="Body_Weight" id="Body Weight(BM)" required/>
+                            <label for="Body_Weigh">Body Weight(BM)</label>
+                            <input type="text" value="" name="Body_Weight" id="Body_Weight">
                         </div>
                         <div class="form-group">
-                            <label for="Sugar Level(SL)">Sugar Level(SL)</label>
-                            <input type="text" name="Sugar_Level" id="Sugar Level(SL)" required/>
+                            <label for="Sugar">Sugar Level(SL)</label>
+                            <input type="text" name="Sugar_Level" id="Sugar" >
                         </div>
                     </div>
                         <div class="form-row">
                         <div class="form-group">
-                                <label for="Height(H)">Height(H)</label>
-                                <input type="text" name="Height" id="Height(H)" required/>
+                                <label for="Height">Height(H)</label>
+                                <input type="text" name="Height" id="Height" >
                             </div>
                         <div class="form-group">
                             <label for="Age">Age:</label>
-                            <input type="text" name="Age" id="Age">
+                            <input type="text" value="<%= row.PatientAge%>" name="Age" id="Age">
                         </div>
                 </div>
                     <div class="form-row">
                     <div class="form-group">
-                        <label for="Pulse Rate(BP/mm)">Pulse Rate(BP/mm)</label>
-                        <input type="text" name="Pulse_Rate" id="Pulse Rate(BP/mm)" required/>
+                        <label for="Pulse_Rate">Pulse Rate(BP/mm)</label>
+                        <input type="text" name="Pulse_Rate" id="Pulse_Rate" >
                     </div>
                         <div class="form-group">
-                            <label for="Doctor_UserName">Consulting Doctor UserName</label>
-                            <input type="text" name="Doctor_UserName" id="Doctor_UserName" required/>
+                            <label for="Doctor_UserName"> Doctor UserName</label>
+                            <input type="text" value="<%= row.userName %>" name="Doctor_UserName" id="Doctor_UserName" required/>
                         </div>
                 </div>   
                         
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="Pulse Rate(BP/mm)">Name Of Consulting Doctor</label>
-                        <input type="text" name="Doctor_Name" id="Pulse Rate(BP/mm)" required/>
+                        <label for="DoctorName">Name Doctor</label>
+                        <input type="text" value="<%= row.doctorName %>" name="Doctor_Name" id="DoctorName" required/>
                     </div>
                         <div class="form-group">
-                            <label for="Doctor_UserName">Deparment</label>
-                            <input type="text" name="Deparment" id="Doctor_UserName" required/>
+                            <label for="Deparment">Deparment</label>
+                            <input type="text" value="<%= row.Deparment%>" name="Deparment" id="Deparment" required/>
                         </div>
                   </div>   
                         <div class="form-submit">
                             <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
                             <input type="submit" value="Create Folder" class="submit" name="submit" id="submit" />
                         </div>
+                        <%});%>
+                        <%} %>
                     </form>
                 </div>
             </div>
         </div>
 
     </div>
+    <script>
+  
+       $('#Hide').hide()
+      var submit = document.getElementById('submit')
+       submit.addEventListener("click", (e)=>{
+           e.preventDefault();
+            let Month =document.getElementById('Month').value
+            let Date =document.getElementById('Date').value
+            let Name =document.getElementById('Name').value
+            let Identity =document.getElementById('Identity').value
+            let Temperature =document.getElementById('Temperature').value
+            let Blood =document.getElementById('Blood').value
+            let Body_Weight =document.getElementById('Body_Weight').value
+            let Sugar =document.getElementById('Sugar').value
+            let Height =document.getElementById('Height').value
+            let Age =document.getElementById('Age').value
+            let Pulse_Rate =document.getElementById('Pulse_Rate').value
+            let Doctor_UserName =document.getElementById('Doctor_UserName').value
+            let DoctorName =document.getElementById('DoctorName').value
+            let Deparment =document.getElementById('Deparment').value
 
-    <!-- JS -->
+            let Data = {Month:Month, Current_Date:Date, Patients_Name:Name, Patient_ID:Identity, Temperature:Temperature, Blood_Level:Blood,Body_Weight:Body_Weight, Sugar_Level:Sugar, Doctor_UserName:Doctor_UserName,Height:Height,Age:Age,Pulse_Rate:Pulse_Rate, Doctor_Name: DoctorName,Deparment:Deparment  }
+            console.log(Data)
+          $.ajax({
+                type: 'POST',
+                url: '/dashboard/PatientVital',
+                ContentType: 'application/json',
+                data: Data,
+                success:  function(data){
+                window.location.reload();
+                $('#Hide').show()
+                $("#message").append("You Have Successfully submited the form and has been sent to the consulting doctor")
+    
+                }
+              }); 
+        })
+    
+            
+        
+    </script>
+    <!-- JS --> 
+   
     <script src="../Assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../Assets/js/formmain.js"></script>
+    <script src="../Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
+  
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

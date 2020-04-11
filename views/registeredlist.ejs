@@ -88,13 +88,13 @@
         </ol>
 
         <!-- DataTables  Content -->
-        <div class="card mb-3">   
-           </div>
+        <div class="">   
+          
 
            <h4 style="text-align: center;"> <b>List of registered patients of the hospital and are still users of the facility</b> </h4>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover" id="dataTable" width="90%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Full Name</th>
@@ -103,6 +103,7 @@
                     <th> Patient Insurance ID</th>
                     <th>Telephone</th>
                     <th>Age</th>
+                    <th>Address</th>
                     <th>Gender</th>
                     <th>Marital Status</th>
                     <th>Religion</th>
@@ -123,6 +124,7 @@
                             <td><%= row.Health_Insurance_ID  %></td>
                             <td><%= row.Telephone %></td>
                             <td><%= row.Age %></td>
+                            <td><%= row.Adress %></td>
                             <td><%= row.gender %></td>
                             <td><%= row.state %></td>
                             <td><%= row.Religion %></td>
@@ -140,6 +142,7 @@
               </table>
             </div>
           </div>
+        </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 
@@ -188,6 +191,35 @@
       </div>
     </div>
   </div>
+  <script>
+      
+    var index, table = document.getElementById('dataTable');
+    var hidform = document.getElementById('hid_form')
+     for(var i = 1; i < table.rows.length; i++){
+
+        table.rows[i].onclick= function(){
+            var c = confirm('Do You want Enter Bills For these Patient?');
+            if(c === true){
+                index = this.parentElement.rowIndex;
+             
+             var patientName = this.cells[0].innerHTML;
+              var patientID = this.cells[2].innerHTML; 
+              var PatientAge = this.cells[5].innerHTML;
+
+              var INFO = {Name:patientName, patientID:patientID, PatientAge:PatientAge}
+              INFOSTRING = JSON.stringify(INFO)
+
+              console.log(INFOSTRING);
+               window.document.location = '/dashboard/OPDBills'+ INFOSTRING
+              }
+            
+   };
+}
+
+
+
+</script>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="../Assets/vendor/jquery/jquery.min.js"></script>

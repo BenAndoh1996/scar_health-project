@@ -11,11 +11,12 @@ router.get('/Patientregister', function(req, res){
 
 //patient registration handle
 router.post('/patientregister', function(req, res){
-    const{ Insurance_Provider,Health_facility_No,Month,Health_Insurance_ID,Full_Name,Age,gender,state,Religion,birth_date,Patient_ID_Number,Telephone, Occupation,Next_of_King,Next_of_King_Number,} = req.body;
+    const{ Insurance_Provider,Health_facility_No,Month,Health_Insurance_ID,Full_Name,Age, Address,gender,state,Religion,birth_date,Telephone, Occupation,Next_of_King,Next_of_King_Number,} = req.body;
     let String_Date= new Date().toLocaleDateString().split(",")[0]
     let Hospital_Name = req.user.Hospital
     let Current_Date = req.body.Current_Date
-    let Hospital_UserName = req.user.UserName
+    let Patient_ID_Number = (req.body.Patient_ID_Number).replace(/\//g,'-')
+    let Hospital_UserName = (req.user.UserName).replace(/\s/g,'')
     let errors =[];
 
     //check require fields
@@ -43,6 +44,7 @@ router.post('/patientregister', function(req, res){
                     Health_Insurance_ID,
                     Full_Name,
                     Age,
+                    Address,
                     Telephone,
                     gender,
                     state,
